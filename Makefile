@@ -7,11 +7,14 @@ NVCC_FLAGS := --use_fast_math -O3 -arch=sm_89
 # need to use -I/usr/include -ccbin g++, because the default nvcc compiler is not able to find the right files otherwise
 LIB := -lcudart -lcurand -lcublas -lcufft  -I/usr/include -ccbin g++ -lglfw -lGL -lGLEW 
 
-# Project files
-EXECUTABLE := cuda_heat_equation
+# # Project files
+# EXECUTABLE := cuda_heat_equation
 
-SRC_FILES := cuda_heat_equation.cu
+# SRC_FILES := cuda_heat_equation.cu
 
+EXECUTABLE := cuda_heat_equation_2d
+
+SRC_FILES := cuda_heat_equation_2d.cu
 
 OBJ_FILES := $(SRC_FILES:.cu=.o)
 
