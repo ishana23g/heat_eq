@@ -2,6 +2,18 @@
 
 The main showcase of this project is cuda and openGL interop. Where we can leverage high performance from cuda and get real time rendering via cuda. 
 
+# How to compile and run
+
+Use the provided make file. All you need to do is run `make`. 
+For running the program it will just be `./cuda_heat_equation`.
+There are some interactive functionalities:
+* 1: Switch to 1D simulation.
+* 2: Switch to 2D simulation.
+* B: Toggle boundary conditions between Dirichlet and Neumann.
+* R: Reset the simulation.
+* Mouse Left Button: Click and drag to add heat.
+
+
 # Ways to improve performace
 
 * Using pre defined constants with the `#define` instead of setting `const int` etc
