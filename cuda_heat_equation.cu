@@ -11,7 +11,7 @@
 #define WIDTH 1024
 #define HEIGHT 1024
 #define TIME_STEP 0.1f
-#define DIFFUSIVITY 0.5f
+#define DIFFUSIVITY 1.0f
 #define HEAT_SOURCE 5.0f
 
 #define HEAT_RADIUS 5
@@ -61,13 +61,58 @@ void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 
 // CUDA kernels
-__global__ void heat_kernel_1d(float* u0, float* u1, int width, float dt, float dx2, float a, BoundaryCondition boundary_condition);
+__global__ void heat_kernel_1d(float* u0, float* u1, 
+                                int width, float dt, 
+                                float dx2, float a, 
+                                BoundaryCondition boundary_condition);
 __global__ void heat_to_color_kernel_1d(float* u, uchar4* output, int width);
-__global__ void heat_kernel_2d(float* u0, float* u1, int width, int height, float dt, float dx2, float dy2, float a, BoundaryCondition boundary_condition);
+__global__ void heat_kernel_2d(float* u0, float* u1, 
+                                int width, int height, 
+                                float dt, float dx2, 
+                                float dy2, float a, 
+                                BoundaryCondition boundary_condition);
 __global__ void heat_to_color_kernel_2d(float* u, uchar4* output, int width, int height);
 __global__ void add_heat_kernel_1d(float* u, int width, int x);
 __global__ void add_heat_kernel_2d(float* u, int width, int height, int cx, int cy);
 
+// Fused kernels
+#define USING_FUSED_KERNELS 1
+__global__ void heat_kernel_1d_fused(float* u0, float* u1, uchar4* output, 
+                                    int width, float dt, float dx2, float a,
+                                    BoundaryCondition boundary_condition);
+__global__ void heat_kernel_2d_fused(float* u0, float* u1, uchar4* output, 
+                                    int width, int height, float dt, 
+                                    float dx2, float dy2, float a,
+                                    BoundaryCondition boundary_condition);
+
+// Color Functions
+
+// Clamp function
+#define HEAT_MAX_CLAMP 1.0f
+#define HEAT_MIN_CLAMP 0.0f
+#define clamp(x) (x < HEAT_MIN_CLAMP ? HEAT_MIN_CLAMP : (x > HEAT_MAX_CLAMP ? HEAT_MAX_CLAMP : x))
+__global__ uchar4 gradient_scaling(float standard_heat_value) {
+    // Gradient Set Up:
+#if 1
+    // Define a color gradient from blue to red
+    unsigned char r = (unsigned char) (255 * clamp(standard_heat_value / HEAT_SOURCE));
+    unsigned char g = 0;
+    unsigned char b = (unsigned char)(255 * (1 - clamp(standard_heat_value / HEAT_SOURCE)));
+    return make_uchar4(r, g, b, 255);
+#else
+    // TODO: Define a color gradient MAGMA
+    // magma_colormap = [
+    //     [252, 253, 191],
+    //     [254, 176, 120],
+    //     [241, 96, 93],
+    //     [183, 55, 121],
+    //     [114, 31, 129],
+    //     [44, 17, 95],
+    //     [0, 0, 4]
+    // ]
+    // https://waldyrious.net/viridis-palette-generator/
+#endif
+}
 
 // CUDA kernel implementations
 
@@ -94,7 +139,7 @@ __global__ void heat_kernel_1d(float* u0, float* u1, int width, float dt, float 
 }
 
 // Heat to color kernel for 1D simulation
-__global__ void heat_to_color_kernel_1d(float* u, uchar4* output, int width) {
+__global__ void heat_to_color_kernel_1d(float* u,  int width) {
     int x = blockIdx.x * blockDim.x + threadIdx.x;
 
     if (x < width) {
@@ -104,6 +149,38 @@ __global__ void heat_to_color_kernel_1d(float* u, uchar4* output, int width) {
         output[x] = make_uchar4(color, 0, 255 - color, 255);
     }
 }
+
+// Heat kernel for 1D simulation
+
+// Fusing heat output into the color kernel
+__global__ void heat_kernel_1d_fused(float* u0, float* u1, uchar4* output, 
+                                    int width, float dt, float dx2, float a,
+                                    BoundaryCondition boundary_condition) {
+    int x = blockIdx.x * blockDim.x + threadIdx.x;
+
+    if (x > 0 && x < width - 1) {
+        float u_center = u0[x];
+        float u_left = u0[x - 1];
+        float u_right = u0[x + 1];
+
+        float laplacian = (u_left + u_right - 2 * u_center) / dx2;
+
+        u1[x] = u_center + a * dt * laplacian;
+
+        output[x] = gradient_scaling(u1[x]);
+
+    } else if (x >= 0 && x < width) {
+        // Boundary conditions
+        if (boundary_condition == DIRICHLET) {
+            u0[x] = 0.0f;
+        } else if (boundary_condition == NEUMANN) {
+            u1[x] = HEAT_SOURCE;
+        }
+        
+        output[x] = gradient_scaling(u1[x]);
+    }
+}
+
 
 // Heat kernel for 2D simulation
 __global__ void heat_kernel_2d(float* u0, float* u1, int width, int height, float dt, float dx2, float dy2, float a, BoundaryCondition boundary_condition) {
@@ -328,6 +405,86 @@ void render() {
     glfwSwapBuffers(window);
 }
 
+
+// Render simulation
+void update_sim_render() {
+
+    // Map PBO
+    cudaGraphicsMapResources(1, &cuda_pbo_resource, 0);
+    size_t size;
+    cudaGraphicsResourceGetMappedPointer((void**)&d_output, &size, cuda_pbo_resource);
+
+    float dx = 1.0f;
+    float dy = 1.0f;
+    float dx2 = dx * dx;
+    float dy2 = dy * dy;
+    float a = DIFFUSIVITY;
+
+    if (simulation_mode == MODE_1D) {
+        dim3 blockSize(256);
+        dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x);
+#if USING_FUSED_KERNELS
+        heat_kernel_1d_fused<<<gridSize, blockSize>>>(d_u0, d_u1, d_output, WIDTH, TIME_STEP, dx2, a, boundary_condition);
+#else
+        heat_kernel_1d<<<gridSize, blockSize>>>(d_u0, d_u1, WIDTH, TIME_STEP, dx2, a, boundary_condition);
+        heat_to_color_kernel_1d<<<gridSize, blockSize>>>(d_u0, d_output, WIDTH);
+#endif
+    } else {
+        dim3 blockSize(BLOCK_SIZE_X, BLOCK_SIZE_Y);
+        dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x,
+                      (HEIGHT + blockSize.y - 1) / blockSize.y);
+#if USING_FUSED_KERNELS
+        heat_kernel_2d_fused<<<gridSize, blockSize>>>(d_u0, d_u1, d_output, WIDTH, HEIGHT, TIME_STEP, dx2, dy2, a, boundary_condition);
+#else
+        heat_kernel_2d<<<gridSize, blockSize>>>(d_u0, d_u1, WIDTH, HEIGHT, TIME_STEP, dx2, dy2, a, boundary_condition);
+        heat_to_color_kernel_2d<<<gridSize, blockSize>>>(d_u0, d_output, WIDTH, HEIGHT);
+#endif
+    }
+
+    cudaDeviceSynchronize();
+
+    // Swap pointers
+    float* temp = d_u0;
+    d_u0 = d_u1;
+    d_u1 = temp;
+
+    // FPS calculation
+    double currentTime = glfwGetTime();
+    nbFrames++;
+    if (currentTime - lastTime >= 1.0) {
+        fps = double(nbFrames) / (currentTime - lastTime);
+        nbFrames = 0;
+        lastTime += 1.0;
+
+        // Update window title
+        char title[256];
+        sprintf(title, "CUDA Heat Equation - Width: %d Height: %d FPS: %.2f", WIDTH, HEIGHT, fps);
+        glfwSetWindowTitle(window, title);
+    }
+
+    // Unmap PBO
+    cudaGraphicsUnmapResources(1, &cuda_pbo_resource, 0);
+
+    // Draw pixels
+    glClear(GL_COLOR_BUFFER_BIT);
+    glDisable(GL_DEPTH_TEST);
+
+    glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbo);
+    if (simulation_mode == MODE_1D) {
+        // HEIGHT HAS BEEN CHANGED TO 10
+        glDrawPixels(WIDTH, 10, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+    } else {
+        glRasterPos2i(-1, -1);
+        glDrawPixels(WIDTH, HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+    }
+    glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
+
+    glfwSwapBuffers(window);
+
+    
+}
+
+
 // Reset simulation
 void reset_simulation() {
     size_t size;
@@ -481,8 +638,10 @@ int main(int argc, char** argv) {
             for (int i = 0; i < MAX_TIME_STEPS; i++) {
                 // CANNOT MANUALLY ADD HEAT IN DEBUG MODE
                 // NOR CAN MOUSE/KEYBOARD INPUT BE USED
-                update_simulation();
-                render();
+                update_sim_render();
+                // update_simulation();
+                // render();
+
                 // randomlly add heat to the simulation, not at all time steps
                 if (rand() % 100 < PERCENT_ADD_HEAT_CHANCE) {
                     int x = rand() % WIDTH;
@@ -499,8 +658,9 @@ int main(int argc, char** argv) {
             // Main loop
             while (!glfwWindowShouldClose(window)) {
                 glfwPollEvents();
-                update_simulation();
-                render();
+                update_sim_render();
+                // update_simulation();
+                // render();
             }
 
             // Cleanup
