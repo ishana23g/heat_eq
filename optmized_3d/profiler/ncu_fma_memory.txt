@@ -1,0 +1,1836 @@
+==PROF== Connected to process 20426 (/home/driffyn/Documents/CMDA4634/heat_eq/optimized/cuda_heat_equation)
+==PROF== Profiling "heat_kernel_2d_fused" - 0: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 1: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 2: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 3: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 4: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 5: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 6: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 7: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 8: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 9: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 10: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 11: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 12: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 13: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 14: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 15: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 16: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 17: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 18: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 19: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 20: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 21: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 22: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 23: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 24: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 25: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 26: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 27: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 28: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 29: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 30: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 31: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 32: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 33: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 34: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 35: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 36: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 37: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 38: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 39: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 40: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 41: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 42: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 43: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 44: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 45: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 46: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 47: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 48: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 49: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 50: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 51: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 52: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 53: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 54: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 55: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 56: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 57: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 58: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 59: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 60: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 61: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 62: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 63: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 64: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 65: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 66: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 67: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 68: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 69: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 70: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 71: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 72: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 73: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 74: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 75: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 76: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 77: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 78: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 79: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 80: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 81: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 82: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 83: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 84: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 85: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 86: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 87: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 88: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 89: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 90: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 91: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 92: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 93: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 94: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 95: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 96: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 97: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 98: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 99: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 100: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 101: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 102: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 103: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 104: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 105: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 106: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 107: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 108: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 109: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 110: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 111: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 112: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 113: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 114: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 115: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 116: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 117: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 118: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 119: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 120: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 121: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 122: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 123: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 124: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 125: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 126: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 127: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 128: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 129: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 130: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 131: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 132: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 133: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 134: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 135: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 136: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 137: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 138: 0%....50%....100% - 3 passes
+==PROF== Profiling "heat_kernel_2d_fused" - 139: 0%....50%....100% - 3 passes
+==PROF== Profiling "add_heat_kernel_2d" - 140: 0%....50%....100% - 3 passes
+==PROF== Disconnected from process 20426
+[20426] cuda_heat_equation@127.0.0.1
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.03
+    dram__bytes_write.sum                                   Mbyte         7.03
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.11
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.15
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.73
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.58
+    dram__bytes_write.sum                                    byte          256
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.74
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.72
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.75
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.75
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.71
+    dram__bytes_write.sum                                    byte          128
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.76
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.06
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.74
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.09
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.46
+    dram__bytes_write.sum                                    byte          128
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.72
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.74
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.71
+    dram__bytes_write.sum                                    byte          256
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.78
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.76
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.71
+    dram__bytes_write.sum                                    byte            0
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.74
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.19
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.58
+    dram__bytes_write.sum                                    byte            0
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.75
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.71
+    dram__bytes_write.sum                                    byte          128
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.74
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.77
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.72
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.74
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.74
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.16
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.84
+    dram__bytes_write.sum                                    byte            0
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.26
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.77
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.84
+    dram__bytes_write.sum                                    byte            0
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.15
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.84
+    dram__bytes_write.sum                                    byte            0
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.03
+    dram__bytes_write.sum                                   Mbyte         7.74
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.71
+    dram__bytes_write.sum                                    byte            0
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.11
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.58
+    dram__bytes_write.sum                                    byte            0
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.72
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.73
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.74
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.09
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.74
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.74
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.75
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.58
+    dram__bytes_write.sum                                    byte            0
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.33
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.58
+    dram__bytes_write.sum                                    byte          128
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.16
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.04
+    dram__bytes_write.sum                                   Mbyte         7.75
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.58
+    dram__bytes_write.sum                                    byte            0
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.72
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.71
+    dram__bytes_write.sum                                    byte          768
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.78
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.11
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.84
+    dram__bytes_write.sum                                    byte          384
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.08
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,003
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.73
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,003
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.73
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.74
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.75
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.58
+    dram__bytes_write.sum                                    byte            0
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.21
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.73
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.09
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.58
+    dram__bytes_write.sum                                    byte          128
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.08
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.03
+    dram__bytes_write.sum                                   Mbyte         7.10
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.46
+    dram__bytes_write.sum                                    byte          128
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.04
+    dram__bytes_write.sum                                   Mbyte         7.76
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.75
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.58
+    dram__bytes_write.sum                                    byte            0
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.08
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.09
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,049
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,219
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.09
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,105
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,611
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.46
+    dram__bytes_write.sum                                    byte          128
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.03
+    dram__bytes_write.sum                                   Mbyte         7.74
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,105
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,611
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.58
+    dram__bytes_write.sum                                    byte            0
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.15
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,138
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,842
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.71
+    dram__bytes_write.sum                                    byte            0
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.77
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,222
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,957,430
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.58
+    dram__bytes_write.sum                                    byte          128
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.09
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,285
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,957,871
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.74
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,358
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,958,382
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.71
+    dram__bytes_write.sum                                    byte            0
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.03
+    dram__bytes_write.sum                                   Mbyte         7.15
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,434
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,958,914
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.76
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,576
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,959,908
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.78
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,718
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,960,902
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.07
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,869
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,961,959
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.78
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,977,066
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,963,413
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.58
+    dram__bytes_write.sum                                    byte            0
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.09
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,977,285
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,964,971
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.71
+    dram__bytes_write.sum                                    byte            0
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.75
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,977,528
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,966,896
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.15
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,977,851
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,969,256
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.76
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,978,179
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,971,642
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.77
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,978,607
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,974,983
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.46
+    dram__bytes_write.sum                                    byte          128
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.74
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,978,933
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,977,508
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.03
+    dram__bytes_write.sum                                   Mbyte         7.75
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,979,443
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,981,454
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.74
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,979,892
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,984,861
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.73
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,980,427
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,988,960
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.75
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,980,973
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,993,503
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.14
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,981,600
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,998,438
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.58
+    dram__bytes_write.sum                                    byte            0
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.78
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,982,240
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   16,003,537
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.71
+    dram__bytes_write.sum                                    byte            0
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.74
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,982,980
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   16,009,330
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.71
+    dram__bytes_write.sum                                    byte          128
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.11
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,983,715
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   16,015,485
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.71
+    dram__bytes_write.sum                                    byte          256
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.76
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,984,585
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   16,022,685
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.46
+    dram__bytes_write.sum                                    byte            0
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.73
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,985,210
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   16,027,648
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.09
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,986,019
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   16,034,311
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.03
+    dram__bytes_write.sum                                   Mbyte         7.75
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,986,991
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   16,042,362
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.71
+    dram__bytes_write.sum                                    byte            0
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.78
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,987,968
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   16,050,286
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.03
+    dram__bytes_write.sum                                   Mbyte         7.12
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,989,071
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   16,059,537
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.78
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,990,142
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   16,068,126
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.58
+    dram__bytes_write.sum                                    byte          256
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.74
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,991,422
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   16,078,751
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.09
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,992,670
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   16,088,909
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.73
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,994,028
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   16,100,113
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.58
+    dram__bytes_write.sum                                    byte            0
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.71
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,995,312
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   16,110,911
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.77
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,997,012
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   16,125,058
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.46
+    dram__bytes_write.sum                                    byte            0
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.74
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,998,520
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   16,137,399
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.58
+    dram__bytes_write.sum                                    byte          128
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.72
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    6,000,171
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   16,151,358
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.77
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    6,001,952
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   16,166,152
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.11
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    6,003,925
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   16,182,295
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.78
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    6,005,789
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   16,198,435
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.46
+    dram__bytes_write.sum                                    byte          256
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         7.08
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    6,007,668
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   16,213,444
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+
+  add_heat_kernel_2d(float *, int, int, int, int) (1, 10, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Kbyte         3.71
+    dram__bytes_write.sum                                    byte          128
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst           80
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst            0
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst            0
+    ------------------------------------------------- ----------- ------------
+

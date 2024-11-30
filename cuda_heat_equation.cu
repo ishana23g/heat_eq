@@ -8,8 +8,8 @@
 #include <cuda_gl_interop.h>
 
 // Simulation settings
-#define WIDTH 1024
-#define HEIGHT 1024
+#define WIDTH 1000
+#define HEIGHT 1000
 #define TIME_STEP 0.25f
 #define DIFFUSIVITY 1.0f
 #define HEAT_SOURCE 5.0f
@@ -341,39 +341,38 @@ __global__ void heat_kernel_2d_fused(float *u0, float *u1, uchar4 *output,
     int s_x = threadIdx.x + 1;
     int s_y = threadIdx.y + 1;
 
-    // Load data into shared memory
-    // Central square
-    s_u[getIndex(s_x, s_y, shared_bs_y)] = u0[getIndex(x, y, width)];
+    if (x < width && y < height) {
+        // Load central square
+        s_u[getIndex(s_x, s_y, shared_bs_y)] = u0[getIndex(x, y, width)];
+
+        // Load borders into shared memory
+        if (threadIdx.x == 0 && x > 0)
+            s_u[getIndex(0, s_y, shared_bs_y)] = u0[getIndex(x - 1, y, width)];
+        if (threadIdx.x == blockDim.x - 1 && x < width - 1)
+            s_u[getIndex(BLOCK_SIZE_X + 1, s_y, shared_bs_y)] = u0[getIndex(x + 1, y, width)];
+        if (threadIdx.y == 0 && y > 0)
+            s_u[getIndex(s_x, 0, shared_bs_y)] = u0[getIndex(x, y - 1, width)];
+        if (threadIdx.y == blockDim.y - 1 && y < height - 1)
+            s_u[getIndex(s_x, BLOCK_SIZE_Y + 1, shared_bs_y)] = u0[getIndex(x, y + 1, width)];
+
+        // Load corners into shared memory
+        if (threadIdx.x == 0 && threadIdx.y == 0 && x > 0 && y > 0)
+            s_u[getIndex(0, 0, shared_bs_y)] = u0[getIndex(x - 1, y - 1, width)];
+        if (threadIdx.x == 0 && threadIdx.y == blockDim.y - 1 && x > 0 && y < height - 1)
+            s_u[getIndex(0, BLOCK_SIZE_Y + 1, shared_bs_y)] = u0[getIndex(x - 1, y + 1, width)];
+        if (threadIdx.x == blockDim.x - 1 && threadIdx.y == 0 && x < width - 1 && y > 0)
+            s_u[getIndex(BLOCK_SIZE_X + 1, 0, shared_bs_y)] = u0[getIndex(x + 1, y - 1, width)];
+        if (threadIdx.x == blockDim.x - 1 && threadIdx.y == blockDim.y - 1 && x < width - 1 && y < height - 1)
+            s_u[getIndex(BLOCK_SIZE_X + 1, BLOCK_SIZE_Y + 1, shared_bs_y)] = u0[getIndex(x + 1, y + 1, width)];
+    }
+
+    // Ensure all threads have loaded their data
+    __syncthreads();
+
 
     if (x > 0 && x < width - 1 &&
         y > 0 && y < height - 1)
     {
-
-    // Top border
-    if (s_x == 1 && s_y != 1)    
-    {
-        s_u[getIndex(0, s_y, shared_bs_y)] = u0[getIndex(blockIdx.x*blockDim.x - 1, y, width)];
-    }
-    // Bottom border
-    if (s_x == BLOCK_SIZE_X && s_y != BLOCK_SIZE_Y) 
-    {
-        s_u[getIndex(BLOCK_SIZE_X + 1, s_y, shared_bs_y)] = u0[getIndex((blockIdx.x + 1)*blockDim.x, y, width)];
-    }
-    // Left border
-    if (s_x != 1 && s_y == 1 )
-    {
-        s_u[getIndex(s_x, 0, shared_bs_y)] = u0[getIndex(x, blockIdx.y*blockDim.y - 1, width)];
-    }
-    // Right border
-    if (s_x != BLOCK_SIZE_X && s_y == BLOCK_SIZE_Y) 
-    {
-        s_u[getIndex(s_x, BLOCK_SIZE_Y + 1, shared_bs_y)] = u0[getIndex(x, (blockIdx.y + 1)*blockDim.y, width)];
-    }
-
-    // Make sure all the data is loaded before computing
-    __syncthreads();
-
-
         int idx = getIndex(x, y, width);
 
         float u_center = s_u[getIndex(s_x, s_y, shared_bs_y)];
@@ -389,8 +388,9 @@ __global__ void heat_kernel_2d_fused(float *u0, float *u1, uchar4 *output,
 
         unsigned char color = (unsigned char)(255 * clamp(u1[idx] / HEAT_SOURCE));
         output[idx] = make_uchar4(color, 0, 255 - color, 255);
-    }
-    else if (x < width && y < height)
+    }    
+    // this part is using global memory
+    else if (x == 0 || x == width - 1 || y == 0 || y == height - 1)
     {
         int idx = getIndex(x, y, width);
 

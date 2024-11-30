@@ -1,0 +1,55 @@
+==23305== Cachegrind, a cache and branch-prediction profiler
+==23305== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
+==23305== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==23305== Command: ./cuda_heat_equation -d
+==23305== 
+--23305-- warning: L3 cache found, using its data for the LL simulation.
+==23305== Warning: noted but unhandled ioctl 0x644f with no size/direction hints.
+==23305==    This could cause spurious value errors to appear.
+==23305==    See README_MISSING_SYSCALL_OR_IOCTL for guidance on writing a proper wrapper.
+==23305== Warning: noted but unhandled ioctl 0x30000001 with no size/direction hints.
+==23305==    This could cause spurious value errors to appear.
+==23305==    See README_MISSING_SYSCALL_OR_IOCTL for guidance on writing a proper wrapper.
+==23305== Warning: noted but unhandled ioctl 0x4b with no size/direction hints.
+==23305==    This could cause spurious value errors to appear.
+==23305==    See README_MISSING_SYSCALL_OR_IOCTL for guidance on writing a proper wrapper.
+==23305== Warning: noted but unhandled ioctl 0x27 with no size/direction hints.
+==23305==    This could cause spurious value errors to appear.
+==23305==    See README_MISSING_SYSCALL_OR_IOCTL for guidance on writing a proper wrapper.
+==23305== brk segment overflow in thread #1: can't grow to 0x499f000
+==23305== (see section Limitations in user manual)
+==23305== NOTE: further instances of this message will not be shown
+==23305== Warning: noted but unhandled ioctl 0x25 with no size/direction hints.
+==23305==    This could cause spurious value errors to appear.
+==23305==    See README_MISSING_SYSCALL_OR_IOCTL for guidance on writing a proper wrapper.
+==23305== Warning: noted but unhandled ioctl 0x17 with no size/direction hints.
+==23305==    This could cause spurious value errors to appear.
+==23305==    See README_MISSING_SYSCALL_OR_IOCTL for guidance on writing a proper wrapper.
+==23305== Warning: noted but unhandled ioctl 0x19 with no size/direction hints.
+==23305==    This could cause spurious value errors to appear.
+==23305==    See README_MISSING_SYSCALL_OR_IOCTL for guidance on writing a proper wrapper.
+==23305== Warning: noted but unhandled ioctl 0x49 with no size/direction hints.
+==23305==    This could cause spurious value errors to appear.
+==23305==    See README_MISSING_SYSCALL_OR_IOCTL for guidance on writing a proper wrapper.
+==23305== Warning: noted but unhandled ioctl 0x21 with no size/direction hints.
+==23305==    This could cause spurious value errors to appear.
+==23305==    See README_MISSING_SYSCALL_OR_IOCTL for guidance on writing a proper wrapper.
+==23305== Warning: noted but unhandled ioctl 0x1b with no size/direction hints.
+==23305==    This could cause spurious value errors to appear.
+==23305==    See README_MISSING_SYSCALL_OR_IOCTL for guidance on writing a proper wrapper.
+==23305== 
+==23305== I   refs:      470,126,302
+==23305== I1  misses:      4,527,623
+==23305== LLi misses:        473,633
+==23305== I1  miss rate:        0.96%
+==23305== LLi miss rate:        0.10%
+==23305== 
+==23305== D   refs:      220,680,603  (118,269,787 rd   + 102,410,816 wr)
+==23305== D1  misses:     29,993,136  ( 15,709,603 rd   +  14,283,533 wr)
+==23305== LLd misses:      4,904,254  (  1,760,378 rd   +   3,143,876 wr)
+==23305== D1  miss rate:        13.6% (       13.3%     +        13.9%  )
+==23305== LLd miss rate:         2.2% (        1.5%     +         3.1%  )
+==23305== 
+==23305== LL refs:        34,520,759  ( 20,237,226 rd   +  14,283,533 wr)
+==23305== LL misses:       5,377,887  (  2,234,011 rd   +   3,143,876 wr)
+==23305== LL miss rate:          0.8% (        0.4%     +         3.1%  )

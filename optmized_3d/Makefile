@@ -12,8 +12,7 @@ LIB := -lcudart -lcurand -lcublas -lcufft  -I/usr/include -ccbin g++ -lglfw -lGL
 
 # SRC_FILES := cuda_heat_equation.cu
 
-EXECUTABLE := cuda_3d
-# cuda_heat_equation#_2d
+EXECUTABLE := cuda_heat_equation#_2d
 
 SRC_FILES := $(EXECUTABLE).cu
 

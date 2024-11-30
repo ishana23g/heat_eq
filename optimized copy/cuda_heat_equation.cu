@@ -8,8 +8,8 @@
 #include <cuda_gl_interop.h>
 
 // Simulation settings
-#define WIDTH 1000
-#define HEIGHT 1000
+#define WIDTH 1024
+#define HEIGHT 1024
 #define TIME_STEP 0.25f
 #define DIFFUSIVITY 1.0f
 #define HEAT_SOURCE 5.0f
@@ -20,6 +20,8 @@
 // CUDA block size
 #define BLOCK_SIZE_X 16
 #define BLOCK_SIZE_Y 16
+
+// Skip N number of frames for rendering more quickly
 
 // Host variables
 GLuint pbo;
@@ -70,6 +72,22 @@ void cursor_position_callback(GLFWwindow *window, double xpos, double ypos);
 void mouse_button_callback(GLFWwindow *window, int button, int action, int mods);
 
 // CUDA kernels
+__global__ void heat_kernel_1d(float *u0, float *u1,
+                               int width, float dt,
+                               float dx2, float a,
+                               BoundaryCondition boundary_condition);
+__global__ void heat_to_color_kernel_1d(float *u, uchar4 *output, int width);
+__global__ void heat_kernel_2d(float *u0, float *u1,
+                               int width, int height,
+                               float dt, float dx2,
+                               float dy2, float a,
+                               BoundaryCondition boundary_condition);
+__global__ void heat_to_color_kernel_2d(float *u, uchar4 *output, int width, int height);
+__global__ void add_heat_kernel_1d(float *u, int width, int x);
+__global__ void add_heat_kernel_2d(float *u, int width, int height, int cx, int cy);
+
+// Fused kernels + Implements Shared Memory Usage
+#define USING_FUSED_KERNELS 1
 __global__ void heat_kernel_1d_fused(float *u0, float *u1, uchar4 *output,
                                      int width, float dt, float dx2, float a,
                                      BoundaryCondition boundary_condition);
@@ -77,8 +95,6 @@ __global__ void heat_kernel_2d_fused(float *u0, float *u1, uchar4 *output,
                                      int width, int height, float dt,
                                      float dx2, float dy2, float a,
                                      BoundaryCondition boundary_condition);
-__global__ void add_heat_kernel_1d(float *u, int width, int x);
-__global__ void add_heat_kernel_2d(float *u, int width, int height, int cx, int cy);
 
 // Color Functions
 uchar4 gradient_scaling(float standard_heat_value);
@@ -127,20 +143,10 @@ int __host__ __device__ getIndex(const int x, const int y, const int width)
     return y * width + x;
 }
 
+
 // Heat kernel for 1D simulation
-/**
- * @brief Heat kernel for 1D simulation
- * Does the simulation and saving the output color values
- *
- * @param[in]   u0                      The heat values at the current time step (t)
- * @param[out]  u1                      The heat values at the next time step (t + dt)
- * @param[out]  output                  The output color values
- * @param[in]   width                   The width of the simulation area
- * @param[in]   dt                      The time step
- * @param[in]   dx2                     The square of the x-axis step size
- * @param[in]   a                       The diffusivity constant
- * @param[in]   boundary_condition      The boundary condition
- */
+
+// Fusing heat output into the color kernel
 __global__ void heat_kernel_1d_fused(float *u0, float *u1, uchar4 *output,
                                      int width, float dt, float dx2, float a,
                                      BoundaryCondition boundary_condition)
@@ -159,12 +165,12 @@ __global__ void heat_kernel_1d_fused(float *u0, float *u1, uchar4 *output,
         // Left border
         if (s_x == 1)
         {
-            s_u[0] = u0[blockIdx.x * blockDim.x - 1];
+            s_u[0] = u0[blockIdx.x*blockDim.x - 1];
         }
         // Right border
         if (s_x == BLOCK_SIZE_X)
         {
-            s_u[BLOCK_SIZE_X + 1] = u0[(blockIdx.x + 1) * blockDim.x];
+            s_u[BLOCK_SIZE_X + 1] = u0[(blockIdx.x + 1)*blockDim.x];
         }
 
         // Make sure all the data is loaded before computing
@@ -174,7 +180,7 @@ __global__ void heat_kernel_1d_fused(float *u0, float *u1, uchar4 *output,
         float u_left = s_u[s_x - 1];
         float u_right = s_u[s_x + 1];
 
-        float laplacian = (u_left - 2 * u_center + u_right) / dx2;
+        float laplacian = (u_left - 2 * u_center + u_right ) / dx2;
 
         u1[x] = u_center + a * dt * laplacian;
 
@@ -183,7 +189,7 @@ __global__ void heat_kernel_1d_fused(float *u0, float *u1, uchar4 *output,
         output[x] = make_uchar4(color, 0, 255 - color, 255);
         // gradient_scaling(u1[x], output[x]);
     }
-    else if (x == 0 || x == width - 1)
+    else if (x==0 || x==width-1)
     // (x < width)
     {
         switch (boundary_condition)
@@ -208,6 +214,44 @@ __global__ void heat_kernel_1d_fused(float *u0, float *u1, uchar4 *output,
     }
 }
 
+// Heat kernel for 2D simulation
+__global__ void heat_kernel_2d(float *u0, float *u1, int width, int height, float dt, float dx2, float dy2, float a, BoundaryCondition boundary_condition)
+{
+    int x = blockIdx.x * blockDim.x + threadIdx.x;
+    int y = blockIdx.y * blockDim.y + threadIdx.y;
+
+    if (x > 0 && x < width - 1 && y > 0 && y < height - 1)
+    {
+        int idx = y * width + x;
+        int idx_left = idx - 1;
+        int idx_right = idx + 1;
+        int idx_up = idx - width;
+        int idx_down = idx + width;
+
+        float u_center = u0[idx];
+        float u_left = u0[idx_left];
+        float u_right = u0[idx_right];
+        float u_up = u0[idx_up];
+        float u_down = u0[idx_down];
+
+        float laplacian = (u_left + u_right - 2 * u_center) / dx2 +
+                          (u_up + u_down - 2 * u_center) / dy2;
+
+        u1[idx] = u_center + a * dt * laplacian;
+    }
+    else if (x < width && y < height)
+    {
+        int idx = y * width + x;
+        if (boundary_condition == DIRICHLET)
+        {
+            u0[idx] = 0.0f;
+        }
+        else if (boundary_condition == NEUMANN)
+        {
+            u1[idx] = HEAT_SOURCE;
+        }
+    }
+}
 
 /**
  * @brief Fused both the simulate step and the color output into a single kernel
@@ -241,86 +285,102 @@ __global__ void heat_kernel_2d_fused(float *u0, float *u1, uchar4 *output,
     int s_x = threadIdx.x + 1;
     int s_y = threadIdx.y + 1;
 
-    if (x < width && y < height) {
-        // Load central square
-        s_u[getIndex(s_x, s_y, shared_bs_y)] = u0[getIndex(x, y, width)];
+    // Load data into shared memory
+    // Central square
+    s_u[getIndex(s_x, s_y, shared_bs_y)] = u0[getIndex(x, y, width)];
 
-        // Load borders into shared memory
-        if (threadIdx.x == 0 && x > 0)
-            s_u[getIndex(0, s_y, shared_bs_y)] = u0[getIndex(x - 1, y, width)];
-        if (threadIdx.x == blockDim.x - 1 && x < width - 1)
-            s_u[getIndex(BLOCK_SIZE_X + 1, s_y, shared_bs_y)] = u0[getIndex(x + 1, y, width)];
-        if (threadIdx.y == 0 && y > 0)
-            s_u[getIndex(s_x, 0, shared_bs_y)] = u0[getIndex(x, y - 1, width)];
-        if (threadIdx.y == blockDim.y - 1 && y < height - 1)
-            s_u[getIndex(s_x, BLOCK_SIZE_Y + 1, shared_bs_y)] = u0[getIndex(x, y + 1, width)];
+    if (x > 0 && x < width - 1 &&
+        y > 0 && y < height - 1)
+    {
 
-        // NOTE that from the CUDA Heat Equation implementation,
-        //  the corners are not loaded into shared memory for some reason
-        // they say that it isn't necessary, but I got errors. And GPT helped 
-        // me figure out that it was because the corners were not loaded into shared memory
+    // Top border
+    if (s_x == 1 && s_y != 1)    
+    {
+        s_u[getIndex(0, s_y, shared_bs_y)] = u0[getIndex(blockIdx.x*blockDim.x - 1, y, width)];
+    }
+    // Bottom border
+    if (s_x == BLOCK_SIZE_X && s_y != BLOCK_SIZE_Y) 
+    {
+        s_u[getIndex(BLOCK_SIZE_X + 1, s_y, shared_bs_y)] = u0[getIndex((blockIdx.x + 1)*blockDim.x, y, width)];
+    }
+    // Left border
+    if (s_x != 1 && s_y == 1 )
+    {
+        s_u[getIndex(s_x, 0, shared_bs_y)] = u0[getIndex(x, blockIdx.y*blockDim.y - 1, width)];
+    }
+    // Right border
+    if (s_x != BLOCK_SIZE_X && s_y == BLOCK_SIZE_Y) 
+    {
+        s_u[getIndex(s_x, BLOCK_SIZE_Y + 1, shared_bs_y)] = u0[getIndex(x, (blockIdx.y + 1)*blockDim.y, width)];
+    }
 
-        // Load corners into shared memory
-        if (threadIdx.x == 0 && threadIdx.y == 0 && x > 0 && y > 0)
-            s_u[getIndex(0, 0, shared_bs_y)] = u0[getIndex(x - 1, y - 1, width)];
-        if (threadIdx.x == 0 && threadIdx.y == blockDim.y - 1 && x > 0 && y < height - 1)
-            s_u[getIndex(0, BLOCK_SIZE_Y + 1, shared_bs_y)] = u0[getIndex(x - 1, y + 1, width)];
-        if (threadIdx.x == blockDim.x - 1 && threadIdx.y == 0 && x < width - 1 && y > 0)
-            s_u[getIndex(BLOCK_SIZE_X + 1, 0, shared_bs_y)] = u0[getIndex(x + 1, y - 1, width)];
-        if (threadIdx.x == blockDim.x - 1 && threadIdx.y == blockDim.y - 1 && x < width - 1 && y < height - 1)
-            s_u[getIndex(BLOCK_SIZE_X + 1, BLOCK_SIZE_Y + 1, shared_bs_y)] = u0[getIndex(x + 1, y + 1, width)];
+    // Make sure all the data is loaded before computing
+    __syncthreads();
 
-        // Ensure all threads have loaded their data
-        __syncthreads();
 
-        if (x > 0 && x < width - 1 &&
-            y > 0 && y < height - 1)
+        int idx = getIndex(x, y, width);
+
+        float u_center = s_u[getIndex(s_x, s_y, shared_bs_y)];
+        float u_left = s_u[getIndex(s_x - 1, s_y, shared_bs_y)];
+        float u_right = s_u[getIndex(s_x + 1, s_y, shared_bs_y)];
+        float u_down = s_u[getIndex(s_x, s_y - 1, shared_bs_y)];
+        float u_up = s_u[getIndex(s_x, s_y + 1, shared_bs_y)];
+
+        float laplacian = (u_left - 2 * u_center + u_right ) / dx2 +
+                          (u_up - 2 * u_center+ u_down ) / dy2;
+
+        u1[idx] = u_center + a * dt * laplacian;
+
+        unsigned char color = (unsigned char)(255 * clamp(u1[idx] / HEAT_SOURCE));
+        output[idx] = make_uchar4(color, 0, 255 - color, 255);
+    }
+    else if (x < width && y < height)
+    {
+        int idx = getIndex(x, y, width);
+
+        switch (boundary_condition)
         {
-            int idx = getIndex(x, y, width);
-
-            float u_center = s_u[getIndex(s_x, s_y, shared_bs_y)];
-            float u_left = s_u[getIndex(s_x - 1, s_y, shared_bs_y)];
-            float u_right = s_u[getIndex(s_x + 1, s_y, shared_bs_y)];
-            float u_down = s_u[getIndex(s_x, s_y - 1, shared_bs_y)];
-            float u_up = s_u[getIndex(s_x, s_y + 1, shared_bs_y)];
-
-            float laplacian = (u_left - 2 * u_center + u_right ) / dx2 +
-                            (u_up - 2 * u_center+ u_down ) / dy2;
-
-            u1[idx] = u_center + a * dt * laplacian;
-
-            unsigned char color = (unsigned char)(255 * clamp(u1[idx] / HEAT_SOURCE));
-            output[idx] = make_uchar4(color, 0, 255 - color, 255);
-        }    
-        // this part is using global memory
-        else if (x == 0 || x == width - 1 || y == 0 || y == height - 1)
-        {
-            int idx = getIndex(x, y, width);
-
-            switch (boundary_condition)
+        case DIRICHLET:
+            u1[idx] = 0.0f;
+            break;
+        case NEUMANN:
+            if (x == 0)
             {
-            case DIRICHLET:
-                u1[idx] = 0.0f;
-                break;
-            case NEUMANN:
-                // Left boundary
-                if (x == 0)
-                    u1[idx] = u1[getIndex(x + 1, y, width)] + HEAT_SOURCE * dx2; 
-                // Right boundary
-                else if (x == width - 1)
-                    u1[idx] = u1[getIndex(x - 1, y, width)] + HEAT_SOURCE * dx2; 
-                // Top boundary
-                else if (y == 0)
-                    u1[idx] = u1[getIndex(x, y + 1, width)] + HEAT_SOURCE * dy2; 
-                // Bottom boundary
-                else if (y == height - 1)
-                    u1[idx] = u1[getIndex(x, y - 1, width)] + HEAT_SOURCE * dy2; 
-                break;
+                u1[idx] = u1[getIndex(x + 1, y, width)] + HEAT_SOURCE * dx2; // Left boundary
             }
-
-            unsigned char color = (unsigned char)(255 * clamp(u1[idx] / HEAT_SOURCE));
-            output[idx] = make_uchar4(color, 0, 255 - color, 255);
+            else if (x == width - 1)
+            {
+                u1[idx] = u1[getIndex(x - 1, y, width)] + HEAT_SOURCE * dx2; // Right boundary
+            }
+            else if (y == 0)
+            {
+                u1[idx] = u1[getIndex(x, y + 1, width)] + HEAT_SOURCE * dy2; // Top boundary
+            }
+            else if (y == height - 1)
+            {
+                u1[idx] = u1[getIndex(x, y - 1, width)] + HEAT_SOURCE * dy2; // Bottom boundary
+            }
+            break;
         }
+
+        unsigned char color = (unsigned char)(255 * clamp(u1[idx] / HEAT_SOURCE));
+        output[idx] = make_uchar4(color, 0, 255 - color, 255);
+    }
+}
+
+// Heat to color kernel for 2D simulation
+__global__ void heat_to_color_kernel_2d(float *u, uchar4 *output, int width, int height)
+{
+    int x = blockIdx.x * blockDim.x + threadIdx.x;
+    int y = blockIdx.y * blockDim.y + threadIdx.y;
+
+    if (x < width && y < height)
+    {
+        int idx = y * width + x;
+        float value = u[idx];
+        unsigned char color = (unsigned char)(255 * fminf(fmaxf(value / HEAT_SOURCE, 0.0f), 1.0f));
+
+        output[idx] = make_uchar4(color, 0, 255 - color, 255);
     }
 }
 
@@ -334,8 +394,7 @@ __global__ void add_heat_kernel_1d(float *u, int width, int x)
     {
         if (abs(tx) <= HEAT_RADIUS)
         {
-            u[idx] += HEAT_SOURCE;
-            // atomicAdd(&u[idx], HEAT_SOURCE);
+            atomicAdd(&u[idx], HEAT_SOURCE);
         }
     }
 }
@@ -343,6 +402,47 @@ __global__ void add_heat_kernel_1d(float *u, int width, int x)
 // Add heat kernel for 2D simulation
 __global__ void add_heat_kernel_2d(float *u, int width, int height, int cx, int cy)
 {
+    // // Shared memory array for faster data fetching
+    // __shared__ float shared_u[(2 * HEAT_RADIUS + 1) * (2 * HEAT_RADIUS + 1)];
+
+    // // Calculate thread's position in the block
+    // int local_x = threadIdx.x - HEAT_RADIUS;
+    // int local_y = threadIdx.y - HEAT_RADIUS;
+
+    // // Calculate global position
+    // int global_x = cx + local_x;
+    // int global_y = cy + local_y;
+
+    // // Load data into shared memory
+    // if (global_x >= 0 && global_x < width && global_y >= 0 && global_y < height)
+    // {
+    //     int shared_idx = (local_y + HEAT_RADIUS) * (2 * HEAT_RADIUS + 1) + (local_x + HEAT_RADIUS);
+    //     int global_idx = global_y * width + global_x;
+    //     shared_u[shared_idx] = u[global_idx];
+    // }
+
+    // // Ensure all threads have loaded their data
+    // __syncthreads();
+
+    // // Add heat if within radius
+    // if (tx * tx + ty * ty <= HEAT_RADIUS * HEAT_RADIUS)
+    // {
+    //     int shared_idx = (ty + HEAT_RADIUS) * (2 * HEAT_RADIUS + 1) + (tx + HEAT_RADIUS);
+    //     atomicAdd(&shared_u[shared_idx], HEAT_SOURCE);
+    // }
+
+    // // Ensure all threads have added heat
+    // __syncthreads();
+
+    // // Write back to global memory
+    // if (global_x >= 0 && global_x < width && global_y >= 0 && global_y < height)
+    // {
+    //     int shared_idx = (local_y + HEAT_RADIUS) * (2 * HEAT_RADIUS + 1) + (local_x + HEAT_RADIUS);
+    //     int global_idx = global_y * width + global_x;
+    //     u[global_idx] = shared_u[shared_idx];
+    // }
+
+
     int tx = blockIdx.x * blockDim.x + threadIdx.x - HEAT_RADIUS;
     int ty = blockIdx.y * blockDim.y + threadIdx.y - HEAT_RADIUS;
 
@@ -430,6 +530,101 @@ void init_opengl()
     cudaGraphicsGLRegisterBuffer(&cuda_pbo_resource, pbo, cudaGraphicsMapFlagsWriteDiscard);
 }
 
+// Update simulation
+void update_simulation()
+{
+    float dx2 = DX * DX;
+    float dy2 = DY * DY;
+
+    if (simulation_mode == MODE_1D)
+    {
+
+
+        dim3 gridSize(WIDTH/BLOCK_SIZE_X + 1, HEIGHT/BLOCK_SIZE_Y + 1);
+        dim3 blockSize(BLOCK_SIZE_X, BLOCK_SIZE_Y);
+
+        heat_kernel_1d<<<gridSize, blockSize>>>(d_u0, d_u1, WIDTH, TIME_STEP, DX * DX, DIFFUSIVITY, boundary_condition);
+    }
+    else
+    {
+        dim3 blockSize(BLOCK_SIZE_X, BLOCK_SIZE_Y);
+        dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x,
+                      (HEIGHT + blockSize.y - 1) / blockSize.y);
+
+        heat_kernel_2d<<<gridSize, blockSize>>>(d_u0, d_u1, WIDTH, HEIGHT, TIME_STEP, dx2, dy2, DIFFUSIVITY, boundary_condition);
+    }
+
+    cudaDeviceSynchronize();
+
+    // Swap pointers
+    float *temp = d_u0;
+    d_u0 = d_u1;
+    d_u1 = temp;
+
+    // FPS calculation
+    double currentTime = glfwGetTime();
+    nbFrames++;
+    if (currentTime - lastTime >= 1.0)
+    {
+        fps = double(nbFrames) / (currentTime - lastTime);
+        nbFrames = 0;
+        lastTime += 1.0;
+
+        // Update window title
+        char title[256];
+        sprintf(title, "CUDA Heat Equation - Width: %d Height: %d FPS: %.2f", WIDTH, HEIGHT, fps);
+        glfwSetWindowTitle(window, title);
+    }
+}
+
+// Render simulation
+void render()
+{
+    // Map PBO
+    cudaGraphicsMapResources(1, &cuda_pbo_resource, 0);
+    size_t size;
+    cudaGraphicsResourceGetMappedPointer((void **)&d_output, &size, cuda_pbo_resource);
+
+    if (simulation_mode == MODE_1D)
+    {
+        dim3 blockSize(256);
+        dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x);
+
+        heat_to_color_kernel_1d<<<gridSize, blockSize>>>(d_u0, d_output, WIDTH);
+    }
+    else
+    {
+        dim3 blockSize(BLOCK_SIZE_X, BLOCK_SIZE_Y);
+        dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x,
+                      (HEIGHT + blockSize.y - 1) / blockSize.y);
+
+        heat_to_color_kernel_2d<<<gridSize, blockSize>>>(d_u0, d_output, WIDTH, HEIGHT);
+    }
+
+    cudaDeviceSynchronize();
+
+    // Unmap PBO
+    cudaGraphicsUnmapResources(1, &cuda_pbo_resource, 0);
+
+    // Draw pixels
+    glClear(GL_COLOR_BUFFER_BIT);
+    glDisable(GL_DEPTH_TEST);
+
+    glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbo);
+    if (simulation_mode == MODE_1D)
+    {
+        glDrawPixels(WIDTH, 1, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+    }
+    else
+    {
+        glRasterPos2i(-1, -1);
+        glDrawPixels(WIDTH, HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+    }
+    glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
+
+    glfwSwapBuffers(window);
+}
+
 // Render simulation
 void update_sim_render()
 {
@@ -444,22 +639,30 @@ void update_sim_render()
 
     if (simulation_mode == MODE_1D)
     {
-        // if we just did BLOCK_SIZE_X, we would only be able to do 16 threads
-        // that is too few, so we need to square it
-        dim3 blockSize(BLOCK_SIZE_X * BLOCK_SIZE_X);
-        dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x);
+        dim3 gridSize(WIDTH/BLOCK_SIZE_X + 1, HEIGHT/BLOCK_SIZE_Y + 1);
+        dim3 blockSize(BLOCK_SIZE_X, BLOCK_SIZE_Y);
 
+#if USING_FUSED_KERNELS
         heat_kernel_1d_fused<<<gridSize, blockSize>>>(d_u0, d_u1, d_output, WIDTH, TIME_STEP, DX * DX, DIFFUSIVITY, boundary_condition);
+#else
+        heat_kernel_1d<<<gridSize, blockSize>>>(d_u0, d_u1, WIDTH, TIME_STEP, DX * DX, DIFFUSIVITY, boundary_condition);
+        heat_to_color_kernel_1d<<<gridSize, blockSize>>>(d_u0, d_output, WIDTH);
+#endif
     }
     else
     {
         dim3 blockSize(BLOCK_SIZE_X, BLOCK_SIZE_Y);
         dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x,
                       (HEIGHT + blockSize.y - 1) / blockSize.y);
+#if USING_FUSED_KERNELS
         heat_kernel_2d_fused<<<gridSize, blockSize>>>(d_u0, d_u1, d_output, WIDTH, HEIGHT, TIME_STEP, dx2, dy2, DIFFUSIVITY, boundary_condition);
-
-        cudaDeviceSynchronize();
+#else
+        heat_kernel_2d<<<gridSize, blockSize>>>(d_u0, d_u1, WIDTH, HEIGHT, TIME_STEP, dx2, dy2, DIFFUSIVITY, boundary_condition);
+        heat_to_color_kernel_2d<<<gridSize, blockSize>>>(d_u0, d_output, WIDTH, HEIGHT);
+#endif
     }
+
+    cudaDeviceSynchronize();
 
     // Swap pointers
     float *temp = d_u0;
@@ -692,6 +895,8 @@ int main(int argc, char **argv)
             // CANNOT MANUALLY ADD HEAT IN DEBUG MODE
             // NOR CAN MOUSE/KEYBOARD INPUT BE USED
             update_sim_render();
+            // update_simulation();
+            // render();
 
             // randomlly add heat to the simulation, not at all time steps
             if (rand() % 100 < PERCENT_ADD_HEAT_CHANCE)
@@ -714,6 +919,8 @@ int main(int argc, char **argv)
         {
             glfwPollEvents();
             update_sim_render();
+            // update_simulation();
+            // render();
         }
 
         // Cleanup

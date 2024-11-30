@@ -1,0 +1,99 @@
+OPT
+
+
+  heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) 
+  (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: GPU Speed Of Light Throughput
+    ----------------------- ----------- ------------
+    Metric Name             Metric Unit Metric Value
+    ----------------------- ----------- ------------
+    DRAM Frequency                  Ghz         5.49
+    SM Frequency                    Mhz       817.41
+    Elapsed Cycles                cycle       81,484
+    Memory Throughput                 %        69.69
+    DRAM Throughput                   %        42.21
+    Duration                         us        99.68
+    L1/TEX Cache Throughput           %        71.78
+    L2 Cache Throughput               %        28.65
+    SM Active Cycles              cycle    79,345.90
+    Compute (SM) Throughput           %        80.92
+    ----------------------- ----------- ------------
+    
+    
+    heat_kernel_2d_fused(float *, float *, uchar4 *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.02
+    dram__bytes_write.sum                                   Mbyte         7.75
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   15,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,996,004
+    ------------------------------------------------- ----------- ------------
+    
+UNOPT
+
+
+
+  heat_kernel_2d(float *, float *, int, int, float, float, float, float, BoundaryCondition) 
+  (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: GPU Speed Of Light Throughput
+    ----------------------- ----------- ------------
+    Metric Name             Metric Unit Metric Value
+    ----------------------- ----------- ------------
+    DRAM Frequency                  Ghz         5.48
+    SM Frequency                    Mhz       816.97
+    Elapsed Cycles                cycle       48,815
+    Memory Throughput                 %        45.51
+    DRAM Throughput                   %        45.51
+    Duration                         us        59.74
+    L1/TEX Cache Throughput           %        36.32
+    L2 Cache Throughput               %        34.74
+    SM Active Cycles              cycle    46,552.17
+    Compute (SM) Throughput           %        70.78
+    ----------------------- ----------- ------------
+
+  heat_to_color_kernel_2d(float *, uchar4 *, int, int) 
+  (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: GPU Speed Of Light Throughput
+    ----------------------- ----------- ------------
+    Metric Name             Metric Unit Metric Value
+    ----------------------- ----------- ------------
+    DRAM Frequency                  Ghz         5.48
+    SM Frequency                    Mhz       816.46
+    Elapsed Cycles                cycle       35,014
+    Memory Throughput                 %        68.63
+    DRAM Throughput                   %        68.63
+    Duration                         us        42.88
+    L1/TEX Cache Throughput           %        37.53
+    L2 Cache Throughput               %        31.35
+    SM Active Cycles              cycle    30,843.50
+    Compute (SM) Throughput           %        51.18
+    ----------------------- ----------- ------------
+    
+    
+    
+  heat_kernel_2d(float *, float *, int, int, float, float, float, float, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         3.74
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    5,976,024
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst   10,956,044
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst      996,004
+    ------------------------------------------------- ----------- ------------
+
+  heat_to_color_kernel_2d(float *, uchar4 *, int, int) (63, 63, 1)x(16, 16, 1), Context 1, Stream 7, Device 0, CC 8.6
+    Section: Command line profiler metrics
+    ------------------------------------------------- ----------- ------------
+    Metric Name                                       Metric Unit Metric Value
+    ------------------------------------------------- ----------- ------------
+    dram__bytes_read.sum                                    Mbyte         4.01
+    dram__bytes_write.sum                                   Mbyte         3.73
+    sm__sass_thread_inst_executed_op_fadd_pred_on.sum        inst    1,000,000
+    sm__sass_thread_inst_executed_op_ffma_pred_on.sum        inst    5,000,000
+    sm__sass_thread_inst_executed_op_fmul_pred_on.sum        inst    1,000,000
+    ------------------------------------------------- ----------- ------------
