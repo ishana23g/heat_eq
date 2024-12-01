@@ -21,7 +21,7 @@ inline void gpuAssert(cudaError_t code, const char *file, int line, bool abort=t
 // Simulation settings
 #define WIDTH 1000
 #define HEIGHT 1000
-#define DEPTH 100
+#define DEPTH 100/2
 #define TIME_STEP 0.25f
 #define DIFFUSIVITY 1.0f
 #define HEAT_SOURCE 5.0f
@@ -107,7 +107,7 @@ __device__ int IDX_2D(int x, int y, int width) {
 }
 
 __device__ int IDX_3D(int x, int y, int z, int width, int height) {
-    return ((z * width * height) + y) * width + x;
+    return z * width * height + y * width + x;
 }
 
 // Color Functions
@@ -162,7 +162,7 @@ __global__ void heat_kernel_1d_fused(float *u0, float *u1, uchar4 *output,
                                      int width, float dt, float dx2, float a,
                                      BoundaryCondition boundary_condition)
 {
-    __shared__ float s_u[BLOCK_SIZE_X + 2];
+    extern __shared__ float s_u[];
 
     int x = blockIdx.x * blockDim.x + threadIdx.x;
     int s_x = threadIdx.x + 1;
@@ -172,14 +172,15 @@ __global__ void heat_kernel_1d_fused(float *u0, float *u1, uchar4 *output,
         // Central square
         s_u[s_x] = u0[x];
 
-        // Left border
-        if (s_x == 1)
+        // Load borders
+        if (threadIdx.x == 0 && x > 0)
             s_u[0] = u0[blockIdx.x * blockDim.x - 1];
         // Right border
-        if (s_x == BLOCK_SIZE_X)
+        if (threadIdx.x == blockDim.x - 1 && x < width - 1)
             s_u[BLOCK_SIZE_X + 1] = u0[(blockIdx.x + 1) * blockDim.x];
 
-        // Load corners into shared memory
+        // Load corners 
+        // In this case it would be the left and right absolute borders
         if (threadIdx.x == 0 && x > 0)
             s_u[0] = u0[x - 1];
         if (threadIdx.x == blockDim.x - 1 && x < width - 1)
@@ -222,6 +223,7 @@ __global__ void heat_kernel_1d_fused(float *u0, float *u1, uchar4 *output,
     }
 }
 
+
 // Add heat kernel for 1D simulation
 __global__ void add_heat_kernel_1d(float *u, int width, int x)
 {
@@ -262,7 +264,7 @@ __global__ void heat_kernel_2d_fused(float *u0, float *u1, uchar4 *output,
 {
     // save a blocks size worth of data into shared memory
     // + 2 for the border on left and right sides both x and y
-    __shared__ float s_u[(BLOCK_SIZE_X + 2) * (BLOCK_SIZE_Y + 2)];
+    extern __shared__ float s_u[];
 
     int shared_bs_y = BLOCK_SIZE_Y + 2;
     int x = blockIdx.x * blockDim.x + threadIdx.x;
@@ -273,12 +275,11 @@ __global__ void heat_kernel_2d_fused(float *u0, float *u1, uchar4 *output,
     int s_y = threadIdx.y + 1;
 
     if (x < width && y < height) {
-        int idx = IDX_2D(x, y, width);
-
+        // Load data into shared memory
         // Load central square
-        s_u[IDX_2D(s_x, s_y, shared_bs_y)] = u0[idx];
+        s_u[IDX_2D(s_x, s_y, shared_bs_y)] = u0[IDX_2D(x, y, width)];
 
-        // Load borders into shared memory
+        // Load borders
         if (threadIdx.x == 0 && x > 0)
             s_u[IDX_2D(0, s_y, shared_bs_y)] = u0[IDX_2D(x - 1, y, width)];
         if (threadIdx.x == blockDim.x - 1 && x < width - 1)
@@ -293,7 +294,7 @@ __global__ void heat_kernel_2d_fused(float *u0, float *u1, uchar4 *output,
         // they say that it isn't necessary, but I got errors. And GPT helped 
         // me figure out that it was because the corners were not loaded into shared memory
 
-        // Load corners into shared memory
+        // Load corners
         if (threadIdx.x == 0 && threadIdx.y == 0 && x > 0 && y > 0)
             s_u[IDX_2D(0, 0, shared_bs_y)] = u0[IDX_2D(x - 1, y - 1, width)];
         if (threadIdx.x == 0 && threadIdx.y == blockDim.y - 1 && x > 0 && y < height - 1)
@@ -305,6 +306,8 @@ __global__ void heat_kernel_2d_fused(float *u0, float *u1, uchar4 *output,
 
         // Ensure all threads have loaded their data
         __syncthreads();
+
+        int idx = IDX_2D(x, y, width);
 
         if (x > 0 && x < width - 1 &&
             y > 0 && y < height - 1) {
@@ -330,16 +333,16 @@ __global__ void heat_kernel_2d_fused(float *u0, float *u1, uchar4 *output,
             case NEUMANN:
                 // Left boundary
                 if (x == 0)
-                    u1[idx] = u0[IDX_2D(x + 1, y, width)] + HEAT_SOURCE * dx2; 
+                    u1[idx] = u1[IDX_2D(x + 1, y, width)] + HEAT_SOURCE * dx2; 
                 // Right boundary
                 else if (x == width - 1)
-                    u1[idx] = u0[IDX_2D(x - 1, y, width)] + HEAT_SOURCE * dx2; 
+                    u1[idx] = u1[IDX_2D(x - 1, y, width)] + HEAT_SOURCE * dx2; 
                 // Top boundary
                 else if (y == 0)
-                    u1[idx] = u0[IDX_2D(x, y + 1, width)] + HEAT_SOURCE * dy2; 
+                    u1[idx] = u1[IDX_2D(x, y + 1, width)] + HEAT_SOURCE * dy2; 
                 // Bottom boundary
                 else if (y == height - 1)
-                    u1[idx] = u0[IDX_2D(x, y - 1, width)] + HEAT_SOURCE * dy2; 
+                    u1[idx] = u1[IDX_2D(x, y - 1, width)] + HEAT_SOURCE * dy2; 
                 break;
             }
         }
@@ -363,7 +366,6 @@ __global__ void add_heat_kernel_2d(float *u, int width, int height, int cx, int 
         {
             int idx = y * width + x;
             u[idx] += HEAT_SOURCE;
-            // atomicAdd(&u[idx], HEAT_SOURCE);
         }
     }
 }
@@ -392,21 +394,11 @@ __global__ void heat_kernel_3d_fused(float *u0, float *u1, uchar4 *output,
                                      float dx2, float dy2, float dz2,
                                      float a, BoundaryCondition boundary_condition)
 {
-
-    int x = blockIdx.x * blockDim.x + threadIdx.x;
-    int y = blockIdx.y * blockDim.y + threadIdx.y;
-    int z = blockIdx.z * blockDim.z + threadIdx.z;
-
-    if (x < width && y < height && z < depth) {
-        int idx = IDX_3D(x, y, z, width, height);
-        u1[idx] = u0[idx]; // Simple copy operation for debugging
-    }
-
-    /*
+    extern __shared__ float s_u[];
 
     // save a blocks size worth of data into shared memory
     // + 2 for the border on left and right sides both x and y
-    __shared__ float s_u[(BLOCK_SIZE_X + 2) * (BLOCK_SIZE_Y + 2) * (BLOCK_SIZE_Z + 2)];
+    // __shared__ float s_u[(BLOCK_SIZE_X + 2) * (BLOCK_SIZE_Y + 2) * (BLOCK_SIZE_Z + 2)];
 
     int shared_bs_y = BLOCK_SIZE_Y + 2;
     int shared_bs_z = BLOCK_SIZE_Z + 2;
@@ -457,11 +449,12 @@ __global__ void heat_kernel_3d_fused(float *u0, float *u1, uchar4 *output,
         
         // Ensure all threads have loaded their data
         __syncthreads();
+
+        int idx = IDX_3D(x, y, z, width, height);
+
         if (x > 0 && x < width - 1 &&
             y > 0 && y < height - 1 &&
-            z > 0 && z < depth - 1)
-        {
-            int idx = IDX_3D(x, y, z, width, height);   
+            z > 0 && z < depth - 1) {
 
             float u_center = s_u[IDX_3D(s_x, s_y, s_z, shared_bs_y, shared_bs_z)];
             float u_left = s_u[IDX_3D(s_x - 1, s_y, s_z, shared_bs_y, shared_bs_z)];
@@ -476,15 +469,10 @@ __global__ void heat_kernel_3d_fused(float *u0, float *u1, uchar4 *output,
                             (u_front - 2 * u_center + u_back) / dz2;
 
             u1[idx] = u_center + a * dt * laplacian;
-
-            unsigned char color = (unsigned char)(255 * clamp(u1[idx] / HEAT_SOURCE));
-            output[idx] = make_uchar4(color, 0, 255 - color, 255);
         }    
         // this part is using global memory
         else if (x == 0 || x == width - 1 || y == 0 || y == height - 1 || z == 0 || z == depth - 1)
         {
-            int idx = IDX_3D(x, y, z, width, height);
-
             switch (boundary_condition)
             {
             case DIRICHLET:
@@ -511,13 +499,10 @@ __global__ void heat_kernel_3d_fused(float *u0, float *u1, uchar4 *output,
                     u1[idx] = u0[IDX_3D(x, y, z - 1, width, height)] + HEAT_SOURCE * dz2;
                 break;
             }
-
-            unsigned char color = (unsigned char)(255 * clamp(u1[idx] / HEAT_SOURCE));
-            output[idx] = make_uchar4(color, 0, 255 - color, 255);
         }
+        unsigned char color = (unsigned char)(255 * clamp(u1[idx] / HEAT_SOURCE));
+        output[idx] = make_uchar4(color, 0, 255 - color, 255/depth);
     }
-    
-     */
 }
 
 __global__ void add_heat_kernel_3d(float *u, int width, int height, int depth, int cx, int cy, int cz) {
@@ -602,7 +587,14 @@ void init_opengl()
     // Create PBO
     glGenBuffers(1, &pbo);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbo);
-    size_t pbo_size = (simulation_mode == MODE_1D) ? WIDTH * sizeof(uchar4) : WIDTH * HEIGHT * sizeof(uchar4);
+    size_t pbo_size;
+    if (simulation_mode == MODE_1D) {
+        pbo_size = WIDTH * sizeof(uchar4);
+    } else if (simulation_mode == MODE_2D) {
+        pbo_size = WIDTH * HEIGHT * sizeof(uchar4);
+    } else if (simulation_mode == MODE_3D) {
+        pbo_size = WIDTH * HEIGHT * DEPTH * sizeof(uchar4);
+    }
     glBufferData(GL_PIXEL_UNPACK_BUFFER, pbo_size, NULL, GL_DYNAMIC_DRAW);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 
@@ -629,27 +621,30 @@ void update_sim_render()
         // that is too few, so we need to square it
         dim3 blockSize(BLOCK_SIZE_X * BLOCK_SIZE_X * 4);
         dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x);
-
+        int sharedMemBytes = (blockSize.x+ 2) * sizeof(float);
         // print out the block size and grid size
         // printf("1D-kernel threads per block: %d\n", blockSize.x);
         // printf("1D-kernel threads per dimension:: %d\n", gridSize.x);
+        // printf("1D-kernel shared memory: %d bytes \n", sharedMemBytes);
 
-        heat_kernel_1d_fused<<<gridSize, blockSize>>>(d_u0, d_u1, d_output, 
+        heat_kernel_1d_fused<<<gridSize, blockSize, sharedMemBytes>>>(d_u0, d_u1, d_output, 
             WIDTH, TIME_STEP, 
             DX * DX, 
             DIFFUSIVITY, boundary_condition);
     }
     else if (simulation_mode == MODE_2D)
     {
-        dim3 blockSize(BLOCK_SIZE_X*4, BLOCK_SIZE_Y*4);
+        dim3 blockSize(BLOCK_SIZE_X*2, BLOCK_SIZE_Y*2);
         dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x,
                       (HEIGHT + blockSize.y - 1) / blockSize.y);
+        int sharedMemBytes = (blockSize.x + 2) * (blockSize.y + 2) * sizeof(float);
 
-        // print out the block size and grid size
+        // prnt out the block size and grid size
         // printf("2D-kernel threads per block: %d\n", blockSize.x * blockSize.y);
         // printf("2D-kernel threads per dimension: %d, %d\n", gridSize.x, gridSize.y);
+        // printf("2D-kernel shared memory: %d bytes \n", sharedMemBytes);
 
-        heat_kernel_2d_fused<<<gridSize, blockSize>>>(d_u0, d_u1, d_output, 
+        heat_kernel_2d_fused<<<gridSize, blockSize, sharedMemBytes>>>(d_u0, d_u1, d_output, 
             WIDTH, HEIGHT, TIME_STEP, 
             DX * DX, DY * DY, 
             DIFFUSIVITY, boundary_condition);
@@ -660,17 +655,20 @@ void update_sim_render()
         dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x,
                       (HEIGHT + blockSize.y - 1) / blockSize.y,
                       (DEPTH + blockSize.z - 1) / blockSize.z);
+        int sharedMemBytes = (blockSize.x + 2) * (blockSize.y + 2) * (blockSize.z + 2) * sizeof(float);
 
         // print out the block size and grid size
         // printf("3D-kernel threads per block: %d\n", blockSize.x * blockSize.y * blockSize.z);
         // printf("3D-kernel threads per dimension: %d, %d, %d\n", gridSize.x, gridSize.y, gridSize.z);
+        // printf("3D-kernel shared memory: %d bytes \n", sharedMemBytes);
 
-        heat_kernel_3d_fused<<<gridSize, blockSize>>>(d_u0, d_u1, d_output, 
+        heat_kernel_3d_fused<<<gridSize, blockSize, sharedMemBytes>>>(d_u0, d_u1, d_output, 
             WIDTH, HEIGHT, DEPTH, TIME_STEP, 
             DX * DX, DY * DY, DZ * DZ,
             DIFFUSIVITY, boundary_condition);
     }
-    // gpuErrchk(cudaPeekAtLastError());
+
+    gpuErrchk(cudaPeekAtLastError());
     gpuErrchk(cudaDeviceSynchronize());
 
     // Swap pointers
@@ -713,33 +711,50 @@ void update_sim_render()
     }
     else if (simulation_mode == MODE_3D)
     {
-        // basically draw out an isometric view of the 3D simulation
-        // this is a bit of a hack, but it should work.
 
-        // the basic idea is to draw the 2D slices of the 3D simulation. And the slices
-        // of color should have an alpha value of so that we can see through the slices. 
-        // This will give us a 3D view of the simulation.
+        int window_width, window_height;
+        glfwGetFramebufferSize(window, &window_width, &window_height);
 
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-        // Set up orthographic projection
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        gluOrtho2D(-1, 1, -1, 1);
-        glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
+    // Set up orthographic projection
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(0, window_width, 0, window_height);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
 
-        // Draw each slice with decreasing alpha
-        for (int z = 0; z < DEPTH; ++z)
-        {
-            float alpha = 1.0f - ((float)z / DEPTH);
-            glColor4f(1.0f, 0.0f, 0.0f, alpha);
-            glRasterPos2f(-1.0f + (2.0f * z / DEPTH), -1.0f);
-            glDrawPixels(WIDTH, HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid *)(z * WIDTH * HEIGHT * sizeof(uchar4)));
-        }
+    // Scale factor to reduce the size of each slice
+    float scale_factor = .9f; // Adjust as needed
+    // float scale_factor = 1.0f - (float) HEIGHT / DEPTH; // Adjust as needed
 
-        glDisable(GL_BLEND);
+    // Starting position for the backmost layer
+    float start_x = 0.0f;
+    float start_y = window_height - (HEIGHT * scale_factor);
+
+    // Draw each slice with offset
+    for (int z = 0; z < DEPTH; ++z)
+    {
+        // float alpha = 1.0f - ((float)z / DEPTH);
+
+        // Calculate position offset
+        float offset_x = start_x + z * (WIDTH * scale_factor) / DEPTH;
+        float offset_y = start_y - z * (HEIGHT * scale_factor) / DEPTH;
+
+        glRasterPos2f(offset_x, offset_y);
+
+        // Set pixel zoom for scaling
+        glPixelZoom(scale_factor, scale_factor);
+
+        // Draw the slice
+        glDrawPixels(WIDTH, HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid *)(z * WIDTH * HEIGHT * sizeof(uchar4)));
+    }
+
+    // Reset pixel zoom
+    glPixelZoom(1.0f, 1.0f);
+
+    glDisable(GL_BLEND);
     }
     
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);

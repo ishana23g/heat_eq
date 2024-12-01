@@ -145,7 +145,7 @@ __global__ void heat_kernel_1d_fused(float *u0, float *u1, uchar4 *output,
                                      int width, float dt, float dx2, float a,
                                      BoundaryCondition boundary_condition)
 {
-    __shared__ float s_u[BLOCK_SIZE_X + 2];
+    extern __shared__ float s_u[];
 
     int x = blockIdx.x * blockDim.x + threadIdx.x;
     int s_x = threadIdx.x + 1;
@@ -155,14 +155,15 @@ __global__ void heat_kernel_1d_fused(float *u0, float *u1, uchar4 *output,
         // Central square
         s_u[s_x] = u0[x];
 
-        // Left border
-        if (s_x == 1)
+        // Load borders
+        if (threadIdx.x == 0 && x > 0)
             s_u[0] = u0[blockIdx.x * blockDim.x - 1];
         // Right border
-        if (s_x == BLOCK_SIZE_X)
+        if (threadIdx.x == blockDim.x - 1 && x < width - 1)
             s_u[BLOCK_SIZE_X + 1] = u0[(blockIdx.x + 1) * blockDim.x];
 
-        // Load corners into shared memory
+        // Load corners 
+        // In this case it would be the left and right absolute borders
         if (threadIdx.x == 0 && x > 0)
             s_u[0] = u0[x - 1];
         if (threadIdx.x == blockDim.x - 1 && x < width - 1)
@@ -229,7 +230,7 @@ __global__ void heat_kernel_2d_fused(float *u0, float *u1, uchar4 *output,
 {
     // save a blocks size worth of data into shared memory
     // + 2 for the border on left and right sides both x and y
-    __shared__ float s_u[(BLOCK_SIZE_X + 2) * (BLOCK_SIZE_Y + 2)];
+    extern __shared__ float s_u[];
 
     int shared_bs_y = BLOCK_SIZE_Y + 2;
     int x = blockIdx.x * blockDim.x + threadIdx.x;
@@ -240,10 +241,11 @@ __global__ void heat_kernel_2d_fused(float *u0, float *u1, uchar4 *output,
     int s_y = threadIdx.y + 1;
 
     if (x < width && y < height) {
+        // Load data into shared memory
         // Load central square
         s_u[IDX_2D(s_x, s_y, shared_bs_y)] = u0[IDX_2D(x, y, width)];
 
-        // Load borders into shared memory
+        // Load borders
         if (threadIdx.x == 0 && x > 0)
             s_u[IDX_2D(0, s_y, shared_bs_y)] = u0[IDX_2D(x - 1, y, width)];
         if (threadIdx.x == blockDim.x - 1 && x < width - 1)
@@ -258,7 +260,7 @@ __global__ void heat_kernel_2d_fused(float *u0, float *u1, uchar4 *output,
         // they say that it isn't necessary, but I got errors. And GPT helped 
         // me figure out that it was because the corners were not loaded into shared memory
 
-        // Load corners into shared memory
+        // Load corners
         if (threadIdx.x == 0 && threadIdx.y == 0 && x > 0 && y > 0)
             s_u[IDX_2D(0, 0, shared_bs_y)] = u0[IDX_2D(x - 1, y - 1, width)];
         if (threadIdx.x == 0 && threadIdx.y == blockDim.y - 1 && x > 0 && y < height - 1)
@@ -326,7 +328,6 @@ __global__ void add_heat_kernel_1d(float *u, int width, int x)
         if (abs(tx) <= HEAT_RADIUS)
         {
             u[idx] += HEAT_SOURCE;
-            // atomicAdd(&u[idx], HEAT_SOURCE);
         }
     }
 }
@@ -346,7 +347,6 @@ __global__ void add_heat_kernel_2d(float *u, int width, int height, int cx, int 
         {
             int idx = y * width + x;
             u[idx] += HEAT_SOURCE;
-            // atomicAdd(&u[idx], HEAT_SOURCE);
         }
     }
 }
@@ -439,15 +439,17 @@ void update_sim_render()
         // that is too few, so we need to square it
         dim3 blockSize(BLOCK_SIZE_X * BLOCK_SIZE_X);
         dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x);
+        int sharedMemBytes = (blockSize.x + 2) * sizeof(float);
 
-        heat_kernel_1d_fused<<<gridSize, blockSize>>>(d_u0, d_u1, d_output, WIDTH, TIME_STEP, DX * DX, DIFFUSIVITY, boundary_condition);
+        heat_kernel_1d_fused<<<gridSize, blockSize, sharedMemBytes>>>(d_u0, d_u1, d_output, WIDTH, TIME_STEP, DX * DX, DIFFUSIVITY, boundary_condition);
     }
     else if (simulation_mode == MODE_2D)
     {
         dim3 blockSize(BLOCK_SIZE_X, BLOCK_SIZE_Y);
         dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x,
                       (HEIGHT + blockSize.y - 1) / blockSize.y);
-        heat_kernel_2d_fused<<<gridSize, blockSize>>>(d_u0, d_u1, d_output, WIDTH, HEIGHT, TIME_STEP, dx2, dy2, DIFFUSIVITY, boundary_condition);
+        int sharedMemBytes = (blockSize.x + 2) * (blockSize.y + 2) * sizeof(float);
+        heat_kernel_2d_fused<<<gridSize, blockSize, sharedMemBytes>>>(d_u0, d_u1, d_output, WIDTH, HEIGHT, TIME_STEP, dx2, dy2, DIFFUSIVITY, boundary_condition);
 
     }
     gpuErrchk(cudaPeekAtLastError());
@@ -483,8 +485,11 @@ void update_sim_render()
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbo);
     if (simulation_mode == MODE_1D)
     {
-        // HEIGHT HAS BEEN CHANGED TO 10
-        glDrawPixels(WIDTH, 1, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+        for (int i = 0; i < 20; i++)
+        {
+            glRasterPos2f(-1.0f, -1.0f + i * 0.02f);
+            glDrawPixels(WIDTH, 1, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+        }
     }
     else
     {
@@ -560,6 +565,19 @@ void keyboard_callback(GLFWwindow *window, int key, int scancode, int action, in
             reset_simulation();
             printf("Simulation reset\n");
             break;
+        case GLFW_KEY_X:
+            glfwSetWindowShouldClose(window, GLFW_TRUE);
+            printf("Exiting simulation\n");
+
+            // Cleanup
+            cudaGraphicsUnregisterResource(cuda_pbo_resource);
+            glDeleteBuffers(1, &pbo);
+            cudaFree(d_u0);
+            cudaFree(d_u1);
+            glfwDestroyWindow(window);
+            glfwTerminate();
+            exit(0);
+            break;
         default:
             break;
         }
@@ -606,7 +624,6 @@ void mouse_button_callback(GLFWwindow *window, int button, int action, int mods)
         if (action == GLFW_PRESS)
         {
             is_mouse_pressed = true;
-            cursor_position_callback(window, 0, 0); // Trigger heat addition
         }
         else if (action == GLFW_RELEASE)
         {
@@ -702,19 +719,10 @@ int main(int argc, char **argv)
     else
     {
         // Main loop
-        while (!glfwWindowShouldClose(window))
-        {
+        while (window && !glfwWindowShouldClose(window)) {
             glfwPollEvents();
             update_sim_render();
         }
-
-        // Cleanup
-        cudaGraphicsUnregisterResource(cuda_pbo_resource);
-        glDeleteBuffers(1, &pbo);
-        cudaFree(d_u0);
-        cudaFree(d_u1);
-        glfwDestroyWindow(window);
-        glfwTerminate();
 
         return 0;
     }

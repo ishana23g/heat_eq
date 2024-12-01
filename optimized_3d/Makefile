@@ -1,7 +1,8 @@
 # Compiler and flags
 NVCC := nvcc
 # Compiled on a 4060TI 16 GB card. Using arch=sm_89
-NVCC_FLAGS := --use_fast_math -O3 -gencode arch=compute_89,code=sm_89
+# Compiled on a 3060TI Mobile 8GB card. Using arch=sm_86
+NVCC_FLAGS := --use_fast_math -O3 -gencode arch=compute_86,code=sm_86
 # Required libraries
 # sudo apt-get install libglfw3-dev libglfw3 libglew-dev libglew2.1 libglu1-mesa-dev
 # need to use -I/usr/include -ccbin g++, because the default nvcc compiler is not able to find the right files otherwise

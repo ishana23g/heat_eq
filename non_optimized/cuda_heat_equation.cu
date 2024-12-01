@@ -27,8 +27,8 @@ inline void gpuAssert(cudaError_t code, const char *file, int line, bool abort=t
 #define HEAT_RADIUS 5
 
 // CUDA block size
-#define BLOCK_SIZE_X 16 * 2
-#define BLOCK_SIZE_Y 16 * 2
+#define BLOCK_SIZE_X 16
+#define BLOCK_SIZE_Y 16
 
 // Host variables
 GLuint pbo;
@@ -237,7 +237,7 @@ __global__ void heat_to_color_kernel_2d(float *u, uchar4 *output, int width, int
     {
         int idx = y * width + x;
         float value = u[idx];
-        unsigned char color = (unsigned char)(255 * clamp fminf(fmaxf(value / HEAT_SOURCE, 0.0f), 1.0f));
+        unsigned char color = (unsigned char)(255 * fminf(fmaxf(value / HEAT_SOURCE, 0.0f), 1.0f));
 
         output[idx] = make_uchar4(color, 0, 255 - color, 255);
     }
@@ -371,8 +371,7 @@ void update_simulation()
             TIME_STEP, DX * DX, DY * DY, 
             DIFFUSIVITY, boundary_condition);
     }
-
-    // gpuErrchk(cudaPeekAtLastError());
+    gpuErrchk(cudaPeekAtLastError());
     gpuErrchk(cudaDeviceSynchronize());
 
     // Swap pointers
@@ -419,7 +418,8 @@ void render()
 
         heat_to_color_kernel_2d<<<gridSize, blockSize>>>(d_u0, d_output, WIDTH, HEIGHT);
     }
-    // gpuErrchk(cudaPeekAtLastError());
+    
+    gpuErrchk(cudaPeekAtLastError());
     gpuErrchk(cudaDeviceSynchronize());
 
 
@@ -480,6 +480,7 @@ void keyboard_callback(GLFWwindow *window, int key, int scancode, int action, in
             cudaFree(d_u0);
             cudaFree(d_u1);
             glfwDestroyWindow(window);
+            
             init_opengl();
             init_simulation();
 
@@ -497,6 +498,7 @@ void keyboard_callback(GLFWwindow *window, int key, int scancode, int action, in
             cudaFree(d_u0);
             cudaFree(d_u1);
             glfwDestroyWindow(window);
+
             init_opengl();
             init_simulation();
 
@@ -539,7 +541,8 @@ void add_heat_launcher(int x, int y)
         add_heat_kernel_2d<<<gridSize, blockSize>>>(d_u0, WIDTH, HEIGHT, x, y);
     }
 
-    cudaDeviceSynchronize();
+    gpuErrchk(cudaPeekAtLastError());
+    gpuErrchk(cudaDeviceSynchronize());
 }
 
 // Cursor position callback
@@ -591,7 +594,7 @@ int main(int argc, char **argv)
             }
             ++i;
         }
-        else if (strcmp(argv[i], "-b") == 0 && i + 1 < argc)
+        if (strcmp(argv[i], "-b") == 0 && i + 1 < argc)
         {
             // switch boundary conditions, dirichlet or neumann
             if (strcmp(argv[i + 1], "d") == 0)
@@ -604,7 +607,7 @@ int main(int argc, char **argv)
             }
             ++i;
         }
-        else if (strcmp(argv[i], "-d") == 0)
+        if (strcmp(argv[i], "-d") == 0)
         {
             // debug mode. Sets a hard coded value for seeing how long the simulation takes to run
             debug_mode = true;
@@ -659,7 +662,7 @@ int main(int argc, char **argv)
     else
     {
         // Main loop
-        while (!glfwWindowShouldClose(window))
+        while (window && !glfwWindowShouldClose(window))
         {
             glfwPollEvents();
             update_simulation();

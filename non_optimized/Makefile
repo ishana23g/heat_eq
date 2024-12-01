@@ -1,11 +1,12 @@
 # Compiler and flags
 NVCC := nvcc
 # complied on a 4060TI 16 GB card. So using the arch=sm_89
-NVCC_FLAGS := --use_fast_math -O3 -arch=sm_89
+NVCC_FLAGS := --use_fast_math -O3 -arch=sm_86
 # need to install the following libraries
 # sudo apt-get install libglfw3-dev libglfw3 libglew-dev libglew2.1
 # need to use -I/usr/include -ccbin g++, because the default nvcc compiler is not able to find the right files otherwise
-LIB := -lcudart -lcurand -lcublas -lcufft  -I/usr/include -ccbin g++ -lglfw -lGL -lGLEW 
+LIB := -I/usr/include -ccbin g++ -lglfw -lGL -lGLEW 
+# -lcudart -lcurand -lcublas -lcufft 
 
 # # Project files
 # EXECUTABLE := cuda_heat_equation
