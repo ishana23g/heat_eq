@@ -4,13 +4,24 @@
 #include <stdlib.h>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <GL/glu.h>
 #include <cuda_runtime.h>
 #include <cuda_gl_interop.h>
+
+// Error checking macro
+#define gpuErrchk(ans) { gpuAssert((ans), __FILE__, __LINE__); }
+inline void gpuAssert(cudaError_t code, const char *file, int line, bool abort=true)
+{
+   if (code != cudaSuccess) {
+      fprintf(stderr,"GPUassert: %s %s %d\n", cudaGetErrorString(code), file, line);
+      if (abort) exit(code);
+   }
+}
 
 // Simulation settings
 #define WIDTH 1000
 #define HEIGHT 1000
-#define DEPTH 1000
+#define DEPTH 100
 #define TIME_STEP 0.25f
 #define DIFFUSIVITY 1.0f
 #define HEAT_SOURCE 5.0f
@@ -20,9 +31,9 @@
 #define HEAT_RADIUS 5
 
 // CUDA block size
-#define BLOCK_SIZE_X 16
-#define BLOCK_SIZE_Y 16
-#define BLOCK_SIZE_Z 16
+#define BLOCK_SIZE_X 8 // 16
+#define BLOCK_SIZE_Y 8 // 16
+#define BLOCK_SIZE_Z 8 // 16
 
 // Host variables
 GLuint pbo;
@@ -66,8 +77,7 @@ int PERCENT_ADD_HEAT_CHANCE = 40;
 // Function prototypes
 void init_simulation();
 void init_opengl();
-void update_simulation();
-void render();
+void update_sim_render();
 void reset_simulation();
 void keyboard_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
 void cursor_position_callback(GLFWwindow *window, double xpos, double ypos);
@@ -154,59 +164,56 @@ __global__ void heat_kernel_1d_fused(float *u0, float *u1, uchar4 *output,
     int x = blockIdx.x * blockDim.x + threadIdx.x;
     int s_x = threadIdx.x + 1;
 
-    if (x > 0 && x < width - 1)
-    {
+    if (x < width) {
         // Load data into shared memory
         // Central square
         s_u[s_x] = u0[x];
 
         // Left border
         if (s_x == 1)
-        {
             s_u[0] = u0[blockIdx.x * blockDim.x - 1];
-        }
         // Right border
         if (s_x == BLOCK_SIZE_X)
-        {
             s_u[BLOCK_SIZE_X + 1] = u0[(blockIdx.x + 1) * blockDim.x];
-        }
+
+        // Load corners into shared memory
+        if (threadIdx.x == 0 && x > 0)
+            s_u[0] = u0[x - 1];
+        if (threadIdx.x == blockDim.x - 1 && x < width - 1)
+            s_u[BLOCK_SIZE_X + 1] = u0[x + 1];
 
         // Make sure all the data is loaded before computing
         __syncthreads();
 
-        float u_center = s_u[s_x];
-        float u_left = s_u[s_x - 1];
-        float u_right = s_u[s_x + 1];
+        if (x > 0 && x < width - 1) {
 
-        float laplacian = (u_left - 2 * u_center + u_right) / dx2;
+            float u_center = s_u[s_x];
+            float u_left = s_u[s_x - 1];
+            float u_right = s_u[s_x + 1];
 
-        u1[x] = u_center + a * dt * laplacian;
+            float laplacian = (u_left - 2 * u_center + u_right) / dx2;
 
-        unsigned char color = (unsigned char)(255 * clamp(u1[x] / HEAT_SOURCE));
+            u1[x] = u_center + a * dt * laplacian;
 
-        output[x] = make_uchar4(color, 0, 255 - color, 255);
-        // gradient_scaling(u1[x], output[x]);
-    }
-    else if (x == 0 || x == width - 1)
-    // (x < width)
-    {
-        switch (boundary_condition)
-        {
-        case DIRICHLET:
-            u1[x] = 0.0f;
-            break;
-        case NEUMANN:
-            // Modified Neumann boundary
-            if (x == 0)
-            {
-                u1[x] = u1[x + 1] + HEAT_SOURCE * (dx2); // Left boundary
-            }
-            else if (x == width - 1)
-            {
-                u1[x] = u1[x - 1] + HEAT_SOURCE * (dx2); // Right boundary
-            }
-            break;
         }
+        else if (x == 0 || x == width - 1)
+        // (x < width)
+        {
+            switch (boundary_condition)
+            {
+            case DIRICHLET:
+                u1[x] = 0.0f;
+                break;
+            case NEUMANN:
+                // Modified Neumann boundary
+                if (x == 0)
+                    u1[x] = u1[x + 1] + HEAT_SOURCE * (dx2); // Left boundary
+                else if (x == width - 1)
+                    u1[x] = u1[x - 1] + HEAT_SOURCE * (dx2); // Right boundary
+                break;
+            }
+        }
+        // gradient_scaling(u1[x], output[x]);
         unsigned char color = (unsigned char)(255 * clamp(u1[x] / HEAT_SOURCE));
         output[x] = make_uchar4(color, 0, 255 - color, 255);
     }
@@ -294,11 +301,10 @@ __global__ void heat_kernel_2d_fused(float *u0, float *u1, uchar4 *output,
         // Ensure all threads have loaded their data
         __syncthreads();
 
-        if (x > 0 && x < width - 1 &&
-            y > 0 && y < height - 1)
-        {
-            int idx = IDX_2D(x, y, width);
+        int idx = IDX_2D(x, y, width);
 
+        if (x > 0 && x < width - 1 &&
+            y > 0 && y < height - 1) {
             float u_center = s_u[IDX_2D(s_x, s_y, shared_bs_y)];
             float u_left = s_u[IDX_2D(s_x - 1, s_y, shared_bs_y)];
             float u_right = s_u[IDX_2D(s_x + 1, s_y, shared_bs_y)];
@@ -309,15 +315,10 @@ __global__ void heat_kernel_2d_fused(float *u0, float *u1, uchar4 *output,
                             (u_up - 2 * u_center+ u_down ) / dy2;
 
             u1[idx] = u_center + a * dt * laplacian;
-
-            unsigned char color = (unsigned char)(255 * clamp(u1[idx] / HEAT_SOURCE));
-            output[idx] = make_uchar4(color, 0, 255 - color, 255);
         }    
         // this part is using global memory
-        else if (x == 0 || x == width - 1 || y == 0 || y == height - 1)
-        {
-            int idx = IDX_2D(x, y, width);
-
+        else if (x == 0 || x == width - 1 || 
+            y == 0 || y == height - 1) {
             switch (boundary_condition)
             {
             case DIRICHLET:
@@ -326,22 +327,21 @@ __global__ void heat_kernel_2d_fused(float *u0, float *u1, uchar4 *output,
             case NEUMANN:
                 // Left boundary
                 if (x == 0)
-                    u1[idx] = u1[IDX_2D(x + 1, y, width)] + HEAT_SOURCE * dx2; 
+                    u1[idx] = u0[IDX_2D(x + 1, y, width)] + HEAT_SOURCE * dx2; 
                 // Right boundary
                 else if (x == width - 1)
-                    u1[idx] = u1[IDX_2D(x - 1, y, width)] + HEAT_SOURCE * dx2; 
+                    u1[idx] = u0[IDX_2D(x - 1, y, width)] + HEAT_SOURCE * dx2; 
                 // Top boundary
                 else if (y == 0)
-                    u1[idx] = u1[IDX_2D(x, y + 1, width)] + HEAT_SOURCE * dy2; 
+                    u1[idx] = u0[IDX_2D(x, y + 1, width)] + HEAT_SOURCE * dy2; 
                 // Bottom boundary
                 else if (y == height - 1)
-                    u1[idx] = u1[IDX_2D(x, y - 1, width)] + HEAT_SOURCE * dy2; 
+                    u1[idx] = u0[IDX_2D(x, y - 1, width)] + HEAT_SOURCE * dy2; 
                 break;
             }
-
-            unsigned char color = (unsigned char)(255 * clamp(u1[idx] / HEAT_SOURCE));
-            output[idx] = make_uchar4(color, 0, 255 - color, 255);
         }
+        unsigned char color = (unsigned char)(255 * clamp(u1[idx] / HEAT_SOURCE));
+        output[idx] = make_uchar4(color, 0, 255 - color, 255);
     }
 }
 
@@ -365,9 +365,7 @@ __global__ void add_heat_kernel_2d(float *u, int width, int height, int cx, int 
     }
 }
 
-// 
-
-
+// Heat kernel for 3D simulation
 /**
  * @brief Fused both the simulate step and the color output into a single kernel
  * Also using shared memory to reduce global memory access
@@ -466,7 +464,6 @@ __global__ void heat_kernel_3d_fused(float *u0, float *u1, uchar4 *output,
 
             unsigned char color = (unsigned char)(255 * clamp(u1[idx] / HEAT_SOURCE));
             output[idx] = make_uchar4(color, 0, 255 - color, 255);
-
         }    
         // this part is using global memory
         else if (x == 0 || x == width - 1 || y == 0 || y == height - 1 || z == 0 || z == depth - 1)
@@ -481,22 +478,22 @@ __global__ void heat_kernel_3d_fused(float *u0, float *u1, uchar4 *output,
             case NEUMANN:
                 // Left boundary
                 if (x == 0)
-                    u1[idx] = u1[IDX_3D(x + 1, y, z, width, height)] + HEAT_SOURCE * dx2;
+                    u1[idx] = u0[IDX_3D(x + 1, y, z, width, height)] + HEAT_SOURCE * dx2;
                 // Right boundary
                 else if (x == width - 1)
-                    u1[idx] = u1[IDX_3D(x - 1, y, z, width, height)] + HEAT_SOURCE * dx2;
+                    u1[idx] = u0[IDX_3D(x - 1, y, z, width, height)] + HEAT_SOURCE * dx2;
                 // Top boundary
                 else if (y == 0)
-                    u1[idx] = u1[IDX_3D(x, y + 1, z, width, height)] + HEAT_SOURCE * dy2;
+                    u1[idx] = u0[IDX_3D(x, y + 1, z, width, height)] + HEAT_SOURCE * dy2;
                 // Bottom boundary
                 else if (y == height - 1)
-                    u1[idx] = u1[IDX_3D(x, y - 1, z, width, height)] + HEAT_SOURCE * dy2;
+                    u1[idx] = u0[IDX_3D(x, y - 1, z, width, height)] + HEAT_SOURCE * dy2;
                 // Front boundary
                 else if (z == 0)
-                    u1[idx] = u1[IDX_3D(x, y, z + 1, width, height)] + HEAT_SOURCE * dz2;
+                    u1[idx] = u0[IDX_3D(x, y, z + 1, width, height)] + HEAT_SOURCE * dz2;
                 // Back boundary
                 else if (z == depth - 1)
-                    u1[idx] = u1[IDX_3D(x, y, z - 1, width, height)] + HEAT_SOURCE * dz2;
+                    u1[idx] = u0[IDX_3D(x, y, z - 1, width, height)] + HEAT_SOURCE * dz2;
                 break;
             }
 
@@ -517,8 +514,7 @@ __global__ void add_heat_kernel_3d(float *u, int width, int height, int depth, i
 
     if (x >= 0 && x < width && y >= 0 && y < height && z >= 0 && z < depth) {
         if (tx * tx + ty * ty + tz * tz <= HEAT_RADIUS * HEAT_RADIUS) {
-            int idx = (z * width * height) + (y * width) + x;
-            u[idx] += HEAT_SOURCE;
+            u[IDX_3D(x, y, z, width, height)] += HEAT_SOURCE;
         }
     }
 }
@@ -540,11 +536,11 @@ void init_simulation()
     {
         size = WIDTH * HEIGHT * DEPTH * sizeof(float);
     } 
-    cudaMalloc((void **)&d_u0, size);
-    cudaMalloc((void **)&d_u1, size);
-
-    cudaMemset(d_u0, 0, size);
-    cudaMemset(d_u1, 0, size);
+    gpuErrchk(cudaMalloc((void **)&d_u0, size));
+    gpuErrchk(cudaMalloc((void **)&d_u1, size));
+    
+    gpuErrchk(cudaMemset(d_u0, 0, size));
+    gpuErrchk(cudaMemset(d_u1, 0, size));
 }
 
 // Initialize OpenGL
@@ -606,9 +602,9 @@ void update_sim_render()
     size_t size;
     cudaGraphicsResourceGetMappedPointer((void **)&d_output, &size, cuda_pbo_resource);
 
-    float dx2 = DX * DX;
-    float dy2 = DY * DY;
-    float dz2 = DZ * DZ;
+    // float dx2 = DX * DX;
+    // float dy2 = DY * DY;
+    // float dz2 = DZ * DZ;
 
     if (simulation_mode == MODE_1D)
     {
@@ -617,16 +613,20 @@ void update_sim_render()
         dim3 blockSize(BLOCK_SIZE_X * BLOCK_SIZE_X);
         dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x);
 
-        heat_kernel_1d_fused<<<gridSize, blockSize>>>(d_u0, d_u1, d_output, WIDTH, TIME_STEP, DX * DX, DIFFUSIVITY, boundary_condition);
+        heat_kernel_1d_fused<<<gridSize, blockSize>>>(d_u0, d_u1, d_output, 
+            WIDTH, TIME_STEP, 
+            DX * DX, 
+            DIFFUSIVITY, boundary_condition);
     }
     else if (simulation_mode == MODE_2D)
     {
         dim3 blockSize(BLOCK_SIZE_X, BLOCK_SIZE_Y);
         dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x,
                       (HEIGHT + blockSize.y - 1) / blockSize.y);
-        heat_kernel_2d_fused<<<gridSize, blockSize>>>(d_u0, d_u1, d_output, WIDTH, HEIGHT, TIME_STEP, dx2, dy2, DIFFUSIVITY, boundary_condition);
-
-        cudaDeviceSynchronize();
+        heat_kernel_2d_fused<<<gridSize, blockSize>>>(d_u0, d_u1, d_output, 
+            WIDTH, HEIGHT, TIME_STEP, 
+            DX * DX, DY * DY, 
+            DIFFUSIVITY, boundary_condition);
     }
     else if (simulation_mode == MODE_3D)
     {
@@ -634,10 +634,13 @@ void update_sim_render()
         dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x,
                       (HEIGHT + blockSize.y - 1) / blockSize.y,
                       (DEPTH + blockSize.z - 1) / blockSize.z);
-        heat_kernel_3d_fused<<<gridSize, blockSize>>>(d_u0, d_u1, d_output, WIDTH, HEIGHT, DEPTH, TIME_STEP, dx2, dy2, dz2, DIFFUSIVITY, boundary_condition);
-
-        cudaDeviceSynchronize();
+        heat_kernel_3d_fused<<<gridSize, blockSize>>>(d_u0, d_u1, d_output, 
+            WIDTH, HEIGHT, DEPTH, TIME_STEP, 
+            DX * DX, DY * DY, DZ * DZ,
+            DIFFUSIVITY, boundary_condition);
     }
+    gpuErrchk(cudaPeekAtLastError());
+    gpuErrchk(cudaDeviceSynchronize());
 
     // Swap pointers
     float *temp = d_u0;
@@ -665,8 +668,8 @@ void update_sim_render()
     // Draw pixels
     glClear(GL_COLOR_BUFFER_BIT);
     glDisable(GL_DEPTH_TEST);
-
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbo);
+
     if (simulation_mode == MODE_1D)
     {
         // HEIGHT HAS BEEN CHANGED TO 10
@@ -679,11 +682,35 @@ void update_sim_render()
     }
     else if (simulation_mode == MODE_3D)
     {
-        glRasterPos2i(-1, -1);
-        glDrawPixels(WIDTH, HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+        // basically draw out an isometric view of the 3D simulation
+        // this is a bit of a hack, but it should work.
+
+        // the basic idea is to draw the 2D slices of the 3D simulation. And the slices
+        // of color should have an alpha value of so that we can see through the slices. 
+        // This will give us a 3D view of the simulation.
+
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+        // Set up orthographic projection
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        gluOrtho2D(-1, 1, -1, 1);
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+
+        // Draw each slice with decreasing alpha
+        for (int z = 0; z < DEPTH; ++z)
+        {
+            float alpha = 1.0f - ((float)z / DEPTH);
+            glColor4f(1.0f, 0.0f, 0.0f, alpha);
+            glRasterPos2f(-1.0f + (2.0f * z / DEPTH), -1.0f);
+            glDrawPixels(WIDTH, HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid *)(z * WIDTH * HEIGHT * sizeof(uchar4)));
+        }
+
+        glDisable(GL_BLEND);
     }
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
-
     glfwSwapBuffers(window);
 }
 
@@ -808,7 +835,8 @@ void cursor_position_callback(GLFWwindow *window, double xpos, double ypos)
         {
             int x = (int)(xpos * WIDTH / fb_width);
             int y = (int)((fb_height - ypos) * HEIGHT / fb_height); // Invert y-axis
-            int z = DEPTH / 2; // Set z to the middle of the depth
+            // int z = DEPTH / 2; // Set z to the middle of the depth
+            int z = rand() % DEPTH;
             dim3 blockSize(BLOCK_SIZE_X, BLOCK_SIZE_Y, BLOCK_SIZE_Z);
             dim3 gridSize((2 * HEAT_RADIUS + blockSize.x - 1) / blockSize.x,
                           (2 * HEAT_RADIUS + blockSize.y - 1) / blockSize.y,
@@ -917,11 +945,8 @@ int main(int argc, char **argv)
             {
                 int x = rand() % WIDTH;
                 int y = rand() % HEIGHT;
-                dim3 blockSize(256);
-                dim3 gridSize((2 * HEAT_RADIUS + blockSize.x - 1) / blockSize.x,
-                              (2 * HEAT_RADIUS + blockSize.y - 1) / blockSize.y);
-
-                add_heat_kernel_2d<<<gridSize, blockSize>>>(d_u0, WIDTH, HEIGHT, x, y);
+                int z = rand() % DEPTH;
+                cursor_position_callback(window, x, y);
             }
         }
         return 0;

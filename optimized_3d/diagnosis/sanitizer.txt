@@ -1,0 +1,38 @@
+========= COMPUTE-SANITIZER
+========= Program hit cudaErrorNoKernelImageForDevice (error 209) due to "no kernel image is available for execution on the device" on CUDA API call to cudaLaunchKernel.
+=========     Saved host backtrace up to driver entry point at error
+=========     Host Frame: [0x469065]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame:cudaLaunchKernel [0x75a2d]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4976]
+=========                in /home/driffyn/Documents/CMDA4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x28a0]
+=========                in /home/driffyn/Documents/CMDA4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x29d8f]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:392 [0x29e3f]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2c14]
+=========                in /home/driffyn/Documents/CMDA4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Program hit cudaErrorNoKernelImageForDevice (error 209) due to "no kernel image is available for execution on the device" on CUDA API call to cudaPeekAtLastError.
+=========     Saved host backtrace up to driver entry point at error
+=========     Host Frame: [0x469065]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame:cudaPeekAtLastError [0x4de96]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x43d8]
+=========                in /home/driffyn/Documents/CMDA4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x28a0]
+=========                in /home/driffyn/Documents/CMDA4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x29d8f]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:392 [0x29e3f]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2c14]
+=========                in /home/driffyn/Documents/CMDA4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+GPUassert: no kernel image is available for execution on the device cuda_heat_equation.cu 642
+========= Target application returned an error
+========= ERROR SUMMARY: 2 errors

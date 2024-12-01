@@ -24,3 +24,4 @@ rm -rf profiler/*
 ncu ./cuda_heat_equation -d 2>&1 | tee profiler/ncu_all.txt
 # measure how much FMAs and memory bandwidth is being used
 ncu --metrics sm__sass_thread_inst_executed_op_fadd_pred_on.sum,sm__sass_thread_inst_executed_op_ffma_pred_on.sum,sm__sass_thread_inst_executed_op_fmul_pred_on.sum,dram__bytes_read.sum,dram__bytes_write.sum ./cuda_heat_equation -d 2>&1 | tee profiler/ncu_fma_memory.txt
+ncu --print-summary per-kernel ./cuda_heat_equation -d 2>&1 | tee profiler/ncu_summary.txt
