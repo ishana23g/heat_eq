@@ -31,6 +31,3 @@ $(EXECUTABLE): $(OBJ_FILES)
 # Clean up build files
 clean:
 	rm -f $(OBJ_FILES) $(EXECUTABLE)
-
-make all:
-	nvcc -o cuda_heat_equation cuda_heat_equation.cu -I/usr/include -ccbin g++ -lglfw -lGL -lGLEW

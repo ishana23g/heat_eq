@@ -102,10 +102,13 @@ __global__ void add_heat_kernel_2d(float *u, int width, int height, int cx, int 
 __global__ void add_heat_kernel_3d(float *u, int width, int height, int depth, int cx, int cy, int cz);
 
 // Indexing macro
-#define IDX_2D(x, y, width) ((y) * (width) + (x))
+__device__ int IDX_2D(int x, int y, int width) {
+    return (y * width) + x;
+}
 
-#define IDX_3D(x, y, z, width, height) ((z) * (width) * (height) + (y) * (width) + (x))
-
+__device__ int IDX_3D(int x, int y, int z, int width, int height) {
+    return ((z * width * height) + y) * width + x;
+}
 
 // Color Functions
 uchar4 gradient_scaling(float standard_heat_value);
@@ -270,8 +273,10 @@ __global__ void heat_kernel_2d_fused(float *u0, float *u1, uchar4 *output,
     int s_y = threadIdx.y + 1;
 
     if (x < width && y < height) {
+        int idx = IDX_2D(x, y, width);
+
         // Load central square
-        s_u[IDX_2D(s_x, s_y, shared_bs_y)] = u0[IDX_2D(x, y, width)];
+        s_u[IDX_2D(s_x, s_y, shared_bs_y)] = u0[idx];
 
         // Load borders into shared memory
         if (threadIdx.x == 0 && x > 0)
@@ -300,8 +305,6 @@ __global__ void heat_kernel_2d_fused(float *u0, float *u1, uchar4 *output,
 
         // Ensure all threads have loaded their data
         __syncthreads();
-
-        int idx = IDX_2D(x, y, width);
 
         if (x > 0 && x < width - 1 &&
             y > 0 && y < height - 1) {
@@ -389,6 +392,18 @@ __global__ void heat_kernel_3d_fused(float *u0, float *u1, uchar4 *output,
                                      float dx2, float dy2, float dz2,
                                      float a, BoundaryCondition boundary_condition)
 {
+
+    int x = blockIdx.x * blockDim.x + threadIdx.x;
+    int y = blockIdx.y * blockDim.y + threadIdx.y;
+    int z = blockIdx.z * blockDim.z + threadIdx.z;
+
+    if (x < width && y < height && z < depth) {
+        int idx = IDX_3D(x, y, z, width, height);
+        u1[idx] = u0[idx]; // Simple copy operation for debugging
+    }
+
+    /*
+
     // save a blocks size worth of data into shared memory
     // + 2 for the border on left and right sides both x and y
     __shared__ float s_u[(BLOCK_SIZE_X + 2) * (BLOCK_SIZE_Y + 2) * (BLOCK_SIZE_Z + 2)];
@@ -501,6 +516,8 @@ __global__ void heat_kernel_3d_fused(float *u0, float *u1, uchar4 *output,
             output[idx] = make_uchar4(color, 0, 255 - color, 255);
         }
     }
+    
+     */
 }
 
 __global__ void add_heat_kernel_3d(float *u, int width, int height, int depth, int cx, int cy, int cz) {
@@ -610,8 +627,12 @@ void update_sim_render()
     {
         // if we just did BLOCK_SIZE_X, we would only be able to do 16 threads
         // that is too few, so we need to square it
-        dim3 blockSize(BLOCK_SIZE_X * BLOCK_SIZE_X);
+        dim3 blockSize(BLOCK_SIZE_X * BLOCK_SIZE_X * 4);
         dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x);
+
+        // print out the block size and grid size
+        // printf("1D-kernel threads per block: %d\n", blockSize.x);
+        // printf("1D-kernel threads per dimension:: %d\n", gridSize.x);
 
         heat_kernel_1d_fused<<<gridSize, blockSize>>>(d_u0, d_u1, d_output, 
             WIDTH, TIME_STEP, 
@@ -620,9 +641,14 @@ void update_sim_render()
     }
     else if (simulation_mode == MODE_2D)
     {
-        dim3 blockSize(BLOCK_SIZE_X, BLOCK_SIZE_Y);
+        dim3 blockSize(BLOCK_SIZE_X*4, BLOCK_SIZE_Y*4);
         dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x,
                       (HEIGHT + blockSize.y - 1) / blockSize.y);
+
+        // print out the block size and grid size
+        // printf("2D-kernel threads per block: %d\n", blockSize.x * blockSize.y);
+        // printf("2D-kernel threads per dimension: %d, %d\n", gridSize.x, gridSize.y);
+
         heat_kernel_2d_fused<<<gridSize, blockSize>>>(d_u0, d_u1, d_output, 
             WIDTH, HEIGHT, TIME_STEP, 
             DX * DX, DY * DY, 
@@ -634,12 +660,17 @@ void update_sim_render()
         dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x,
                       (HEIGHT + blockSize.y - 1) / blockSize.y,
                       (DEPTH + blockSize.z - 1) / blockSize.z);
+
+        // print out the block size and grid size
+        // printf("3D-kernel threads per block: %d\n", blockSize.x * blockSize.y * blockSize.z);
+        // printf("3D-kernel threads per dimension: %d, %d, %d\n", gridSize.x, gridSize.y, gridSize.z);
+
         heat_kernel_3d_fused<<<gridSize, blockSize>>>(d_u0, d_u1, d_output, 
             WIDTH, HEIGHT, DEPTH, TIME_STEP, 
             DX * DX, DY * DY, DZ * DZ,
             DIFFUSIVITY, boundary_condition);
     }
-    gpuErrchk(cudaPeekAtLastError());
+    // gpuErrchk(cudaPeekAtLastError());
     gpuErrchk(cudaDeviceSynchronize());
 
     // Swap pointers
@@ -710,6 +741,7 @@ void update_sim_render()
 
         glDisable(GL_BLEND);
     }
+    
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
     glfwSwapBuffers(window);
 }
@@ -930,6 +962,16 @@ int main(int argc, char **argv)
     glfwSetKeyCallback(window, keyboard_callback);
     glfwSetMouseButtonCallback(window, mouse_button_callback);
     glfwSetCursorPosCallback(window, cursor_position_callback);
+
+    // cudaDeviceProp deviceProp;
+    // cudaGetDeviceProperties(&deviceProp, 0);
+    // printf("Max threads per block: %d\n", deviceProp.maxThreadsPerBlock);
+    // printf("Max threads per dimension: %d, %d, %d\n", deviceProp.maxThreadsDim[0], deviceProp.maxThreadsDim[1], deviceProp.maxThreadsDim[2]);
+    // printf("Max grid size: %d, %d, %d\n\n", deviceProp.maxGridSize[0], deviceProp.maxGridSize[1], deviceProp.maxGridSize[2]);
+
+    // cudaGetDeviceProperties(&deviceProp, 0);
+    // printf("Shared memory per block: %ld bytes\n\n", deviceProp.sharedMemPerBlock);
+
 
     if (debug_mode)
     {

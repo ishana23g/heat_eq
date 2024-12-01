@@ -7,6 +7,15 @@
 #include <cuda_runtime.h>
 #include <cuda_gl_interop.h>
 
+#define gpuErrchk(ans) { gpuAssert((ans), __FILE__, __LINE__); }
+inline void gpuAssert(cudaError_t code, const char *file, int line, bool abort=true)
+{
+   if (code != cudaSuccess) {
+      fprintf(stderr,"GPUassert: %s %s %d\n", cudaGetErrorString(code), file, line);
+      if (abort) exit(code);
+   }
+}
+
 // Simulation settings
 #define WIDTH 1000
 #define HEIGHT 1000
@@ -18,8 +27,8 @@
 #define HEAT_RADIUS 5
 
 // CUDA block size
-#define BLOCK_SIZE_X 16
-#define BLOCK_SIZE_Y 16
+#define BLOCK_SIZE_X 16 * 2
+#define BLOCK_SIZE_Y 16 * 2
 
 // Host variables
 GLuint pbo;
@@ -169,14 +178,15 @@ __global__ void heat_kernel_2d(float *u0, float *u1, int width, int height, floa
     int x = blockIdx.x * blockDim.x + threadIdx.x;
     int y = blockIdx.y * blockDim.y + threadIdx.y;
 
-    if (x > 0 && x < width - 1 && y > 0 && y < height - 1)
-    {
-        int idx = y * width + x;
-        int idx_left = idx - 1;
-        int idx_right = idx + 1;
-        int idx_up = idx - width;
-        int idx_down = idx + width;
+    int idx = getIndex(x, y, width);
 
+    if (x > 0 && x < width - 1 && y > 0 && y < height - 1)
+    {   
+        int idx_left = getIndex(x - 1, y, width);
+        int idx_right = getIndex(x + 1, y, width);
+        int idx_up = getIndex(x, y - 1, width);
+        int idx_down = getIndex(x, y + 1, width);
+        
         float u_center = u0[idx];
         float u_left = u0[idx_left];
         float u_right = u0[idx_right];
@@ -190,8 +200,6 @@ __global__ void heat_kernel_2d(float *u0, float *u1, int width, int height, floa
     }
     else if (x < width && y < height)
     {
-        int idx = getIndex(x, y, width);
-
         switch (boundary_condition)
         {
         case DIRICHLET:
@@ -229,7 +237,7 @@ __global__ void heat_to_color_kernel_2d(float *u, uchar4 *output, int width, int
     {
         int idx = y * width + x;
         float value = u[idx];
-        unsigned char color = (unsigned char)(255 * fminf(fmaxf(value / HEAT_SOURCE, 0.0f), 1.0f));
+        unsigned char color = (unsigned char)(255 * clamp fminf(fmaxf(value / HEAT_SOURCE, 0.0f), 1.0f));
 
         output[idx] = make_uchar4(color, 0, 255 - color, 255);
     }
@@ -364,7 +372,8 @@ void update_simulation()
             DIFFUSIVITY, boundary_condition);
     }
 
-    cudaDeviceSynchronize();
+    // gpuErrchk(cudaPeekAtLastError());
+    gpuErrchk(cudaDeviceSynchronize());
 
     // Swap pointers
     float *temp = d_u0;
@@ -397,7 +406,7 @@ void render()
 
     if (simulation_mode == MODE_1D)
     {
-        dim3 blockSize(BLOCK_SIZE_X);
+        dim3 blockSize(BLOCK_SIZE_X * BLOCK_SIZE_X);
         dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x);
 
         heat_to_color_kernel_1d<<<gridSize, blockSize>>>(d_u0, d_output, WIDTH);
@@ -410,8 +419,9 @@ void render()
 
         heat_to_color_kernel_2d<<<gridSize, blockSize>>>(d_u0, d_output, WIDTH, HEIGHT);
     }
+    // gpuErrchk(cudaPeekAtLastError());
+    gpuErrchk(cudaDeviceSynchronize());
 
-    cudaDeviceSynchronize();
 
     // Unmap PBO
     cudaGraphicsUnmapResources(1, &cuda_pbo_resource, 0);

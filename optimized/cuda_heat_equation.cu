@@ -28,8 +28,8 @@ inline void gpuAssert(cudaError_t code, const char *file, int line, bool abort=t
 #define HEAT_RADIUS 5
 
 // CUDA block size
-#define BLOCK_SIZE_X 16
-#define BLOCK_SIZE_Y 16
+#define BLOCK_SIZE_X 16*2
+#define BLOCK_SIZE_Y 16*2
 
 // Host variables
 GLuint pbo;
@@ -72,8 +72,7 @@ int PERCENT_ADD_HEAT_CHANCE = 40;
 // Function prototypes
 void init_simulation();
 void init_opengl();
-void update_simulation();
-void render();
+void update_sim_render();
 void reset_simulation();
 void keyboard_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
 void cursor_position_callback(GLFWwindow *window, double xpos, double ypos);
@@ -123,7 +122,10 @@ uchar4 gradient_scaling(float standard_heat_value)
 }
 
 // CUDA kernel implementations
-#define IDX_2D(x, y, width) ((y) * (width) + (x))
+__device__ int IDX_2D(int x, int y, int width)
+{
+    return y * width + x;
+}
 
 // Heat kernel for 1D simulation
 /**
@@ -448,7 +450,8 @@ void update_sim_render()
         heat_kernel_2d_fused<<<gridSize, blockSize>>>(d_u0, d_u1, d_output, WIDTH, HEIGHT, TIME_STEP, dx2, dy2, DIFFUSIVITY, boundary_condition);
 
     }
-    cudaDeviceSynchronize();
+    gpuErrchk(cudaPeekAtLastError());
+    gpuErrchk(cudaDeviceSynchronize());
 
     // Swap pointers
     float *temp = d_u0;

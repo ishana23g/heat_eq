@@ -5,7 +5,7 @@
 =========                in /lib/x86_64-linux-gnu/libcuda.so.1
 =========     Host Frame:cudaLaunchKernel [0x75a2d]
 =========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
-=========     Host Frame:update_sim_render() [0x4976]
+=========     Host Frame:update_sim_render() [0x49b6]
 =========                in /home/driffyn/Documents/CMDA4634/heat_eq/optimized_3d/./cuda_heat_equation
 =========     Host Frame:main [0x28a0]
 =========                in /home/driffyn/Documents/CMDA4634/heat_eq/optimized_3d/./cuda_heat_equation
@@ -22,7 +22,7 @@
 =========                in /lib/x86_64-linux-gnu/libcuda.so.1
 =========     Host Frame:cudaPeekAtLastError [0x4de96]
 =========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
-=========     Host Frame:update_sim_render() [0x43d8]
+=========     Host Frame:update_sim_render() [0x4418]
 =========                in /home/driffyn/Documents/CMDA4634/heat_eq/optimized_3d/./cuda_heat_equation
 =========     Host Frame:main [0x28a0]
 =========                in /home/driffyn/Documents/CMDA4634/heat_eq/optimized_3d/./cuda_heat_equation
@@ -33,6 +33,6 @@
 =========     Host Frame:_start [0x2c14]
 =========                in /home/driffyn/Documents/CMDA4634/heat_eq/optimized_3d/./cuda_heat_equation
 ========= 
-GPUassert: no kernel image is available for execution on the device cuda_heat_equation.cu 642
+GPUassert: no kernel image is available for execution on the device cuda_heat_equation.cu 673
 ========= Target application returned an error
 ========= ERROR SUMMARY: 2 errors
