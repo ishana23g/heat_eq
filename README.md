@@ -106,7 +106,34 @@ By default if you call:
 
 ## Ways Performance Gains Were Made
 
+* Fusing kernels for simulation and color saving. 
+  - By putting together both the time stepping simulation kernel, and the conversion of a float (the heat value) to a color in the same kernel we can cut down on more kernels being lauched (launch lattency) and some duplicated memory being needed to pushed again. 
 
+* Use of shared memory. The whole process when disritizing and simulating the next time step needs not just a given space's previous heat value but the neighborring values too. 
+
+* The 3D kernel was further optimzied by looking at Paulius Micikevicius's white paper given below, and Ashwin Srinath's code implementation of said white paper. The basic idea was to reduce on register counts by stepping through the flattened 3D array in slices.
+
+
+## Possible Future Development: 
+
+### Better color gradients in general. 
+An example of what someone might want to try is a gradient based on MAGMA: 
+Where the ranges could look like:
+```python
+magma_colormap = [
+    [252, 253, 191],
+    [254, 176, 120],
+    [241, 96, 93],
+    [183, 55, 121],
+    [114, 31, 129],
+    [44, 17, 95],
+    [0, 0, 4]
+]
+```
+Or other common gradients and some n-number of colors can be found here:
+https://waldyrious.net/viridis-palette-generator/
+
+Note that currently it is being I just have a low and high color and scaling the temperature based on that. It is hard to do that in general. Possibly there might be some use of sin/cos??? to combine them better. However, I do not know what would be the least computationally intensive way to do this.
 
 
 ## Sources Used
@@ -115,5 +142,7 @@ By default if you call:
   - [Fluid Rendering with OpenGL](https://github.com/NVIDIA/cuda-samples/tree/master/Samples/5_Domain_Specific/fluidsGL)
   - [Example 3D Cos-Sin Graph with OpenGL](https://github.com/NVIDIA/cuda-samples/tree/master/Samples/5_Domain_Specific/simpleGL)
 - [Cuda Heat Equation](https://enccs.github.io/OpenACC-CUDA-beginners/2.02_cuda-heat-equation/)
+- [3D Finite Difference Computation on GPUs using CUDA, by Paulius Micikevicius](https://developer.download.nvidia.com/CUDA/CUDA_Zone/papers/gpu_3dfd_rev.pdf)
+  - [Implemntation done by Ashwin Srinath](https://github.com/shwina/cuda_3Dheat)
 - ChatGPT o1-preview
 - ChatGPT 4o

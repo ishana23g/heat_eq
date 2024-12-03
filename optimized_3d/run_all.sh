@@ -3,7 +3,7 @@
 # Make the CUDA program
 make 
 
-O=(-d -b n)
+O=(-d -b N)
 
 # Run diagnostics of memory and cache
 # check if diagnosis directory exists
@@ -23,8 +23,8 @@ if [ ! -d "profiler" ]; then
 fi
 # clear the profiler directory
 rm -rf profiler/*
-# ncu ./cuda_heat_equation "${O[@]}" 2>&1 | tee profiler/ncu_all.txt
-ncu ./cuda_heat_equation "${O[@]}" --open-in-ui -o profiler/ncu_report
+ncu ./cuda_heat_equation "${O[@]}" 2>&1 | tee profiler/ncu_all.txt
+ncu --open-in-ui -o profiler/ncu_report ./cuda_heat_equation "${O[@]}" 
 # measure how much FMAs and memory bandwidth is being used
 ncu --metrics sm__sass_thread_inst_executed_op_fadd_pred_on.sum,\
 sm__sass_thread_inst_executed_op_ffma_pred_on.sum,\

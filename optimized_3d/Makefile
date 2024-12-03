@@ -26,7 +26,7 @@ $(EXECUTABLE): $(OBJ_FILES)
 
 # Compile each .cu file to .o
 %.o: %.cu
-	$(NVCC) $(NVCC_FLAGS) -c $< -o $@ 
+	$(NVCC) $(NVCC_FLAGS) -c $< -o $@ $(LIB)
 
 # Generate PTX files
 %.ptx: %.cu
