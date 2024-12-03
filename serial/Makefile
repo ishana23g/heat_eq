@@ -3,7 +3,7 @@ CXX := g++
 CXX_FLAGS := -O3 -Wall -std=c++11
 
 # Required libraries
-LIB := -lglfw -lGL -lGLEW -lm
+LIB := -lglfw -lGL -lGLEW -lm -lGLU -lglut
 
 # Project files
 EXECUTABLE := heat_sim

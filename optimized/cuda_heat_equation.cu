@@ -76,6 +76,7 @@ void update_sim_render();
 void reset_simulation();
 void keyboard_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
 void cursor_position_callback(GLFWwindow *window, double xpos, double ypos);
+void add_heat_launcher(double xpos, int fb_width, int fb_height, double ypos);
 void mouse_button_callback(GLFWwindow *window, int button, int action, int mods);
 
 // CUDA kernels
@@ -97,28 +98,21 @@ uchar4 gradient_scaling(float standard_heat_value);
 #define HEAT_MIN_CLAMP 0.0f
 #define clamp(x) (x < HEAT_MIN_CLAMP ? HEAT_MIN_CLAMP : (x > HEAT_MAX_CLAMP ? HEAT_MAX_CLAMP : x))
 
-uchar4 gradient_scaling(float standard_heat_value)
-{
-    // Gradient Set Up:
-#if 1
-    // Define a color gradient from blue to red
-    unsigned char r = (unsigned char)(255 * clamp(standard_heat_value / HEAT_SOURCE));
-    unsigned char g = 0;
-    unsigned char b = (unsigned char)(255 * (1 - clamp(standard_heat_value / HEAT_SOURCE)));
-    return make_uchar4(r, g, b, 255);
-#else
-    // TODO: Define a color gradient MAGMA
-    // magma_colormap = [
-    //     [252, 253, 191],
-    //     [254, 176, 120],
-    //     [241, 96, 93],
-    //     [183, 55, 121],
-    //     [114, 31, 129],
-    //     [44, 17, 95],
-    //     [0, 0, 4]
-    // ]
-    // https://waldyrious.net/viridis-palette-generator/
-#endif
+__device__ void gradient_scaling(float heat_value, uchar4* out_color, SimulationMode mode)
+{   
+
+    float t = clamp(heat_value / HEAT_SOURCE);
+    unsigned char a = static_cast<unsigned char>(255.0f);
+
+    if (mode == MODE_3D) {
+        a = static_cast<unsigned char>(255.0f / DEPTH * 4.0f);
+    }
+
+    unsigned char r = static_cast<unsigned char>(t * 255.0f);
+    unsigned char g = static_cast<unsigned char>(0);
+    unsigned char b = static_cast<unsigned char>(255.0f - t * 255.0f);
+
+    *out_color = make_uchar4(r, g, b, a);
 }
 
 // CUDA kernel implementations

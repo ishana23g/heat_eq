@@ -1,4 +1,10 @@
+./heat_sim: option requires an argument -- 'd'
+Usage: ./heat_sim [options]
+Options:
+  -m <1d|2d|3d>       Simulation mode (default: 1d)
+  -b <d|n>            Boundary condition: d (Dirichlet), n (Neumann) (default: d)
+  -d <max_steps> <chance>  Enable debug mode with max steps and heat chance
 
-real	0m0.906s
-user	0m0.567s
-sys	0m0.184s
+real	0m0.024s
+user	0m0.011s
+sys	0m0.013s

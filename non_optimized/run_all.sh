@@ -3,7 +3,7 @@
 # Make the CUDA program
 make 
 
-O=(-d -m 2d -b n)
+O=(-d -m 2d -b N)
 
 # Run diagnostics of memory and cache
 # check if diagnosis directory exists

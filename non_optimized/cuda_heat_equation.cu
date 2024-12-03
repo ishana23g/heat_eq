@@ -4,6 +4,9 @@
 #include <stdlib.h>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <GL/glu.h>
+#include <string>
+#include <unistd.h>
 #include <cuda_runtime.h>
 #include <cuda_gl_interop.h>
 
@@ -19,12 +22,14 @@ inline void gpuAssert(cudaError_t code, const char *file, int line, bool abort=t
 // Simulation settings
 #define WIDTH 1000
 #define HEIGHT 1000
-#define TIME_STEP 0.25f
 #define DIFFUSIVITY 1.0f
 #define HEAT_SOURCE 5.0f
 #define DX 1.0f
 #define DY 1.0f
+#define DX2 (DX * DX)
+#define DY2 (DY * DY)
 #define HEAT_RADIUS 5
+#define TIME_STEP (DX2 * DY2  / (2 * DIFFUSIVITY * (DX2 + DY2)))
 
 // CUDA block size
 #define BLOCK_SIZE_X 16
@@ -350,34 +355,39 @@ void init_opengl()
 // Update simulation
 void update_simulation()
 {
-    if (simulation_mode == MODE_1D)
+    const int SIM_STEPS = 10;
+
+    for (int i = 0; i < SIM_STEPS; i++)
     {
-        dim3 blockSize(BLOCK_SIZE_X*BLOCK_SIZE_X);
-        dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x);
+        if (simulation_mode == MODE_1D)
+        {
+            dim3 blockSize(BLOCK_SIZE_X*BLOCK_SIZE_X);
+            dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x);
 
-        heat_kernel_1d<<<gridSize, blockSize>>>(
-            d_u0, d_u1, WIDTH, 
-            TIME_STEP, DX * DX, 
-            DIFFUSIVITY, boundary_condition);
+            heat_kernel_1d<<<gridSize, blockSize>>>(
+                d_u0, d_u1, WIDTH, 
+                TIME_STEP, DX * DX, 
+                DIFFUSIVITY, boundary_condition);
+        }
+        else
+        {
+            dim3 blockSize(BLOCK_SIZE_X, BLOCK_SIZE_Y);
+            dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x,
+                        (HEIGHT + blockSize.y - 1) / blockSize.y);
+
+            heat_kernel_2d<<<gridSize, blockSize>>>(
+                d_u0, d_u1, WIDTH, HEIGHT, 
+                TIME_STEP, DX * DX, DY * DY, 
+                DIFFUSIVITY, boundary_condition);
+        }
+        gpuErrchk(cudaPeekAtLastError());
+        gpuErrchk(cudaDeviceSynchronize());
+
+        // Swap pointers
+        float *temp = d_u0;
+        d_u0 = d_u1;
+        d_u1 = temp;
     }
-    else
-    {
-        dim3 blockSize(BLOCK_SIZE_X, BLOCK_SIZE_Y);
-        dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x,
-                      (HEIGHT + blockSize.y - 1) / blockSize.y);
-
-        heat_kernel_2d<<<gridSize, blockSize>>>(
-            d_u0, d_u1, WIDTH, HEIGHT, 
-            TIME_STEP, DX * DX, DY * DY, 
-            DIFFUSIVITY, boundary_condition);
-    }
-    gpuErrchk(cudaPeekAtLastError());
-    gpuErrchk(cudaDeviceSynchronize());
-
-    // Swap pointers
-    float *temp = d_u0;
-    d_u0 = d_u1;
-    d_u1 = temp;
 
     // FPS calculation
     double currentTime = glfwGetTime();
@@ -465,6 +475,7 @@ void reset_simulation()
     cudaMemset(d_u1, 0, size);
 }
 
+
 // Keyboard callback
 void keyboard_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
@@ -480,7 +491,6 @@ void keyboard_callback(GLFWwindow *window, int key, int scancode, int action, in
             cudaFree(d_u0);
             cudaFree(d_u1);
             glfwDestroyWindow(window);
-            
             init_opengl();
             init_simulation();
 
@@ -492,13 +502,11 @@ void keyboard_callback(GLFWwindow *window, int key, int scancode, int action, in
         case GLFW_KEY_2:
             simulation_mode = MODE_2D;
             printf("Switched to 2D simulation\n");
-
             cudaGraphicsUnregisterResource(cuda_pbo_resource);
             glDeleteBuffers(1, &pbo);
             cudaFree(d_u0);
             cudaFree(d_u1);
             glfwDestroyWindow(window);
-
             init_opengl();
             init_simulation();
 
@@ -516,6 +524,18 @@ void keyboard_callback(GLFWwindow *window, int key, int scancode, int action, in
             reset_simulation();
             printf("Simulation reset\n");
             break;
+        case GLFW_KEY_X:
+            glfwSetWindowShouldClose(window, GLFW_TRUE);
+            printf("Exiting simulation\n");
+
+            // Cleanup
+            glDeleteBuffers(1, &pbo);
+            cudaFree(d_u0);
+            cudaFree(d_u1);
+            glfwDestroyWindow(window);
+            glfwTerminate();
+            exit(0);
+            break;
         default:
             break;
         }
@@ -523,24 +543,30 @@ void keyboard_callback(GLFWwindow *window, int key, int scancode, int action, in
 }
 
 
-void add_heat_launcher(int x, int y)
-{
+void add_heat_launcher(double xpos, double ypos){
+
+    int fb_width, fb_height;
+    glfwGetFramebufferSize(window, &fb_width, &fb_height);
+
     if (simulation_mode == MODE_1D)
     {
-        dim3 blockSize(BLOCK_SIZE_X*BLOCK_SIZE_X);
+        int x = (int)(xpos * WIDTH / fb_width);
+
+        dim3 blockSize(256);
         dim3 gridSize((2 * HEAT_RADIUS + blockSize.x - 1) / blockSize.x);
 
         add_heat_kernel_1d<<<gridSize, blockSize>>>(d_u0, WIDTH, x);
     }
-    else
+    else if (simulation_mode == MODE_2D)
     {
+        int x = (int)(xpos * WIDTH / fb_width);
+        int y = (int)((fb_height - ypos) * HEIGHT / fb_height); // Invert y-axis
         dim3 blockSize(BLOCK_SIZE_X, BLOCK_SIZE_Y);
         dim3 gridSize((2 * HEAT_RADIUS + blockSize.x - 1) / blockSize.x,
-                      (2 * HEAT_RADIUS + blockSize.y - 1) / blockSize.y);
+                        (2 * HEAT_RADIUS + blockSize.y - 1) / blockSize.y);
 
         add_heat_kernel_2d<<<gridSize, blockSize>>>(d_u0, WIDTH, HEIGHT, x, y);
     }
-
     gpuErrchk(cudaPeekAtLastError());
     gpuErrchk(cudaDeviceSynchronize());
 }
@@ -550,12 +576,7 @@ void cursor_position_callback(GLFWwindow *window, double xpos, double ypos)
 {
     if (is_mouse_pressed)
     {
-        int fb_width, fb_height;
-        glfwGetFramebufferSize(window, &fb_width, &fb_height);
-        int x = (int)(xpos * WIDTH / fb_width);
-        int y = (int)((fb_height - ypos) * HEIGHT / fb_height); // Invert y-axis
-
-        add_heat_launcher(x, y);
+        add_heat_launcher(xpos, ypos);
     }
 }
 
@@ -575,59 +596,75 @@ void mouse_button_callback(GLFWwindow *window, int button, int action, int mods)
     }
 }
 
-// Main function
-int main(int argc, char **argv)
-{
-    // Parse command line arguments
-    for (int i = 1; i < argc; ++i)
-    {
-        if (strcmp(argv[i], "-m") == 0 && i + 1 < argc)
-        {
-            // switch modes, 1d or 2d
-            if (strcmp(argv[i + 1], "1d") == 0)
-            {
-                simulation_mode = MODE_1D;
-            }
-            else if (strcmp(argv[i + 1], "2d") == 0)
-            {
-                simulation_mode = MODE_2D;
-            }
-            ++i;
-        }
-        if (strcmp(argv[i], "-b") == 0 && i + 1 < argc)
-        {
-            // switch boundary conditions, dirichlet or neumann
-            if (strcmp(argv[i + 1], "d") == 0)
-            {
-                boundary_condition = DIRICHLET;
-            }
-            else if (strcmp(argv[i + 1], "n") == 0)
-            {
-                boundary_condition = NEUMANN;
-            }
-            ++i;
-        }
-        if (strcmp(argv[i], "-d") == 0)
-        {
-            // debug mode. Sets a hard coded value for seeing how long the simulation takes to run
-            debug_mode = true;
-            // the next two numbers are time, and percent chance to add heat
-            if (i + 2 < argc)
-            {
-                MAX_TIME_STEPS = atoi(argv[i + 1]);
-                PERCENT_ADD_HEAT_CHANCE = atoi(argv[i + 2]);
-                if (MAX_TIME_STEPS < 0)
-                {
-                    MAX_TIME_STEPS = 100;
+// Print usage
+void print_usage(const char *prog_name) {
+    printf("Usage: %s [options]\n", prog_name);
+    printf("[options]:\n");
+    printf("  -m <1d|2d|3d>         Simulation mode (default: 3d)\n");
+    printf("  -b <D|N>              Boundary condition: D (Dirichlet), N (Neumann) (default: D)\n");
+    printf("  -d [max_steps chance] Enable debug mode with optional max time steps (default: 100) and heat chance (default: 40)\n");
+}
+
+int main(int argc, char **argv) {
+    int opt;
+    while ((opt = getopt(argc, argv, "m:b:d::")) != -1) {
+        switch (opt) {
+            case 'm': // Simulation mode
+                if (strcmp(optarg, "1d") == 0) {
+                    simulation_mode = MODE_1D;
+                } else if (strcmp(optarg, "2d") == 0) {
+                    simulation_mode = MODE_2D;
+                } else {
+                    fprintf(stderr, "Invalid simulation mode: %s\n", optarg);
+                    print_usage(argv[0]);
+                    return EXIT_FAILURE;
                 }
-                if (PERCENT_ADD_HEAT_CHANCE < 0 || PERCENT_ADD_HEAT_CHANCE > 100)
-                {
+                break;
+
+            case 'b': // Boundary condition
+                if (strcmp(optarg, "D") == 0) {
+                    boundary_condition = DIRICHLET;
+                } else if (strcmp(optarg, "N") == 0) {
+                    boundary_condition = NEUMANN;
+                } else {
+                    fprintf(stderr, "Invalid boundary condition: %s\n", optarg);
+                    print_usage(argv[0]);
+                    return EXIT_FAILURE;
+                }
+                break;
+
+            case 'd': // Debug mode
+                debug_mode = true;
+                if (optind < argc && argv[optind][0] != '-') {
+                    MAX_TIME_STEPS = atoi(argv[optind++]);
+                }
+                if (optind < argc && argv[optind][0] != '-') {
+                    PERCENT_ADD_HEAT_CHANCE = atoi(argv[optind++]);
+                }
+
+                // Validate debug parameters
+                if (MAX_TIME_STEPS < 0) MAX_TIME_STEPS = 100;
+                if (PERCENT_ADD_HEAT_CHANCE < 0 || PERCENT_ADD_HEAT_CHANCE > 100) {
                     PERCENT_ADD_HEAT_CHANCE = 40;
                 }
-                i += 2;
-            }
+                break;
+
+            default: // Invalid option
+                print_usage(argv[0]);
+                return EXIT_FAILURE;
         }
     }
+
+    // Print the parsed configuration
+    printf("Simulation Mode: %s\n", simulation_mode == MODE_1D ? "1D" :
+                                  simulation_mode == MODE_2D ? "2D" : "3D");
+    printf("Boundary Condition: %s\n", boundary_condition == DIRICHLET ? "Dirichlet" : "Neumann");
+    printf("Debug Mode: %s\n", debug_mode ? "Enabled" : "Disabled");
+    if (debug_mode) {
+        printf("  Max Time Steps: %d\n", MAX_TIME_STEPS);
+        printf("  Heat Chance: %d%%\n", PERCENT_ADD_HEAT_CHANCE);
+    }
+    printf("====================================\n");
 
     init_opengl();
     init_simulation();
