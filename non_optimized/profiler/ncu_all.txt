@@ -1,3 +1,0 @@
-==PROF== Connected to process 69975 (/home/driffyn/Documents/CMDA4634/heat_eq/non_optimized/cuda_heat_equation)
-==PROF== Disconnected from process 69975
-==WARNING== No kernels were profiled.
