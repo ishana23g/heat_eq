@@ -8,20 +8,30 @@
 #include <unistd.h>
 #include <getopt.h>
 
+
+// Simulation settings
 #define WIDTH 1000
 #define HEIGHT 1000
 #define DEPTH 100
-#define TIME_STEP 0.25f
-#define DIFFUSIVITY 1.0f
 #define HEAT_SOURCE 5.0f
 #define DX 1.0f
 #define DY 1.0f
 #define DZ 1.0f
+
+#define DX2 (DX * DX)
+#define DY2 (DY * DY)
+#define DZ2 (DZ * DZ)
+
 #define HEAT_RADIUS 5
+#define DIFFUSIVITY 1.0f
+
+#define TIME_STEP (DX2 * DY2 * DZ2 / (2 * DIFFUSIVITY * (DX2 + DY2 + DZ2)))
 
 // Host variables
 GLuint pbo;
 GLFWwindow *window;
+// Declare the texture globally or in an appropriate scope
+GLuint volumeTexture;
 
 // Global variables for FPS calculation
 double lastTime = 0.0;
@@ -56,7 +66,11 @@ int PERCENT_ADD_HEAT_CHANCE = 40;
 // Function prototypes
 void init_simulation();
 void init_opengl();
+void init();
+void init_volume_texture();
 void update_sim_render();
+void cleanup();
+void print_config();
 void reset_simulation();
 void keyboard_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
 void cursor_position_callback(GLFWwindow *window, double xpos, double ypos);
@@ -79,56 +93,65 @@ void gradient_scaling(float heat_value, uchar4 *out_color);
 #define HEAT_MIN_CLAMP 0.0f
 #define clamp(x) (x < HEAT_MIN_CLAMP ? HEAT_MIN_CLAMP : (x > HEAT_MAX_CLAMP ? HEAT_MAX_CLAMP : x))
 
+void make_char4(uchar4 *out, float x, float y, float z, float w)
+{
+    out->x = static_cast<unsigned char>(x);
+    out->y = static_cast<unsigned char>(y);
+    out->z = static_cast<unsigned char>(z);
+    out->w = static_cast<unsigned char>(w);
+}
+
+/**
+ * @brief Gradient scaling function
+ * 
+ * @param heat_value The heat value
+ * @param out_color The output color
+ * @param mode The simulation mode
+ * 
+ * There are two constant colors that are used to create a gradient
+ * The gradient is created by interpolating between the two colors
+ */
 void gradient_scaling(float heat_value, uchar4* out_color)
 {
+
+    // COLORS CAN BE SET HERE.
+    // THE DEFAULT IS A BLUE TO YELLOW GRADIENT
+    #if 1
+    // liner interpolation between rgb(5, 34, 51) and rgb(232, 251, 90)
+    uchar4 LOW_COLOR;
+    make_char4(&LOW_COLOR, 5.0f, 34.0f, 51.0f, 255.0f);
+    uchar4 HIGH_COLOR;
+    make_char4(&HIGH_COLOR, 232.0f, 251.0f, 90.0f, 255.0f);
+    #else
+    // liner interpolation between rgb(0, 0, 255) and rgb(255, 0, 0)
+    uchar4 LOW_COLOR;
+    make_char4(&LOW_COLOR, 0.0f, 0.0f, 255.0f, 255.0f);
+    uchar4 HIGH_COLOR;
+    make_char4(&HIGH_COLOR, 255.0f, 0.0f, 0.0f, 255.0f);
+    #endif
+
     // Gradient Set Up:
     float t = clamp(heat_value / HEAT_SOURCE);
 
     // Default alpha
-    unsigned char a = 255;
+    unsigned char a = static_cast<unsigned char> (255.0f);
 
     // Adjust alpha for 3D mode
     if (simulation_mode == MODE_3D) {
-        a = (unsigned char) (255.0f / DEPTH * 4.0f);
+        a = static_cast<unsigned char>(255.0f / DEPTH * 4.0f);
     }
 
-#if 0
-    // liner interpolation between rgb(0, 0, 255) and rgb(255, 0, 0)
-    // const float R_low = 0.0f;
-    const float R_high = 255.0f;
-    // const float G_low = 0.0f;
-    // const float G_high = 0.0f;
-    const float B_low = 255.0f;
-    const float B_high = 0.0f;
-    
-    // Perform linear interpolation
-    unsigned char r = (unsigned char) (t * R_high);
-    unsigned char g = (unsigned char) (0);
-    unsigned char b = (unsigned char) (B_low + t * (B_high - B_low));
-
-    // Write the result to the output pointer   
-    *out_color = (uchar4){r, g, b, a};
-#else
-    // liner interpolation between rgb(232, 251, 90) and rgb(5, 34, 51)
-    const float R_low = 232.0f;
-    const float R_high = 5.0f;
-    const float G_low = 251.0f;
-    const float G_high = 34.0f;
-    const float B_low = 90.0f;
-    const float B_high = 51.0f;
-    
-    // Perform linear interpolation
-    unsigned char r = (unsigned char) (R_low + t * (R_high - R_low));
-    unsigned char g = (unsigned char) (G_low + t * (G_high - G_low));
-    unsigned char b = (unsigned char) (B_low + t * (B_high - B_low));
-
-    // Write the result to the output pointer
-    *out_color = (uchar4){r, g, b, a};
-#endif
+    // Interpolate between the two colors
+    make_char4(out_color,
+        LOW_COLOR.x + t * (HIGH_COLOR.x - LOW_COLOR.x),
+        LOW_COLOR.y + t * (HIGH_COLOR.y - LOW_COLOR.y),
+        LOW_COLOR.z + t * (HIGH_COLOR.z - LOW_COLOR.z),
+        a);
 }
 
 // Heat kernel for 1D simulation
-void heat_kernel_1d(const std::vector<float> &u0, std::vector<float> &u1, std::vector<uchar4> &output, int width, float dt, float dx2, float a, BoundaryCondition boundary_condition)
+void heat_kernel_1d(const std::vector<float> &u0, std::vector<float> &u1,
+    int width, float dt, float dx2, float a, BoundaryCondition boundary_condition)
 {
     for (int x = 0; x < width; ++x)
     {
@@ -157,12 +180,19 @@ void heat_kernel_1d(const std::vector<float> &u0, std::vector<float> &u1, std::v
                 break;
             }
         }
-        gradient_scaling(u1[x], &output[x]);
+    }
+}
+
+void heat_kernel_1d_color(const std::vector<float> &u0, std::vector<uchar4> &output, int width)
+{
+    for (int x = 0; x < width; ++x)
+    {
+        gradient_scaling(u0[x], &output[x]);
     }
 }
 
 // Heat kernel for 2D simulation
-void heat_kernel_2d(const std::vector<float> &u0, std::vector<float> &u1, std::vector<uchar4> &output, int width, int height, float dt, float dx2, float dy2, float a, BoundaryCondition boundary_condition)
+void heat_kernel_2d(const std::vector<float> &u0, std::vector<float> &u1, int width, int height, float dt, float dx2, float dy2, float a, BoundaryCondition boundary_condition)
 {
     for (int y = 0; y < height; ++y)
     {
@@ -201,13 +231,23 @@ void heat_kernel_2d(const std::vector<float> &u0, std::vector<float> &u1, std::v
                     break;
                 }
             }
-            gradient_scaling(u1[x], &output[x]);
         }
     }
 }
 
+void heat_kernel_2d_color(const std::vector<float> &u0, std::vector<uchar4> &output, int width, int height)
+{
+    for (int y = 0; y < height; ++y)
+    {
+        for (int x = 0; x < width; ++x)
+        {
+            int idx = y * width + x;
+            gradient_scaling(u0[idx], &output[idx]);
+        }
+    }
+}
 // Heat kernel for 3D simulation
-void heat_kernel_3d(const std::vector<float> &u0, std::vector<float> &u1, std::vector<uchar4> &output, int width, int height, int depth, float dt, float dx2, float dy2, float dz2, float a, BoundaryCondition boundary_condition)
+void heat_kernel_3d(const std::vector<float> &u0, std::vector<float> &u1, int width, int height, int depth, float dt, float dx2, float dy2, float dz2, float a, BoundaryCondition boundary_condition)
 {
     for (int z = 0; z < depth; ++z)
     {
@@ -255,7 +295,21 @@ void heat_kernel_3d(const std::vector<float> &u0, std::vector<float> &u1, std::v
                         break;
                     }
                 }
-                gradient_scaling(u1[x], &output[x]);
+            }
+        }
+    }
+}
+
+void heat_kernel_3d_color(const std::vector<float> &u0, std::vector<uchar4> &output, int width, int height, int depth)
+{
+    for (int z = 0; z < depth; ++z)
+    {
+        for (int y = 0; y < height; ++y)
+        {
+            for (int x = 0; x < width; ++x)
+            {
+                int idx = z * width * height + y * width + x;
+                gradient_scaling(u0[idx], &output[idx]);
             }
         }
     }
@@ -323,19 +377,9 @@ void add_heat_kernel_3d(std::vector<float> &u, int width, int height, int depth,
 // Initialize the simulation
 void init_simulation()
 {
-    size_t size;
-    if (simulation_mode == MODE_1D)
-    {
-        size = WIDTH;
-    }
-    else if (simulation_mode == MODE_2D)
-    {
-        size = WIDTH * HEIGHT;
-    }
-    else if (simulation_mode == MODE_3D)
-    {
-        size = WIDTH * HEIGHT * DEPTH;
-    }
+    size_t size =   (simulation_mode == MODE_1D) ? (WIDTH) :
+                    (simulation_mode == MODE_2D) ? (WIDTH * HEIGHT) :
+                    (WIDTH * HEIGHT * DEPTH);
 
     h_u0.resize(size, 0.0f);
     h_u1.resize(size, 0.0f);
@@ -369,14 +413,38 @@ void init_opengl()
     // Create PBO
     glGenBuffers(1, &pbo);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbo);
-    size_t pbo_size = (simulation_mode == MODE_1D) ? WIDTH * sizeof(uchar4) : WIDTH * HEIGHT * sizeof(uchar4);
-    if (simulation_mode == MODE_3D)
-    {
-        pbo_size = WIDTH * HEIGHT * DEPTH * sizeof(uchar4);
-    }
+    size_t pbo_size = (simulation_mode == MODE_1D) ? (WIDTH * sizeof(uchar4)) :
+                      (simulation_mode == MODE_2D) ? (WIDTH * HEIGHT * sizeof(uchar4)) :
+                      (WIDTH * HEIGHT * DEPTH * sizeof(uchar4));
     glBufferData(GL_PIXEL_UNPACK_BUFFER, pbo_size, NULL, GL_DYNAMIC_DRAW);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
+    init_volume_texture();
 }
+
+void init_volume_texture() {
+    glGenTextures(1, &volumeTexture);
+    glBindTexture(GL_TEXTURE_3D, volumeTexture);
+
+    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+    // Allocate texture storage
+    glTexImage3D(
+        GL_TEXTURE_3D,          // Target
+        0,                      // Level
+        GL_RGBA8,               // Internal format
+        WIDTH, HEIGHT, DEPTH,   // Size
+        0,                      // Border
+        GL_RGBA,                // Format
+        GL_UNSIGNED_BYTE,       // Type
+        NULL);                  // No initial data
+
+    glBindTexture(GL_TEXTURE_3D, 0);
+}
+
 
 // Render simulation
 void update_sim_render()
@@ -385,17 +453,26 @@ void update_sim_render()
     float dy2 = DY * DY;
     float dz2 = DZ * DZ;
 
-    if (simulation_mode == MODE_1D)
-    {
-        heat_kernel_1d(h_u0, h_u1, h_output, WIDTH, TIME_STEP, dx2, DIFFUSIVITY, boundary_condition);
-    }
-    else if (simulation_mode == MODE_2D)
-    {
-        heat_kernel_2d(h_u0, h_u1, h_output, WIDTH, HEIGHT, TIME_STEP, dx2, dy2, DIFFUSIVITY, boundary_condition);
-    }
-    else if (simulation_mode == MODE_3D)
-    {
-        heat_kernel_3d(h_u0, h_u1, h_output, WIDTH, HEIGHT, DEPTH, TIME_STEP, dx2, dy2, dz2, DIFFUSIVITY, boundary_condition);
+    const int MAX_SIM_STEPS = (simulation_mode == MODE_3D) ? 10 : 1;
+
+    for (int i = 0; i < MAX_SIM_STEPS; i++) {
+        if (simulation_mode == MODE_1D) {
+            heat_kernel_1d(h_u0, h_u1, WIDTH, TIME_STEP, dx2, DIFFUSIVITY, boundary_condition);
+            if (i == MAX_SIM_STEPS - 1) {
+                heat_kernel_1d_color(h_u1, h_output, WIDTH);
+            }
+        } else if (simulation_mode == MODE_2D) {
+            heat_kernel_2d(h_u0, h_u1, WIDTH, HEIGHT, TIME_STEP, dx2, dy2, DIFFUSIVITY, boundary_condition);
+            if (i == MAX_SIM_STEPS - 1) {
+                heat_kernel_2d_color(h_u1, h_output, WIDTH, HEIGHT);
+            }
+        } else if (simulation_mode == MODE_3D) {
+            heat_kernel_3d(h_u0, h_u1, WIDTH, HEIGHT, DEPTH, TIME_STEP, dx2, dy2, dz2, DIFFUSIVITY, boundary_condition);
+            if (i == MAX_SIM_STEPS - 1) {
+                heat_kernel_3d_color(h_u1, h_output, WIDTH, HEIGHT, DEPTH);
+            }
+        }
+        std::swap(h_u0, h_u1);
     }
 
     // Swap pointers
@@ -439,46 +516,93 @@ void update_sim_render()
     else if (simulation_mode == MODE_3D)
     {
         glBufferSubData(GL_PIXEL_UNPACK_BUFFER, 0, WIDTH * HEIGHT * DEPTH * sizeof(uchar4), h_output.data());
-
-        int window_width, window_height;
-        glfwGetFramebufferSize(window, &window_width, &window_height);
-
+        // Set up OpenGL state for 3D rendering
+        glEnable(GL_DEPTH_TEST);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_TEXTURE_3D);
 
-        // Set up orthographic projection
+        // Bind the volume texture
+        glBindTexture(GL_TEXTURE_3D, volumeTexture);
+
+        // Transfer data from PBO to the 3D texture
+        glTexSubImage3D(
+            GL_TEXTURE_3D,
+            0,
+            0, 0, 0,
+            WIDTH, HEIGHT, DEPTH,
+            GL_RGBA,
+            GL_UNSIGNED_BYTE,
+            0);
+
+        // Set up the projection and view matrices
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        gluOrtho2D(0, window_width, 0, window_height);
+        gluPerspective(45.0, (double) WIDTH / (double) HEIGHT, 0.1, 1000.0);
+
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
+        gluLookAt(
+            0.0, 0.0, 2.0,
+            0.0, 0.0, 0.0,
+            0.0, 1.0, 0.0);
 
-        // Scale factor to reduce the size of each slice
-        float scale_factor = 0.6f; // Adjust as needed
-
-        // Starting position for the backmost layer
-        float start_x = 0.0f;
-        float start_y = window_height - (HEIGHT * scale_factor);
-
-        // Draw each slice with offset
-        for (int z = 0; z < DEPTH; ++z)
+        // Render slices
+        glBegin(GL_QUADS);
+        for (int i = 0; i < DEPTH; ++i)
         {
-            float offset_x = start_x + z * (WIDTH * scale_factor) / DEPTH;
-            float offset_y = start_y - z * (HEIGHT * scale_factor) / DEPTH;
+            float z = -1.0f + 2.0f * i / (DEPTH - 1);
+            float texZ = (float)i / (DEPTH - 1);
 
-            glRasterPos2f(offset_x, offset_y);
-
-            // Set pixel zoom for scaling
-            glPixelZoom(scale_factor, scale_factor);
-
-            // Draw the slice
-            glDrawPixels(WIDTH, HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid *)(z * WIDTH * HEIGHT * sizeof(uchar4)));
+            glTexCoord3f(0.0f, 0.0f, texZ); glVertex3f(-1.0f, -1.0f, z);
+            glTexCoord3f(1.0f, 0.0f, texZ); glVertex3f(1.0f, -1.0f, z);
+            glTexCoord3f(1.0f, 1.0f, texZ); glVertex3f(1.0f, 1.0f, z);
+            glTexCoord3f(0.0f, 1.0f, texZ); glVertex3f(-1.0f, 1.0f, z);
         }
+        glEnd();
 
-        // Reset pixel zoom
-        glPixelZoom(1.0f, 1.0f);
+        // Unbind texture
+        glBindTexture(GL_TEXTURE_3D, 0);
 
-        glDisable(GL_BLEND);
+        // int window_width, window_height;
+        // glfwGetFramebufferSize(window, &window_width, &window_height);
+
+        // glEnable(GL_BLEND);
+        // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+        // // Set up orthographic projection
+        // glMatrixMode(GL_PROJECTION);
+        // glLoadIdentity();
+        // gluOrtho2D(0, window_width, 0, window_height);
+        // glMatrixMode(GL_MODELVIEW);
+        // glLoadIdentity();
+
+        // // Scale factor to reduce the size of each slice
+        // float scale_factor = 0.6f; // Adjust as needed
+
+        // // Starting position for the backmost layer
+        // float start_x = 0.0f;
+        // float start_y = window_height - (HEIGHT * scale_factor);
+
+        // // Draw each slice with offset
+        // for (int z = 0; z < DEPTH; ++z)
+        // {
+        //     float offset_x = start_x + z * (WIDTH * scale_factor) / DEPTH;
+        //     float offset_y = start_y - z * (HEIGHT * scale_factor) / DEPTH;
+
+        //     glRasterPos2f(offset_x, offset_y);
+
+        //     // Set pixel zoom for scaling
+        //     glPixelZoom(scale_factor, scale_factor);
+
+        //     // Draw the slice
+        //     glDrawPixels(WIDTH, HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid *)(z * WIDTH * HEIGHT * sizeof(uchar4)));
+        // }
+
+        // // Reset pixel zoom
+        // glPixelZoom(1.0f, 1.0f);
+
+        // glDisable(GL_BLEND);
     }
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 
@@ -502,47 +626,20 @@ void keyboard_callback(GLFWwindow *window, int key, int scancode, int action, in
         case GLFW_KEY_1:
             simulation_mode = MODE_1D;
             printf("Switched to 1D simulation\n");
-            glDeleteBuffers(1, &pbo);
-            h_u0.clear();
-            h_u1.clear();
-            glfwDestroyWindow(window);
-            init_opengl();
-            init_simulation();
-
-            glfwSetKeyCallback(window, keyboard_callback);
-            glfwSetMouseButtonCallback(window, mouse_button_callback);
-            glfwSetCursorPosCallback(window, cursor_position_callback);
-
+            cleanup();
+            init();
             break;
         case GLFW_KEY_2:
             simulation_mode = MODE_2D;
             printf("Switched to 2D simulation\n");
-            glDeleteBuffers(1, &pbo);
-            h_u0.clear();
-            h_u1.clear();
-            glfwDestroyWindow(window);
-            init_opengl();
-            init_simulation();
-
-            glfwSetKeyCallback(window, keyboard_callback);
-            glfwSetMouseButtonCallback(window, mouse_button_callback);
-            glfwSetCursorPosCallback(window, cursor_position_callback);
-
+            cleanup();
+            init();
             break;
         case GLFW_KEY_3:
             simulation_mode = MODE_3D;
             printf("Switched to 3D simulation\n");
-            glDeleteBuffers(1, &pbo);
-            h_u0.clear();
-            h_u1.clear();
-            glfwDestroyWindow(window);
-            init_opengl();
-            init_simulation();
-
-            glfwSetKeyCallback(window, keyboard_callback);
-            glfwSetMouseButtonCallback(window, mouse_button_callback);
-            glfwSetCursorPosCallback(window, cursor_position_callback);
-
+            cleanup();
+            init();
             break;
         case GLFW_KEY_B:
             boundary_condition = (boundary_condition == DIRICHLET) ? NEUMANN : DIRICHLET;
@@ -558,10 +655,7 @@ void keyboard_callback(GLFWwindow *window, int key, int scancode, int action, in
             printf("Exiting simulation\n");
 
             // Cleanup
-            glDeleteBuffers(1, &pbo);
-            h_u0.clear();
-            h_u1.clear();
-            glfwDestroyWindow(window);
+            cleanup();
             glfwTerminate();
             exit(0);
             break;
@@ -622,6 +716,24 @@ void mouse_button_callback(GLFWwindow *window, int button, int action, int mods)
     }
 }
 
+void init(){
+    print_config();
+    init_opengl();
+    init_simulation();
+
+    glfwSetKeyCallback(window, keyboard_callback);
+    glfwSetMouseButtonCallback(window, mouse_button_callback);
+    glfwSetCursorPosCallback(window, cursor_position_callback);
+}
+
+void cleanup(){
+    glDeleteBuffers(1, &pbo);
+    h_u0.clear();
+    h_u1.clear();
+    glfwDestroyWindow(window);
+}
+
+
 // Print usage
 void print_usage(const char *prog_name) {
     printf("Usage: %s [options]\n", prog_name);
@@ -629,6 +741,20 @@ void print_usage(const char *prog_name) {
     printf("  -m <1d|2d|3d>         Simulation mode (default: 3d)\n");
     printf("  -b <D|N>              Boundary condition: D (Dirichlet), N (Neumann) (default: D)\n");
     printf("  -d [max_steps chance] Enable debug mode with optional max time steps (default: 100) and heat chance (default: 40)\n");
+}
+
+// Print the parsed configuration
+void print_config(){
+    printf("====================================\n");
+    printf("Simulation Mode: %s\n", simulation_mode == MODE_1D ? "1D" :
+                                  simulation_mode == MODE_2D ? "2D" : "3D");
+    printf("Boundary Condition: %s\n", boundary_condition == DIRICHLET ? "Dirichlet" : "Neumann");
+    printf("Debug Mode: %s\n", debug_mode ? "Enabled" : "Disabled");
+    if (debug_mode) {
+        printf("  Max Time Steps: %d\n", MAX_TIME_STEPS);
+        printf("  Heat Chance: %d%%\n", PERCENT_ADD_HEAT_CHANCE);
+    }
+    printf("====================================\n");
 }
 
 int main(int argc, char **argv) {
@@ -694,12 +820,8 @@ int main(int argc, char **argv) {
     }
     printf("====================================\n");
 
-    init_opengl();
-    init_simulation();
-
-    glfwSetKeyCallback(window, keyboard_callback);
-    glfwSetMouseButtonCallback(window, mouse_button_callback);
-    glfwSetCursorPosCallback(window, cursor_position_callback);
+    // Initialize simulation
+    init();
 
     if (debug_mode)
     {
@@ -724,11 +846,7 @@ int main(int argc, char **argv) {
     }
 
     // Cleanup
-    glDeleteBuffers(1, &pbo);
-    h_u0.clear();
-    h_u1.clear();
-    glfwDestroyWindow(window);
+    cleanup();
     glfwTerminate();
-
     return 0;
 }

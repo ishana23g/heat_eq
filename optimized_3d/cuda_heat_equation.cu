@@ -804,6 +804,17 @@ void init_volume_texture() {
     glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
+    // Allocate texture storage
+    glTexImage3D(
+        GL_TEXTURE_3D,          // Target
+        0,                      // Level
+        GL_RGBA8,               // Internal format
+        WIDTH, HEIGHT, DEPTH,   // Size
+        0,                      // Border
+        GL_RGBA,                // Format
+        GL_UNSIGNED_BYTE,       // Type
+        NULL);                  // No initial data
+
     glBindTexture(GL_TEXTURE_3D, 0);
 }
 
@@ -815,8 +826,10 @@ void update_sim_render()
     size_t size;
     cudaGraphicsResourceGetMappedPointer((void **)&d_output, &size, cuda_pbo_resource);
 
-    const int MAX_SIM_STEPS = 10;
-    
+    int MAX_SIM_STEPS = 10;
+    if (simulation_mode == MODE_3D)
+        MAX_SIM_STEPS = 4;
+
     for (int i=0; i<MAX_SIM_STEPS; i++){
         if (simulation_mode == MODE_1D)
         {
@@ -901,58 +914,82 @@ void update_sim_render()
     // Unmap PBO
     cudaGraphicsUnmapResources(1, &cuda_pbo_resource, 0);
 
-    // Draw pixels
+    // Clear buffers
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    // Bind PBO
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbo);
-    
+
     if (simulation_mode == MODE_1D)
-    {  
+    {
+        // Set up OpenGL state for 1D rendering
         glDisable(GL_DEPTH_TEST);
-        for (int i = 0; i < 20; i++)
+        glDisable(GL_BLEND);
+        glDisable(GL_TEXTURE_3D);
+
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        gluOrtho2D(0, WIDTH, 0, 20);
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+
+        for (int i = 0; i < 10; i++)
         {
-            glRasterPos2f(-1.0f, -1.0f + i * 0.02f);
+            glRasterPos2i(0, i);
             glDrawPixels(WIDTH, 1, GL_RGBA, GL_UNSIGNED_BYTE, 0);
         }
+
     }
     else if (simulation_mode == MODE_2D)
     {
+        // Set up OpenGL state for 2D rendering
         glDisable(GL_DEPTH_TEST);
-        glRasterPos2i(-1, -1);
+        glDisable(GL_BLEND);
+        glDisable(GL_TEXTURE_3D);
+
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        gluOrtho2D(0, WIDTH, 0, HEIGHT);
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+
+        glRasterPos2i(0, 0);
         glDrawPixels(WIDTH, HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, 0);
     }
     else if (simulation_mode == MODE_3D)
-    {   
+    {
+        // Set up OpenGL state for 3D rendering
+        glEnable(GL_DEPTH_TEST);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_TEXTURE_3D);
+
         // Bind the volume texture
         glBindTexture(GL_TEXTURE_3D, volumeTexture);
 
         // Transfer data from PBO to the 3D texture
         glTexSubImage3D(
-            GL_TEXTURE_3D,          // Target
-            0,                      // Level
-            0, 0, 0,                // Offset
-            WIDTH, HEIGHT, DEPTH,   // Size
-            GL_RGBA,                // Format
-            GL_UNSIGNED_BYTE,       // Type
-            0);                     // Offset in PBO
-
-        // Render slices from back to front
-        glEnable(GL_DEPTH_TEST);
-        glEnable(GL_TEXTURE_3D);
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            GL_TEXTURE_3D,
+            0,
+            0, 0, 0,
+            WIDTH, HEIGHT, DEPTH,
+            GL_RGBA,
+            GL_UNSIGNED_BYTE,
+            0);
 
         // Set up the projection and view matrices
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        gluPerspective(45.0, (double)WIDTH / (double)HEIGHT, 0.1, 1000.0);
+        gluPerspective(45.0, (double) WIDTH / (double) HEIGHT, 0.1, 1000.0);
+
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
         gluLookAt(
-            0.0, 0.0, 2.0,  // Camera position
-            0.0, 0.0, 0.0,  // Look at point
-            0.0, 1.0, 0.0); // Up vector
+            0.0, 0.0, 2.0,
+            0.0, 0.0, 0.0,
+            0.0, 1.0, 0.0);
 
-        // Render slices from back to front
+        // Render slices
         glBegin(GL_QUADS);
         for (int i = 0; i < DEPTH; ++i)
         {
@@ -960,61 +997,20 @@ void update_sim_render()
             float texZ = (float)i / (DEPTH - 1);
 
             glTexCoord3f(0.0f, 0.0f, texZ); glVertex3f(-1.0f, -1.0f, z);
-            glTexCoord3f(1.0f, 0.0f, texZ); glVertex3f( 1.0f, -1.0f, z);
-            glTexCoord3f(1.0f, 1.0f, texZ); glVertex3f( 1.0f,  1.0f, z);
-            glTexCoord3f(0.0f, 1.0f, texZ); glVertex3f(-1.0f,  1.0f, z);
+            glTexCoord3f(1.0f, 0.0f, texZ); glVertex3f(1.0f, -1.0f, z);
+            glTexCoord3f(1.0f, 1.0f, texZ); glVertex3f(1.0f, 1.0f, z);
+            glTexCoord3f(0.0f, 1.0f, texZ); glVertex3f(-1.0f, 1.0f, z);
         }
         glEnd();
 
-        glDisable(GL_BLEND);
-        glDisable(GL_TEXTURE_3D);
-        glDisable(GL_DEPTH_TEST);
-
-        // int window_width, window_height;
-        // glfwGetFramebufferSize(window, &window_width, &window_height);
-
-        // glEnable(GL_BLEND);
-        // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-        // // Set up orthographic projection
-        // glMatrixMode(GL_PROJECTION);
-        // glLoadIdentity();
-        // gluOrtho2D(0, window_width, 0, window_height);
-        // glMatrixMode(GL_MODELVIEW);
-        // glLoadIdentity();
-
-        // // Starting position for the backmost layer
-        // float start_x = 0.0f;
-        // float start_y = window_height - (HEIGHT * SCALE_FACTOR_3D);
-
-        // float offset_x = start_x;
-        // float offset_y = start_y;
-
-        // // Set pixel zoom for scaling for all new slices
-        // glPixelZoom(SCALE_FACTOR_3D, SCALE_FACTOR_3D);
-        
-        // // Draw each slice with offset
-        // for (int z = 0; z < DEPTH; ++z)
-        // {
-        //     // Calculate position offsetfused
-        //     offset_x += (WIDTH * SCALE_FACTOR_3D) / DEPTH;
-        //     offset_y -= (HEIGHT * SCALE_FACTOR_3D) / DEPTH;
-
-        //     // Set raster position
-        //     glRasterPos2f(offset_x, offset_y);
-
-        //     // Draw the slice
-        //     glDrawPixels(WIDTH, HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid *)(z * WIDTH * HEIGHT * sizeof(uchar4)));
-        // }
-
-        // // Reset pixel zoom
-        // glPixelZoom(1.0f, 1.0f);
-
-        // glDisable(GL_BLEND);
+        // Unbind texture
+        glBindTexture(GL_TEXTURE_3D, 0);
     }
 
     // Unbind PBO
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
+
+    // Swap buffers
     glfwSwapBuffers(window);
 }
 
@@ -1090,10 +1086,19 @@ void add_heat_launcher(double xpos, double ypos){
     int fb_width, fb_height;
     glfwGetFramebufferSize(window, &fb_width, &fb_height);
 
+    // Normalize cursor position
+    float norm_x = xpos / fb_width;
+    float norm_y = ypos / fb_height;
+    norm_y = 1.0f - norm_y;
+
+    // Map to simulation grid
+    int x = static_cast<int>(norm_x * WIDTH);
+    int y = static_cast<int>(norm_y * HEIGHT);
+    x = max(0, min(x, WIDTH - 1));
+    y = max(0, min(y, HEIGHT - 1));
+
     if (simulation_mode == MODE_1D)
     {
-        int x = (int)(xpos * WIDTH / fb_width);
-
         dim3 blockSize(256);
         dim3 gridSize((2 * HEAT_RADIUS + blockSize.x - 1) / blockSize.x);
 
@@ -1101,8 +1106,6 @@ void add_heat_launcher(double xpos, double ypos){
     }
     else if (simulation_mode == MODE_2D)
     {
-        int x = (int)(xpos * WIDTH / fb_width);
-        int y = (int)((fb_height - ypos) * HEIGHT / fb_height); // Invert y-axis
         dim3 blockSize(BLOCK_SIZE_X, BLOCK_SIZE_Y);
         dim3 gridSize((2 * HEAT_RADIUS + blockSize.x - 1) / blockSize.x,
                         (2 * HEAT_RADIUS + blockSize.y - 1) / blockSize.y);
@@ -1111,15 +1114,9 @@ void add_heat_launcher(double xpos, double ypos){
     }
     else if (simulation_mode == MODE_3D)
     {
-        // Calculate x and y based on scaling factor
-        int x = (int)(xpos * WIDTH / fb_width / SCALE_FACTOR_3D);
-        int y = (int)((fb_height - ypos) * HEIGHT / fb_height / SCALE_FACTOR_3D); // Invert y-axis
-
-        // Calculate z based on the cursor position and scaling factor
-        float offset_x = xpos - (WIDTH * SCALE_FACTOR_3D) / DEPTH;
-        float offset_y = (fb_height - ypos) - (HEIGHT * SCALE_FACTOR_3D) / DEPTH;
-        int z = (int)((offset_x + offset_y) / ((WIDTH * SCALE_FACTOR_3D) / DEPTH));
-        z = clamp(z / DEPTH - 1);
+        // Calculate z (keeping your original method or adjust as shown)
+        int z = static_cast<int>(((norm_x + norm_y) / 2.0f) * DEPTH);
+        z = max(0, min(z, DEPTH - 1));
         
         dim3 blockSize(BLOCK_SIZE_X/2, BLOCK_SIZE_Y/2, BLOCK_SIZE_Z/2);
         dim3 gridSize((2 * HEAT_RADIUS + blockSize.x - 1) / blockSize.x,
