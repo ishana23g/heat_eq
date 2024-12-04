@@ -1,0 +1,2312 @@
+========= COMPUTE-SANITIZER
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (0,14,0) in block (25,62,0)
+=========     Address 0x7d372fd7e800 is out of bounds
+=========     and is 25,601 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (1,14,0) in block (25,62,0)
+=========     Address 0x7d372fd7e804 is out of bounds
+=========     and is 25,605 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (2,14,0) in block (25,62,0)
+=========     Address 0x7d372fd7e808 is out of bounds
+=========     and is 25,609 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (3,14,0) in block (25,62,0)
+=========     Address 0x7d372fd7e80c is out of bounds
+=========     and is 25,613 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (4,14,0) in block (25,62,0)
+=========     Address 0x7d372fd7e810 is out of bounds
+=========     and is 25,617 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (5,14,0) in block (25,62,0)
+=========     Address 0x7d372fd7e814 is out of bounds
+=========     and is 25,621 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (6,14,0) in block (25,62,0)
+=========     Address 0x7d372fd7e818 is out of bounds
+=========     and is 25,625 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (7,14,0) in block (25,62,0)
+=========     Address 0x7d372fd7e81c is out of bounds
+=========     and is 25,629 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (8,14,0) in block (25,62,0)
+=========     Address 0x7d372fd7e820 is out of bounds
+=========     and is 25,633 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (9,14,0) in block (25,62,0)
+=========     Address 0x7d372fd7e824 is out of bounds
+=========     and is 25,637 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (10,14,0) in block (25,62,0)
+=========     Address 0x7d372fd7e828 is out of bounds
+=========     and is 25,641 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (11,14,0) in block (25,62,0)
+=========     Address 0x7d372fd7e82c is out of bounds
+=========     and is 25,645 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (12,14,0) in block (25,62,0)
+=========     Address 0x7d372fd7e830 is out of bounds
+=========     and is 25,649 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (13,14,0) in block (25,62,0)
+=========     Address 0x7d372fd7e834 is out of bounds
+=========     and is 25,653 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (14,14,0) in block (25,62,0)
+=========     Address 0x7d372fd7e838 is out of bounds
+=========     and is 25,657 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (15,14,0) in block (25,62,0)
+=========     Address 0x7d372fd7e83c is out of bounds
+=========     and is 25,661 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (0,15,0) in block (25,62,0)
+=========     Address 0x7d372fd7f7a0 is out of bounds
+=========     and is 29,601 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (1,15,0) in block (25,62,0)
+=========     Address 0x7d372fd7f7a4 is out of bounds
+=========     and is 29,605 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (2,15,0) in block (25,62,0)
+=========     Address 0x7d372fd7f7a8 is out of bounds
+=========     and is 29,609 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (3,15,0) in block (25,62,0)
+=========     Address 0x7d372fd7f7ac is out of bounds
+=========     and is 29,613 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (4,15,0) in block (25,62,0)
+=========     Address 0x7d372fd7f7b0 is out of bounds
+=========     and is 29,617 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (5,15,0) in block (25,62,0)
+=========     Address 0x7d372fd7f7b4 is out of bounds
+=========     and is 29,621 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (6,15,0) in block (25,62,0)
+=========     Address 0x7d372fd7f7b8 is out of bounds
+=========     and is 29,625 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (7,15,0) in block (25,62,0)
+=========     Address 0x7d372fd7f7bc is out of bounds
+=========     and is 29,629 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (8,15,0) in block (25,62,0)
+=========     Address 0x7d372fd7f7c0 is out of bounds
+=========     and is 29,633 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (9,15,0) in block (25,62,0)
+=========     Address 0x7d372fd7f7c4 is out of bounds
+=========     and is 29,637 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (10,15,0) in block (25,62,0)
+=========     Address 0x7d372fd7f7c8 is out of bounds
+=========     and is 29,641 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (11,15,0) in block (25,62,0)
+=========     Address 0x7d372fd7f7cc is out of bounds
+=========     and is 29,645 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (12,15,0) in block (25,62,0)
+=========     Address 0x7d372fd7f7d0 is out of bounds
+=========     and is 29,649 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (13,15,0) in block (25,62,0)
+=========     Address 0x7d372fd7f7d4 is out of bounds
+=========     and is 29,653 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (14,15,0) in block (25,62,0)
+=========     Address 0x7d372fd7f7d8 is out of bounds
+=========     and is 29,657 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (15,15,0) in block (25,62,0)
+=========     Address 0x7d372fd7f7dc is out of bounds
+=========     and is 29,661 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (0,8,0) in block (25,62,0)
+=========     Address 0x7d372fd78a40 is out of bounds
+=========     and is 1,601 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (1,8,0) in block (25,62,0)
+=========     Address 0x7d372fd78a44 is out of bounds
+=========     and is 1,605 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (2,8,0) in block (25,62,0)
+=========     Address 0x7d372fd78a48 is out of bounds
+=========     and is 1,609 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (3,8,0) in block (25,62,0)
+=========     Address 0x7d372fd78a4c is out of bounds
+=========     and is 1,613 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (4,8,0) in block (25,62,0)
+=========     Address 0x7d372fd78a50 is out of bounds
+=========     and is 1,617 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (5,8,0) in block (25,62,0)
+=========     Address 0x7d372fd78a54 is out of bounds
+=========     and is 1,621 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (6,8,0) in block (25,62,0)
+=========     Address 0x7d372fd78a58 is out of bounds
+=========     and is 1,625 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (7,8,0) in block (25,62,0)
+=========     Address 0x7d372fd78a5c is out of bounds
+=========     and is 1,629 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (8,8,0) in block (25,62,0)
+=========     Address 0x7d372fd78a60 is out of bounds
+=========     and is 1,633 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (9,8,0) in block (25,62,0)
+=========     Address 0x7d372fd78a64 is out of bounds
+=========     and is 1,637 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (10,8,0) in block (25,62,0)
+=========     Address 0x7d372fd78a68 is out of bounds
+=========     and is 1,641 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (11,8,0) in block (25,62,0)
+=========     Address 0x7d372fd78a6c is out of bounds
+=========     and is 1,645 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (12,8,0) in block (25,62,0)
+=========     Address 0x7d372fd78a70 is out of bounds
+=========     and is 1,649 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (13,8,0) in block (25,62,0)
+=========     Address 0x7d372fd78a74 is out of bounds
+=========     and is 1,653 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (14,8,0) in block (25,62,0)
+=========     Address 0x7d372fd78a78 is out of bounds
+=========     and is 1,657 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (15,8,0) in block (25,62,0)
+=========     Address 0x7d372fd78a7c is out of bounds
+=========     and is 1,661 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (0,9,0) in block (25,62,0)
+=========     Address 0x7d372fd799e0 is out of bounds
+=========     and is 5,601 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (1,9,0) in block (25,62,0)
+=========     Address 0x7d372fd799e4 is out of bounds
+=========     and is 5,605 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (2,9,0) in block (25,62,0)
+=========     Address 0x7d372fd799e8 is out of bounds
+=========     and is 5,609 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (3,9,0) in block (25,62,0)
+=========     Address 0x7d372fd799ec is out of bounds
+=========     and is 5,613 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (4,9,0) in block (25,62,0)
+=========     Address 0x7d372fd799f0 is out of bounds
+=========     and is 5,617 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (5,9,0) in block (25,62,0)
+=========     Address 0x7d372fd799f4 is out of bounds
+=========     and is 5,621 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (6,9,0) in block (25,62,0)
+=========     Address 0x7d372fd799f8 is out of bounds
+=========     and is 5,625 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (7,9,0) in block (25,62,0)
+=========     Address 0x7d372fd799fc is out of bounds
+=========     and is 5,629 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (8,9,0) in block (25,62,0)
+=========     Address 0x7d372fd79a00 is out of bounds
+=========     and is 5,633 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (9,9,0) in block (25,62,0)
+=========     Address 0x7d372fd79a04 is out of bounds
+=========     and is 5,637 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (10,9,0) in block (25,62,0)
+=========     Address 0x7d372fd79a08 is out of bounds
+=========     and is 5,641 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (11,9,0) in block (25,62,0)
+=========     Address 0x7d372fd79a0c is out of bounds
+=========     and is 5,645 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (12,9,0) in block (25,62,0)
+=========     Address 0x7d372fd79a10 is out of bounds
+=========     and is 5,649 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (13,9,0) in block (25,62,0)
+=========     Address 0x7d372fd79a14 is out of bounds
+=========     and is 5,653 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (14,9,0) in block (25,62,0)
+=========     Address 0x7d372fd79a18 is out of bounds
+=========     and is 5,657 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (15,9,0) in block (25,62,0)
+=========     Address 0x7d372fd79a1c is out of bounds
+=========     and is 5,661 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (0,10,0) in block (25,62,0)
+=========     Address 0x7d372fd7a980 is out of bounds
+=========     and is 9,601 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (1,10,0) in block (25,62,0)
+=========     Address 0x7d372fd7a984 is out of bounds
+=========     and is 9,605 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (2,10,0) in block (25,62,0)
+=========     Address 0x7d372fd7a988 is out of bounds
+=========     and is 9,609 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (3,10,0) in block (25,62,0)
+=========     Address 0x7d372fd7a98c is out of bounds
+=========     and is 9,613 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (4,10,0) in block (25,62,0)
+=========     Address 0x7d372fd7a990 is out of bounds
+=========     and is 9,617 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (5,10,0) in block (25,62,0)
+=========     Address 0x7d372fd7a994 is out of bounds
+=========     and is 9,621 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (6,10,0) in block (25,62,0)
+=========     Address 0x7d372fd7a998 is out of bounds
+=========     and is 9,625 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (7,10,0) in block (25,62,0)
+=========     Address 0x7d372fd7a99c is out of bounds
+=========     and is 9,629 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (8,10,0) in block (25,62,0)
+=========     Address 0x7d372fd7a9a0 is out of bounds
+=========     and is 9,633 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (9,10,0) in block (25,62,0)
+=========     Address 0x7d372fd7a9a4 is out of bounds
+=========     and is 9,637 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (10,10,0) in block (25,62,0)
+=========     Address 0x7d372fd7a9a8 is out of bounds
+=========     and is 9,641 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (11,10,0) in block (25,62,0)
+=========     Address 0x7d372fd7a9ac is out of bounds
+=========     and is 9,645 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (12,10,0) in block (25,62,0)
+=========     Address 0x7d372fd7a9b0 is out of bounds
+=========     and is 9,649 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (13,10,0) in block (25,62,0)
+=========     Address 0x7d372fd7a9b4 is out of bounds
+=========     and is 9,653 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (14,10,0) in block (25,62,0)
+=========     Address 0x7d372fd7a9b8 is out of bounds
+=========     and is 9,657 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (15,10,0) in block (25,62,0)
+=========     Address 0x7d372fd7a9bc is out of bounds
+=========     and is 9,661 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (0,11,0) in block (25,62,0)
+=========     Address 0x7d372fd7b920 is out of bounds
+=========     and is 13,601 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (1,11,0) in block (25,62,0)
+=========     Address 0x7d372fd7b924 is out of bounds
+=========     and is 13,605 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (2,11,0) in block (25,62,0)
+=========     Address 0x7d372fd7b928 is out of bounds
+=========     and is 13,609 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (3,11,0) in block (25,62,0)
+=========     Address 0x7d372fd7b92c is out of bounds
+=========     and is 13,613 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (4,11,0) in block (25,62,0)
+=========     Address 0x7d372fd7b930 is out of bounds
+=========     and is 13,617 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (5,11,0) in block (25,62,0)
+=========     Address 0x7d372fd7b934 is out of bounds
+=========     and is 13,621 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (6,11,0) in block (25,62,0)
+=========     Address 0x7d372fd7b938 is out of bounds
+=========     and is 13,625 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (7,11,0) in block (25,62,0)
+=========     Address 0x7d372fd7b93c is out of bounds
+=========     and is 13,629 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (8,11,0) in block (25,62,0)
+=========     Address 0x7d372fd7b940 is out of bounds
+=========     and is 13,633 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (9,11,0) in block (25,62,0)
+=========     Address 0x7d372fd7b944 is out of bounds
+=========     and is 13,637 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (10,11,0) in block (25,62,0)
+=========     Address 0x7d372fd7b948 is out of bounds
+=========     and is 13,641 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (11,11,0) in block (25,62,0)
+=========     Address 0x7d372fd7b94c is out of bounds
+=========     and is 13,645 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (12,11,0) in block (25,62,0)
+=========     Address 0x7d372fd7b950 is out of bounds
+=========     and is 13,649 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (13,11,0) in block (25,62,0)
+=========     Address 0x7d372fd7b954 is out of bounds
+=========     and is 13,653 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (14,11,0) in block (25,62,0)
+=========     Address 0x7d372fd7b958 is out of bounds
+=========     and is 13,657 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (15,11,0) in block (25,62,0)
+=========     Address 0x7d372fd7b95c is out of bounds
+=========     and is 13,661 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (0,12,0) in block (25,62,0)
+=========     Address 0x7d372fd7c8c0 is out of bounds
+=========     and is 17,601 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (1,12,0) in block (25,62,0)
+=========     Address 0x7d372fd7c8c4 is out of bounds
+=========     and is 17,605 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (2,12,0) in block (25,62,0)
+=========     Address 0x7d372fd7c8c8 is out of bounds
+=========     and is 17,609 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+========= Invalid __global__ read of size 4 bytes
+=========     at heat_kernel_3d_sim(float *, float *, int, int, int, float, float, float, float, float, BoundaryCondition)+0x5d0
+=========     by thread (3,12,0) in block (25,62,0)
+=========     Address 0x7d372fd7c8cc is out of bounds
+=========     and is 17,613 bytes after the nearest allocation at 0x7d3718000000 of size 400,000,000 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========     Host Frame: [0x2dcdbf]
+=========                in /lib/x86_64-linux-gnu/libcuda.so.1
+=========     Host Frame: [0x15aa7]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:cudaLaunchKernel [0x759f0]
+=========                in /usr/local/cuda-12.6/lib64/libcudart.so.12
+=========     Host Frame:update_sim_render() [0x4bce]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:main [0x2a35]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+=========     Host Frame:__libc_start_call_main in ../sysdeps/nptl/libc_start_call_main.h:58 [0x2a1c9]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:__libc_start_main in ../csu/libc-start.c:360 [0x2a28a]
+=========                in /lib/x86_64-linux-gnu/libc.so.6
+=========     Host Frame:_start [0x2cd4]
+=========                in /home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/./cuda_heat_equation
+========= 
+GPUassert: unspecified launch failure cuda_heat_equation.cu 893
+====================================
+Simulation Mode: 3D
+Boundary Condition: Neumann
+Debug Mode: Enabled
+  Max Time Steps: 100
+  Heat Chance: 40%
+====================================
+========= Target application returned an error
+========= ERROR SUMMARY: 706 errors
+========= ERROR SUMMARY: 606 errors were not printed. Use --print-limit option to adjust the number of printed errors

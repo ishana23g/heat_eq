@@ -1,0 +1,9 @@
+========= COMPUTE-SANITIZER
+====================================
+Simulation Mode: 2D
+Boundary Condition: Neumann
+Debug Mode: Enabled
+  Max Time Steps: 100
+  Heat Chance: 40%
+====================================
+========= ERROR SUMMARY: 0 errors
