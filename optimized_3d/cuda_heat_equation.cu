@@ -47,6 +47,8 @@ inline void gpuAssert(cudaError_t code, const char *file, int line, bool abort=t
 GLuint pbo;
 struct cudaGraphicsResource *cuda_pbo_resource;
 GLFWwindow *window;
+// Declare the texture globally or in an appropriate scope
+GLuint volumeTexture;
 
 // Device variables
 float *d_u0, *d_u1;
@@ -87,9 +89,10 @@ int PERCENT_ADD_HEAT_CHANCE = 40;
 // Function prototypes
 void init_simulation();
 void init_opengl();
+void init_volume_texture();
+void init();
 void update_sim_render();
 void reset_simulation();
-void init();
 void cleanup();
 void print_config();
 void keyboard_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
@@ -98,19 +101,21 @@ void mouse_button_callback(GLFWwindow *window, int button, int action, int mods)
 void add_heat_launcher(double xpos, double ypos);
 
 // CUDA kernels
-__global__ void heat_kernel_1d_fused(float *u0, float *u1, uchar4 *output,
+__global__ void heat_kernel_1d_sim(float *u0, float *u1,
                                      int width, float dt, float dx2, float a,
                                      BoundaryCondition boundary_condition);
-__global__ void heat_kernel_2d_fused(float *u0, float *u1, uchar4 *output,
+__global__ void heat_kernel_2d_sim(float *u0, float *u1,
                                      int width, int height, float dt,
                                      float dx2, float dy2, float a,
                                      BoundaryCondition boundary_condition);
-__global__ void heat_kernel_3d_fused(float *u0, float *u1, uchar4 *output,
+__global__ void heat_kernel_3d_sim(float *u0, float *u1,
                                      int width, int height, int depth,
                                      float dt,
                                      float dx2, float dy2, float dz2,
                                      float a, BoundaryCondition boundary_condition);
-
+__global__ void heat_kernel_1d_color(float *u, uchar4 *output, int width);
+__global__ void heat_kernel_2d_color(float *u, uchar4 *output, int width, int height);
+__global__ void heat_kernel_3d_color(float *u, uchar4 *output, int width, int height, int depth);
 __global__ void add_heat_kernel_1d(float *u, int width, int x);
 __global__ void add_heat_kernel_2d(float *u, int width, int height, int cx, int cy);
 __global__ void add_heat_kernel_3d(float *u, int width, int height, int depth, int cx, int cy, int cz);
@@ -257,22 +262,20 @@ __global__ void heat_kernel_1d_fused(float *u0, float *u1, uchar4 *output,
 }
 
 
+// 1D simulation kernel -----------------------------------------
 
-
-// Heat kernel for 1D simulation
 /**
  * @brief Heat kernel for 1D simulation
  *
  * @param[in]   u0                      The heat values at the current time step (t)
  * @param[out]  u1                      The heat values at the next time step (t + dt)
- * @param[out]  output                  The output color values
  * @param[in]   width                   The width of the simulation area
  * @param[in]   dt                      The time step
  * @param[in]   dx2                     The square of the x-axis step size
  * @param[in]   a                       The diffusivity constant
  * @param[in]   boundary_condition      The boundary condition
  */
-__global__ void heat_kernel_1d_fused(float *u0, float *u1, uchar4 *output,
+__global__ void heat_kernel_1d_sim(float *u0, float *u1,
                                      int width, float dt, float dx2, float a,
                                      BoundaryCondition boundary_condition)
 {
@@ -331,8 +334,6 @@ __global__ void heat_kernel_1d_fused(float *u0, float *u1, uchar4 *output,
                 break;
             }
         }
-        
-        gradient_scaling(u1[x], &output[x], MODE_1D);
     }
 }
 
@@ -345,67 +346,12 @@ __global__ void heat_kernel_1d_fused(float *u0, float *u1, uchar4 *output,
  * @param[out]  output                  The output color values
  * @param[in]   width                   The width of the simulation area
  */
-__global__ void heat_kernel_1d_fused(float *u0, float *u1, uchar4 *output,
-                                     int width, float dt, float dx2, float a,
-                                     BoundaryCondition boundary_condition)
+__global__ void heat_kernel_1d_color(float *u, uchar4 *output, int width)
 {
-    extern __shared__ float s_u[];
-
     int x = blockIdx.x * blockDim.x + threadIdx.x;
-    int s_x = threadIdx.x + 1;
 
     if (x < width) {
-        // Load data into shared memory
-        // Central square
-        s_u[s_x] = u0[x];
-
-        // Load borders
-        if (threadIdx.x == 0 && x > 0)
-            s_u[0] = u0[blockIdx.x * blockDim.x - 1];
-        // Right border
-        if (threadIdx.x == blockDim.x - 1 && x < width - 1)
-            s_u[blockDim.x + 1] = u0[(blockIdx.x + 1) * blockDim.x];
-
-        // Load corners 
-        // In this case it would be the left and right absolute borders
-        if (threadIdx.x == 0 && x > 0)
-            s_u[0] = u0[x - 1];
-        if (threadIdx.x == blockDim.x - 1 && x < width - 1)
-            s_u[blockDim.x + 1] = u0[x + 1];
-
-        // Make sure all the data is loaded before computing
-        __syncthreads();
-
-        if (x > 0 && x < width - 1) {
-
-            float u_center = s_u[s_x];
-            float u_left = s_u[s_x - 1];
-            float u_right = s_u[s_x + 1];
-
-            float laplacian = (u_left - 2 * u_center + u_right) / dx2;
-
-            u1[x] = u_center + a * dt * laplacian;
-
-        }
-        else if (x == 0 || x == width - 1)
-        // (x < width)
-        {
-            switch (boundary_condition)
-            {
-            case DIRICHLET:
-                u1[x] = 0.0f;
-                break;
-            case NEUMANN:
-                // Modified Neumann boundary
-                if (x == 0)
-                    u1[x] = u1[x + 1] + HEAT_SOURCE * (dx2); // Left boundary
-                else if (x == width - 1)
-                    u1[x] = u1[x - 1] + HEAT_SOURCE * (dx2); // Right boundary
-                break;
-            }
-        }
-        
-        gradient_scaling(u1[x], &output[x], MODE_1D);
+        gradient_scaling(u[x], &output[x], MODE_1D);
     }
 }
 
@@ -425,15 +371,13 @@ __global__ void add_heat_kernel_1d(float *u, int width, int x)
     }
 }
 
-
+// 2D simulation kernel -----------------------------------------
 
 /**
- * @brief Fused both the simulate step and the color output into a single kernel
- * Also using shared memory to reduce global memory access
+ * @brief Heat kernel for 2D simulation
  *
  * @param u0         The heat values at the current time step (t)
  * @param u1         The heat values at the next time step (t + dt)
- * @param output     The output color values
  * @param width      The width of the simulation area
  * @param height     The height of the simulation area
  * @param dt         The time step
@@ -442,7 +386,7 @@ __global__ void add_heat_kernel_1d(float *u, int width, int x)
  * @param a          The diffusivity constant
  * @param boundary_condition The boundary condition
  */
-__global__ void heat_kernel_2d_fused(float *u0, float *u1, uchar4 *output,
+__global__ void heat_kernel_2d_sim(float *u0, float *u1,
                                      int width, int height, float dt,
                                      float dx2, float dy2, float a,
                                      BoundaryCondition boundary_condition)
@@ -531,12 +475,37 @@ __global__ void heat_kernel_2d_fused(float *u0, float *u1, uchar4 *output,
                 break;
             }
         }
-
-        gradient_scaling(u1[idx], &output[idx], MODE_2D);
     }
 }
 
-// Add heat kernel for 2D simulation
+/**
+ * @brief Just coloring the output for 2D simulation
+ *
+ * @param[in]   u                       The heat values at the current time step (t)
+ * @param[out]  output                  The output color values
+ * @param[in]   width                   The width of the simulation area
+ * @param[in]   height                  The height of the simulation area
+ */
+__global__ void heat_kernel_2d_color(float *u, uchar4 *output, int width, int height)
+{
+    int x = blockIdx.x * blockDim.x + threadIdx.x;
+    int y = blockIdx.y * blockDim.y + threadIdx.y;
+
+    if (x < width && y < height) {
+        int idx = IDX_2D(x, y, width);
+        gradient_scaling(u[idx], &output[idx], MODE_2D);
+    }
+}
+
+/**
+ * @brief Add heat kernel for 2D simulation
+ * 
+ * @param u         The heat values at the current time step (t)
+ * @param width     The width of the simulation area
+ * @param height    The height of the simulation area
+ * @param cx        The x-coordinate of the center of the heat source
+ * @param cy        The y-coordinate of the center of the heat source
+ */
 __global__ void add_heat_kernel_2d(float *u, int width, int height, int cx, int cy)
 {
     int tx = blockIdx.x * blockDim.x + threadIdx.x - HEAT_RADIUS;
@@ -555,14 +524,12 @@ __global__ void add_heat_kernel_2d(float *u, int width, int height, int cx, int 
     }
 }
 
-// Heat kernel for 3D simulation
+// 3D simulation kernel -----------------------------------------
 /**
- * @brief Fused both the simulate step and the color output into a single kernel
- * Also using shared memory to reduce global memory access
+ * @brief Heat kernel for 3D simulation
  *
  * @param u0         The heat values at the current time step (t)
  * @param u1         The heat values at the next time step (t + dt)
- * @param output     The output color values
  * @param width      The width of the simulation area
  * @param height     The height of the simulation area
  * @param depth      The depth of the simulation area
@@ -573,7 +540,7 @@ __global__ void add_heat_kernel_2d(float *u, int width, int height, int cx, int 
  * @param a          The diffusivity constant
  * @param boundary_condition The boundary condition
  */
-__global__ void heat_kernel_3d_fused(float* u0, float* u1, uchar4* output,
+__global__ void heat_kernel_3d_sim(float* u0, float* u1,
                                      int width, int height, int depth,
                                      float dt, float dx2, float dy2, float dz2,
                                      float a, BoundaryCondition boundary_condition) {
@@ -690,12 +657,43 @@ __global__ void heat_kernel_3d_fused(float* u0, float* u1, uchar4* output,
                 break;
             }
         }
-        
-        gradient_scaling(u1[o2d], &output[o2d], MODE_3D);
     }
 }
 
 
+
+/**
+ * @brief Just coloring the output for 3D simulation
+ *
+ * @param[in]   u                       The heat values at the current time step (t)
+ * @param[out]  output                  The output color values
+ * @param[in]   width                   The width of the simulation area
+ * @param[in]   height                  The height of the simulation area
+ * @param[in]   depth                   The depth of the simulation area
+ */
+__global__ void heat_kernel_3d_color(float *u, uchar4 *output, int width, int height, int depth)
+{
+    int x = blockIdx.x * blockDim.x + threadIdx.x;
+    int y = blockIdx.y * blockDim.y + threadIdx.y;
+    int z = blockIdx.z * blockDim.z + threadIdx.z;
+
+    if (x < width && y < height && z < depth) {
+        int idx = IDX_3D(x, y, z, width, height);
+        gradient_scaling(u[idx], &output[idx], MODE_3D);
+    }
+}
+
+/**
+ * @brief Add heat kernel for 3D simulation
+ * 
+ * @param u         The heat values at the current time step (t)
+ * @param width     The width of the simulation area
+ * @param height    The height of the simulation area
+ * @param depth     The depth of the simulation area
+ * @param cx        The x-coordinate of the center of the heat source
+ * @param cy        The y-coordinate of the center of the heat source
+ * @param cz        The z-coordinate of the center of the heat source
+ */
 __global__ void add_heat_kernel_3d(float *u, int width, int height, int depth, int cx, int cy, int cz) {
     int tx = blockIdx.x * blockDim.x + threadIdx.x - (HEAT_RADIUS * 2);
     int ty = blockIdx.y * blockDim.y + threadIdx.y - (HEAT_RADIUS * 2);
@@ -791,67 +789,99 @@ void init_opengl()
 
     // Register PBO with CUDA
     cudaGraphicsGLRegisterBuffer(&cuda_pbo_resource, pbo, cudaGraphicsMapFlagsWriteDiscard);
+
+    init_volume_texture();
+}
+
+
+void init_volume_texture() {
+    glGenTextures(1, &volumeTexture);
+    glBindTexture(GL_TEXTURE_3D, volumeTexture);
+
+    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+    glBindTexture(GL_TEXTURE_3D, 0);
 }
 
 // Render simulation
 void update_sim_render()
 {
-
     // Map PBO
     cudaGraphicsMapResources(1, &cuda_pbo_resource, 0);
     size_t size;
     cudaGraphicsResourceGetMappedPointer((void **)&d_output, &size, cuda_pbo_resource);
 
-    // float dx2 = DX * DX;
-    // float dy2 = DY * DY;
-    // float dz2 = DZ * DZ;
+    const int MAX_SIM_STEPS = 10;
+    
+    for (int i=0; i<MAX_SIM_STEPS; i++){
+        if (simulation_mode == MODE_1D)
+        {
+            // if we just did BLOCK_SIZE_X, we would only be able to do 16 threads
+            // that is too few, so we need to square it
+            dim3 blockSize(BLOCK_SIZE_X * BLOCK_SIZE_X * 2);
+            dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x);
+            int sharedMemBytes = (blockSize.x+ 2) * sizeof(float);
+            // simulate for all steps
+            heat_kernel_1d_sim<<<gridSize, blockSize, sharedMemBytes>>>(d_u0, d_u1,
+                WIDTH, TIME_STEP, 
+                DX * DX, 
+                DIFFUSIVITY, boundary_condition);
+            // color updated at last step
+            if (i == MAX_SIM_STEPS - 1){   
+                heat_kernel_1d_color<<<gridSize, blockSize>>>(d_u1, 
+                    d_output, WIDTH);
+            }
+    
+        }
+        else if (simulation_mode == MODE_2D)
+        {
+            dim3 blockSize(BLOCK_SIZE_X, BLOCK_SIZE_Y);
+            dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x,
+                        (HEIGHT + blockSize.y - 1) / blockSize.y);
+            int sharedMemBytes = (blockSize.x + 2) * (blockSize.y + 2) * sizeof(float);
 
-    if (simulation_mode == MODE_1D)
-    {
-        // if we just did BLOCK_SIZE_X, we would only be able to do 16 threads
-        // that is too few, so we need to square it
-        dim3 blockSize(BLOCK_SIZE_X * BLOCK_SIZE_X * 2);
-        dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x);
-        int sharedMemBytes = (blockSize.x+ 2) * sizeof(float);
+            heat_kernel_2d_sim<<<gridSize, blockSize, sharedMemBytes>>>(d_u0, d_u1,
+                WIDTH, HEIGHT, TIME_STEP, 
+                DX * DX, DY * DY, 
+                DIFFUSIVITY, boundary_condition);
+            
+            if (i == MAX_SIM_STEPS - 1){
+                heat_kernel_2d_color<<<gridSize, blockSize>>>(d_u1, 
+                    d_output, WIDTH, HEIGHT);
+            }
+        }
+        else if (simulation_mode == MODE_3D)
+        {
 
-        heat_kernel_1d_fused<<<gridSize, blockSize, sharedMemBytes>>>(d_u0, d_u1, d_output, 
-            WIDTH, TIME_STEP, 
-            DX * DX, 
-            DIFFUSIVITY, boundary_condition);
+            dim3 blockSize(BLOCK_SIZE_X, BLOCK_SIZE_Y);
+            dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x,
+                        (HEIGHT + blockSize.y - 1) / blockSize.y);
+            int sharedMemBytes = (blockSize.x + 2) * (blockSize.y + 2) * sizeof(float);
+
+            heat_kernel_3d_sim<<<gridSize, blockSize, sharedMemBytes>>>(d_u0, d_u1,
+                WIDTH, HEIGHT, DEPTH, TIME_STEP, 
+                DX * DX, DY * DY, DZ * DZ,
+                DIFFUSIVITY, boundary_condition);
+
+            if (i == MAX_SIM_STEPS - 1){
+                dim3 blockSize(BLOCK_SIZE_X/2, BLOCK_SIZE_Y/2, BLOCK_SIZE_Z/2);
+                dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x,
+                            (HEIGHT + blockSize.y - 1) / blockSize.y,
+                            (DEPTH + blockSize.z - 1) / blockSize.z);
+                heat_kernel_3d_color<<<gridSize, blockSize>>>(d_u1, 
+                    d_output, WIDTH, HEIGHT, DEPTH);
+            }
+
+        }
+        gpuErrchk(cudaPeekAtLastError());
+
+        // Swap pointers
+        std::swap(d_u0, d_u1);
     }
-    else if (simulation_mode == MODE_2D)
-    {
-        dim3 blockSize(BLOCK_SIZE_X, BLOCK_SIZE_Y);
-        dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x,
-                      (HEIGHT + blockSize.y - 1) / blockSize.y);
-        int sharedMemBytes = (blockSize.x + 2) * (blockSize.y + 2) * sizeof(float);
-
-        heat_kernel_2d_fused<<<gridSize, blockSize, sharedMemBytes>>>(d_u0, d_u1, d_output, 
-            WIDTH, HEIGHT, TIME_STEP, 
-            DX * DX, DY * DY, 
-            DIFFUSIVITY, boundary_condition);
-    }
-    else if (simulation_mode == MODE_3D)
-    {
-
-        dim3 blockSize(BLOCK_SIZE_X, BLOCK_SIZE_Y);
-        dim3 gridSize((WIDTH + blockSize.x - 1) / blockSize.x,
-                      (HEIGHT + blockSize.y - 1) / blockSize.y);
-        int sharedMemBytes = (blockSize.x + 2) * (blockSize.y + 2) * sizeof(float);
-
-        heat_kernel_3d_fused<<<gridSize, blockSize, sharedMemBytes>>>(d_u0, d_u1, d_output, 
-            WIDTH, HEIGHT, DEPTH, TIME_STEP, 
-            DX * DX, DY * DY, DZ * DZ,
-            DIFFUSIVITY, boundary_condition);
-    }
-
-    gpuErrchk(cudaPeekAtLastError());
-    // gpuErrchk(cudaDeviceSynchronize());
-
-    // Swap pointers
-    float *temp = d_u0;
-    d_u0 = d_u1;
-    d_u1 = temp;
 
     // FPS calculation
     double currentTime = glfwGetTime();
@@ -872,12 +902,12 @@ void update_sim_render()
     cudaGraphicsUnmapResources(1, &cuda_pbo_resource, 0);
 
     // Draw pixels
-    glClear(GL_COLOR_BUFFER_BIT);
-    glDisable(GL_DEPTH_TEST);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbo);
-
+    
     if (simulation_mode == MODE_1D)
-    {
+    {  
+        glDisable(GL_DEPTH_TEST);
         for (int i = 0; i < 20; i++)
         {
             glRasterPos2f(-1.0f, -1.0f + i * 0.02f);
@@ -886,55 +916,104 @@ void update_sim_render()
     }
     else if (simulation_mode == MODE_2D)
     {
+        glDisable(GL_DEPTH_TEST);
         glRasterPos2i(-1, -1);
         glDrawPixels(WIDTH, HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, 0);
     }
     else if (simulation_mode == MODE_3D)
-    {
+    {   
+        // Bind the volume texture
+        glBindTexture(GL_TEXTURE_3D, volumeTexture);
 
-        int window_width, window_height;
-        glfwGetFramebufferSize(window, &window_width, &window_height);
+        // Transfer data from PBO to the 3D texture
+        glTexSubImage3D(
+            GL_TEXTURE_3D,          // Target
+            0,                      // Level
+            0, 0, 0,                // Offset
+            WIDTH, HEIGHT, DEPTH,   // Size
+            GL_RGBA,                // Format
+            GL_UNSIGNED_BYTE,       // Type
+            0);                     // Offset in PBO
 
+        // Render slices from back to front
+        glEnable(GL_DEPTH_TEST);
+        glEnable(GL_TEXTURE_3D);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-        // Set up orthographic projection
+        // Set up the projection and view matrices
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        gluOrtho2D(0, window_width, 0, window_height);
+        gluPerspective(45.0, (double)WIDTH / (double)HEIGHT, 0.1, 1000.0);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
+        gluLookAt(
+            0.0, 0.0, 2.0,  // Camera position
+            0.0, 0.0, 0.0,  // Look at point
+            0.0, 1.0, 0.0); // Up vector
 
-        // Starting position for the backmost layer
-        float start_x = 0.0f;
-        float start_y = window_height - (HEIGHT * SCALE_FACTOR_3D);
-
-        float offset_x = start_x;
-        float offset_y = start_y;
-
-        // Set pixel zoom for scaling for all new slices
-        glPixelZoom(SCALE_FACTOR_3D, SCALE_FACTOR_3D);
-        
-        // Draw each slice with offset
-        for (int z = 0; z < DEPTH; ++z)
+        // Render slices from back to front
+        glBegin(GL_QUADS);
+        for (int i = 0; i < DEPTH; ++i)
         {
-            // Calculate position offsetfused
-            offset_x += (WIDTH * SCALE_FACTOR_3D) / DEPTH;
-            offset_y -= (HEIGHT * SCALE_FACTOR_3D) / DEPTH;
+            float z = -1.0f + 2.0f * i / (DEPTH - 1);
+            float texZ = (float)i / (DEPTH - 1);
 
-            // Set raster position
-            glRasterPos2f(offset_x, offset_y);
-
-            // Draw the slice
-            glDrawPixels(WIDTH, HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid *)(z * WIDTH * HEIGHT * sizeof(uchar4)));
+            glTexCoord3f(0.0f, 0.0f, texZ); glVertex3f(-1.0f, -1.0f, z);
+            glTexCoord3f(1.0f, 0.0f, texZ); glVertex3f( 1.0f, -1.0f, z);
+            glTexCoord3f(1.0f, 1.0f, texZ); glVertex3f( 1.0f,  1.0f, z);
+            glTexCoord3f(0.0f, 1.0f, texZ); glVertex3f(-1.0f,  1.0f, z);
         }
-
-        // Reset pixel zoom
-        glPixelZoom(1.0f, 1.0f);
+        glEnd();
 
         glDisable(GL_BLEND);
+        glDisable(GL_TEXTURE_3D);
+        glDisable(GL_DEPTH_TEST);
+
+        // int window_width, window_height;
+        // glfwGetFramebufferSize(window, &window_width, &window_height);
+
+        // glEnable(GL_BLEND);
+        // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+        // // Set up orthographic projection
+        // glMatrixMode(GL_PROJECTION);
+        // glLoadIdentity();
+        // gluOrtho2D(0, window_width, 0, window_height);
+        // glMatrixMode(GL_MODELVIEW);
+        // glLoadIdentity();
+
+        // // Starting position for the backmost layer
+        // float start_x = 0.0f;
+        // float start_y = window_height - (HEIGHT * SCALE_FACTOR_3D);
+
+        // float offset_x = start_x;
+        // float offset_y = start_y;
+
+        // // Set pixel zoom for scaling for all new slices
+        // glPixelZoom(SCALE_FACTOR_3D, SCALE_FACTOR_3D);
+        
+        // // Draw each slice with offset
+        // for (int z = 0; z < DEPTH; ++z)
+        // {
+        //     // Calculate position offsetfused
+        //     offset_x += (WIDTH * SCALE_FACTOR_3D) / DEPTH;
+        //     offset_y -= (HEIGHT * SCALE_FACTOR_3D) / DEPTH;
+
+        //     // Set raster position
+        //     glRasterPos2f(offset_x, offset_y);
+
+        //     // Draw the slice
+        //     glDrawPixels(WIDTH, HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid *)(z * WIDTH * HEIGHT * sizeof(uchar4)));
+        // }
+
+        // // Reset pixel zoom
+        // glPixelZoom(1.0f, 1.0f);
+
+        // glDisable(GL_BLEND);
     }
-    
+
+    // Unbind PBO
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
     glfwSwapBuffers(window);
 }
@@ -1113,6 +1192,7 @@ void init(){
 
 void cleanup(){
     cudaGraphicsUnregisterResource(cuda_pbo_resource);
+    glDeleteTextures(1, &volumeTexture);
     glDeleteBuffers(1, &pbo);
     cudaFree(d_u0);
     cudaFree(d_u1);

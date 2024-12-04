@@ -38,6 +38,22 @@ sm__sass_thread_inst_executed_op_imad_pred_on.sum \
 
 ncu --print-summary per-kernel ./cuda_heat_equation "${O[@]}" 2>&1 | tee profiler/ncu_summary.txt
 
+# Generate PTX files
+echo "Generating PTX files..."
+for cu_file in *.cu; do
+    ptx_file="${cu_file%.cu}.ptx"
+    $(NVCC) $(NVCC_FLAGS) $(PTX_FLAGS) -ptx $cu_file -o $ptx_file
+done
+
+# Generate CUBIN files
+echo "Generating CUBIN files..."
+for cu_file in *.cu; do
+    cubin_file="${cu_file%.cu}.cubin"
+    sass_file="${cu_file%.cu}.sass"
+    $(NVCC) $(NVCC_FLAGS) -cubin $cu_file -o $cubin_file
+    cuobjdump --dump-sass $cubin_file > $sass_file
+done
+
 # Measure wall clock time
 echo "Measuring wall clock time..."
-(time ./heat_sim "${O[@]}") 2>&1 | tee profiler/wall_clock_time.txt
+(time ./cuda_heat_equation "${O[@]}") 2>&1 | tee profiler/wall_clock_time.txt
