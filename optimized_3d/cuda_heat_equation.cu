@@ -71,8 +71,6 @@ enum SimulationMode
 };
 SimulationMode simulation_mode = MODE_3D;
 
-#define SCALE_FACTOR_3D 0.8f
-
 // Boundary conditions
 enum BoundaryCondition
 {
@@ -565,26 +563,23 @@ __global__ void heat_kernel_3d_sim(float* u0, float* u1,
     float infront = u0[i2d]; 
     i2d += stride;
 
-    for (int i = 1; i < depth - 1; i++) {
+    // before going into the loop make sure to update the boundaries
+    // it is the same as z == 0 || z == depth - 1
+    
+    // i==0
+    // the full slice should be updated for u1 either to 0s or to the neumann boundary
+    switch (boundary_condition)
+    {
+    case DIRICHLET:
+        // all the values in the slice should be 0
+        u1[o2d] = 0.0f;
+        break;
+    case NEUMANN:
+        // we will be taking the infront value and adding the heat source
+        u1[o2d] = infront + HEAT_SOURCE * dz2;
+    }
 
-        // if i == 1 || i == depth - 2 (we need to update the boundaries)
-        // it is the same as z == 0 || z == depth - 1
-        if (i == 1 || i == depth - 2){
-            switch (boundary_condition)
-            {
-            case DIRICHLET:
-                u1[o2d] = 0.0f;
-                break;
-            case NEUMANN:
-                // Left boundary
-                if (i == 1)
-                    u1[o2d] = u0[o2d + stride] + HEAT_SOURCE * dz2;
-                // Right boundary
-                else if (i == depth - 2)
-                    u1[o2d] = u0[o2d - stride] + HEAT_SOURCE * dz2;
-                break;
-            }
-        }
+    for (int i = 1; i < depth - 1; i++) {    
 
         // These go in registers:
         behind = current;
@@ -596,6 +591,8 @@ __global__ void heat_kernel_3d_sim(float* u0, float* u1,
         __syncthreads();
 
         // Shared memory
+
+        slice[IDX_2D(ty, tx, BLOCK_SIZE_X + 2)] = current;
 
         if (compute_if) {
             if (threadIdx.x == 0) { // Halo left
@@ -614,10 +611,6 @@ __global__ void heat_kernel_3d_sim(float* u0, float* u1,
                 slice[IDX_2D(ty + 1, tx, BLOCK_SIZE_X + 2)] = u0[o2d + width];
             }
         }
-
-        __syncthreads();
-
-        slice[IDX_2D(ty, tx, BLOCK_SIZE_X + 2)] = current;
 
         __syncthreads();
 
@@ -657,6 +650,19 @@ __global__ void heat_kernel_3d_sim(float* u0, float* u1,
                 break;
             }
         }
+    }
+
+    // i==depth-1
+    // the full slice should be updated for u1 either to 0s or to the neumann boundary
+    switch (boundary_condition)
+    {
+    case DIRICHLET:
+        // all the values in the slice should be 0
+        u1[o2d] = 0.0f;
+        break;
+    case NEUMANN:
+        // we will be taking the behind value and adding the heat source
+        u1[o2d] = behind + HEAT_SOURCE * dz2;
     }
 }
 
@@ -980,7 +986,7 @@ void update_sim_render()
         // Set up the projection and view matrices
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        gluPerspective(45.0, (double) WIDTH / (double) HEIGHT, 0.1, 1000.0);
+        gluPerspective(90.0, (double) WIDTH / (double) HEIGHT, 0.01, 10000.0);
 
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
