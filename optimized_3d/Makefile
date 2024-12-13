@@ -15,6 +15,9 @@ PTX_FLAGS := -Xptxas -v
 LIB := -lcudart -lcurand -lcublas -lcufft -I/usr/include -lglfw -lGL -lGLEW -lGLU -lglut
 
 # Project files
+# TODO: 
+# If someone whated to use this make file. just change the executable name and the source files
+# SRC: is the source files. Right now for this code eveything is in one file; makes it easy for compilation
 EXECUTABLE := cuda_heat_equation
 SRC_FILES := $(EXECUTABLE).cu
 OBJ_FILES := $(SRC_FILES:.cu=.o)
