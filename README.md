@@ -91,9 +91,9 @@ While each one can be different and separate, for the sake of simplicity we are 
 
   In the continuous form, this sets the derivative of the temperature at the boundaries to a fixed value, which looks like:
 
-  $$\left( \frac{\partial u}{\partial x} \right)_{\text{boundary}} = \text{HEAT\_SOURCE}, $$
-  $$\left( \frac{\partial u}{\partial y} \right)_{\text{boundary}} = \text{HEAT\_SOURCE}, $$
-  $$\left( \frac{\partial u}{\partial z} \right)_{\text{boundary}} = \text{HEAT\_SOURCE}  $$
+  $$\left( \frac{\partial u}{\partial x} \right)_{\text{boundary}} = \text{HEAT}\_\text{SOURCE}, $$
+  $$\left( \frac{\partial u}{\partial y} \right)_{\text{boundary}} = \text{HEAT}\_\text{SOURCE}, $$
+  $$\left( \frac{\partial u}{\partial z} \right)_{\text{boundary}} = \text{HEAT}\_\text{SOURCE}  $$
 
   Set the derivative at the boundaries using finite differences:
 
@@ -111,8 +111,8 @@ While each one can be different and separate, for the sake of simplicity we are 
 
 As talked about in the different cases I have different $Q(\dots)$ terms. This is the heat source term, representing the amount of heat added at a given spacial position respective of the dimension I am simulating.
 
-All this is going to be doing is $$Q(x, t) = Q(x, y, t) = Q(x, y, z, t)= \text{HEAT\_SOURCE},$$
-where $\text{HEAT\_SOURCE}$ is a constant value.
+All this is going to be doing is $$Q(x, t) = Q(x, y, t) = Q(x, y, z, t)= \text{HEAT}\_\text{SOURCE},$$
+where $\text{HEAT}\_\text{SOURCE}$ is a constant value.
 
 ### Stability Considerations
 * Time Step ($\Delta t$):
