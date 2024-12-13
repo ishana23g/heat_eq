@@ -184,6 +184,17 @@ This will compile all the source files and generate an executable named `cuda_he
 
 Note: If you encounter errors related to missing CUDA headers (e.g., `cuda_runtime.h`), ensure that the CUDA include directory is in your compiler's include path. The `Makefile` should handle this, but if issues persist, you might need to modify the `NVCC_FLAGS` in the `Makefile` to include the correct CUDA include path:
 
+### Viewing PTX and CUBIN
+
+In the given make file if you want to look at the compiled `.ptx` and `.cubin` code you can do that via using:
+* to compile the ptx code:
+  ```bash
+  make ptx
+  ```
+* and to compile the cubin code:
+  ```bash
+  make cubin
+  ```
 
 ```bash
 NVCC_FLAGS := --use_fast_math -O3 -gencode arch=compute_86,code=sm_86 -I/usr/local/cuda/include -Xptxas -v

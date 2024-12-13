@@ -1,4 +1,4 @@
-==PROF== Connected to process 33575 (/home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/cuda_heat_equation)
+==PROF== Connected to process 45245 (/home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/cuda_heat_equation)
 ==PROF== Profiling "heat_kernel_2d_sim" - 0: 0%....50%....100% - 8 passes
 ==PROF== Profiling "heat_kernel_2d_sim" - 1: 0%....50%....100% - 8 passes
 ==PROF== Profiling "heat_kernel_2d_sim" - 2: 0%....50%....100% - 8 passes
@@ -120,22 +120,22 @@ Debug Mode: Enabled
   Max Time Steps: 10
   Heat Chance: 60%
 ====================================
-==PROF== Disconnected from process 33575
-[33575] cuda_heat_equation@127.0.0.1
+==PROF== Disconnected from process 45245
+[45245] cuda_heat_equation@127.0.0.1
   add_heat_kernel_2d(float *, int, int, int, int) (1, 1, 1)x(16, 16, 1), Device 0, CC 8.9, Invocations 4
     Section: GPU Speed Of Light Throughput
     ----------------------- ----------- -------- -------- --------
     Metric Name             Metric Unit  Minimum  Maximum  Average
     ----------------------- ----------- -------- -------- --------
-    DRAM Frequency                  Ghz     8.57     8.73     8.63
-    SM Frequency                    Ghz     2.22     2.25     2.24
-    Elapsed Cycles                cycle 3,897.00 4,007.00 3,958.00
-    Memory Throughput                 %     0.85     2.28     1.24
-    DRAM Throughput                   %     0.85     0.92     0.90
-    Duration                         us     1.73     1.79     1.77
-    L1/TEX Cache Throughput           %    22.03    23.35    22.56
-    L2 Cache Throughput               %     0.48     2.28     0.94
-    SM Active Cycles              cycle    51.38    54.47    53.21
+    DRAM Frequency                  Ghz     8.71     8.86     8.76
+    SM Frequency                    Ghz     2.24     2.27     2.25
+    Elapsed Cycles                cycle 3,945.00 4,068.00 4,003.50
+    Memory Throughput                 %     0.81     2.24     1.38
+    DRAM Throughput                   %     0.81     2.24     1.38
+    Duration                         us     1.76     1.79     1.78
+    L1/TEX Cache Throughput           %    21.60    23.46    22.71
+    L2 Cache Throughput               %     0.46     1.07     0.62
+    SM Active Cycles              cycle    51.15    55.56    52.88
     Compute (SM) Throughput           %     0.05     0.05     0.05
     ----------------------- ----------- -------- -------- --------
 
@@ -143,16 +143,16 @@ Debug Mode: Enabled
     -------------------------- ----------- ---------- ---------- ----------
     Metric Name                Metric Unit    Minimum    Maximum    Average
     -------------------------- ----------- ---------- ---------- ----------
-    Average DRAM Active Cycles       cycle     132.00     140.00     137.00
-    Total DRAM Elapsed Cycles        cycle  59,392.00  61,952.00  61,056.00
-    Average L1 Active Cycles         cycle      51.38      54.47      53.21
-    Total L1 Elapsed Cycles          cycle 131,128.00 134,262.00 133,157.00
-    Average L2 Active Cycles         cycle     362.25     442.44     389.20
-    Total L2 Elapsed Cycles          cycle  51,456.00  52,832.00  52,232.00
-    Average SM Active Cycles         cycle      51.38      54.47      53.21
-    Total SM Elapsed Cycles          cycle 131,128.00 134,262.00 133,157.00
-    Average SMSP Active Cycles       cycle      49.61      51.82      50.74
-    Total SMSP Elapsed Cycles        cycle 524,512.00 537,048.00 532,628.00
+    Average DRAM Active Cycles       cycle     124.00     344.00     215.00
+    Total DRAM Elapsed Cycles        cycle  61,440.00  63,488.00  62,208.00
+    Average L1 Active Cycles         cycle      51.15      55.56      52.88
+    Total L1 Elapsed Cycles          cycle 135,180.00 137,534.00 136,206.50
+    Average L2 Active Cycles         cycle     375.75     424.75     395.88
+    Total L2 Elapsed Cycles          cycle  51,968.00  53,648.00  52,796.00
+    Average SM Active Cycles         cycle      51.15      55.56      52.88
+    Total SM Elapsed Cycles          cycle 135,180.00 137,534.00 136,206.50
+    Average SMSP Active Cycles       cycle      51.15      53.34      52.01
+    Total SMSP Elapsed Cycles        cycle 540,720.00 550,136.00 544,826.00
     -------------------------- ----------- ---------- ---------- ----------
 
     Section: Launch Statistics
@@ -182,8 +182,8 @@ Debug Mode: Enabled
     Block Limit Warps                     block    6.00    6.00    6.00
     Theoretical Active Warps per SM        warp   48.00   48.00   48.00
     Theoretical Occupancy                     %  100.00  100.00  100.00
-    Achieved Occupancy                        %   14.16   15.60   14.59
-    Achieved Active Warps Per SM           warp    6.80    7.49    7.00
+    Achieved Occupancy                        %   13.87   15.44   14.93
+    Achieved Active Warps Per SM           warp    6.66    7.41    7.17
     ------------------------------- ----------- ------- ------- -------
 
   heat_kernel_2d_color(float *, uchar4 *) (63, 63, 1)x(16, 16, 1), Device 0, CC 8.9, Invocations 10
@@ -191,32 +191,32 @@ Debug Mode: Enabled
     ----------------------- ----------- --------- --------- ---------
     Metric Name             Metric Unit   Minimum   Maximum   Average
     ----------------------- ----------- --------- --------- ---------
-    DRAM Frequency                  Ghz      8.96      8.99      8.97
-    SM Frequency                    Ghz      2.25      2.27      2.26
-    Elapsed Cycles                cycle 55,241.00 59,238.00 57,601.90
-    Memory Throughput                 %     91.06     92.62     92.21
-    DRAM Throughput                   %     91.06     92.62     92.21
-    Duration                         us     24.26     26.18     25.43
-    L1/TEX Cache Throughput           %     22.01     31.39     30.16
-    L2 Cache Throughput               %     24.89     26.74     25.66
-    SM Active Cycles              cycle 33,588.79 47,320.94 35,233.70
-    Compute (SM) Throughput           %     18.64     27.34     26.22
+    DRAM Frequency                  Ghz      8.97      8.98      8.98
+    SM Frequency                    Ghz      2.25      2.28      2.27
+    Elapsed Cycles                cycle 53,802.00 66,212.00 59,254.20
+    Memory Throughput                 %     90.13     92.54     92.01
+    DRAM Throughput                   %     90.13     92.54     92.01
+    Duration                         us     23.81     28.96     26.11
+    L1/TEX Cache Throughput           %     17.25     31.39     28.41
+    L2 Cache Throughput               %     22.25     27.39     24.97
+    SM Active Cycles              cycle 33,542.41 65,520.79 41,321.84
+    Compute (SM) Throughput           %     15.04     27.33     24.74
     ----------------------- ----------- --------- --------- ---------
 
     Section: GPU and Memory Workload Distribution
     -------------------------- ----------- ------------ ------------ ------------
     Metric Name                Metric Unit      Minimum      Maximum      Average
     -------------------------- ----------- ------------ ------------ ------------
-    Average DRAM Active Cycles       cycle   200,220.00   216,980.00   210,417.60
-    Total DRAM Elapsed Cycles        cycle   871,424.00   937,984.00   912,691.20
-    Average L1 Active Cycles         cycle    33,588.79    47,320.94    35,233.70
-    Total L1 Elapsed Cycles          cycle 1,219,444.00 1,788,394.00 1,287,564.00
-    Average L2 Active Cycles         cycle    27,778.31    28,163.38    27,951.54
-    Total L2 Elapsed Cycles          cycle   734,480.00   789,632.00   767,475.20
-    Average SM Active Cycles         cycle    33,588.79    47,320.94    35,233.70
-    Total SM Elapsed Cycles          cycle 1,219,444.00 1,788,394.00 1,287,564.00
-    Average SMSP Active Cycles       cycle    33,681.35    34,165.17    33,862.56
-    Total SMSP Elapsed Cycles        cycle 4,877,776.00 7,153,576.00 5,150,256.00
+    Average DRAM Active Cycles       cycle   192,424.00   236,936.00   215,698.80
+    Total DRAM Elapsed Cycles        cycle   854,016.00 1,040,384.00   937,625.60
+    Average L1 Active Cycles         cycle    33,542.41    65,520.79    41,321.84
+    Total L1 Elapsed Cycles          cycle 1,219,520.00 2,217,104.00 1,415,501.00
+    Average L2 Active Cycles         cycle    27,818.12    57,615.88    35,486.04
+    Total L2 Elapsed Cycles          cycle   716,752.00   878,448.00   788,696.00
+    Average SM Active Cycles         cycle    33,542.41    65,520.79    41,321.84
+    Total SM Elapsed Cycles          cycle 1,219,520.00 2,217,104.00 1,415,501.00
+    Average SMSP Active Cycles       cycle    33,728.20    67,025.78    42,236.40
+    Total SMSP Elapsed Cycles        cycle 4,878,080.00 8,868,416.00 5,662,004.00
     -------------------------- ----------- ------------ ------------ ------------
 
     Section: Launch Statistics
@@ -246,41 +246,41 @@ Debug Mode: Enabled
     Block Limit Warps                     block    6.00    6.00    6.00
     Theoretical Active Warps per SM        warp   48.00   48.00   48.00
     Theoretical Occupancy                     %  100.00  100.00  100.00
-    Achieved Occupancy                        %   84.00  119.47  112.21
-    Achieved Active Warps Per SM           warp   40.32   57.35   53.86
+    Achieved Occupancy                        %   61.72  122.92  104.36
+    Achieved Active Warps Per SM           warp   29.62   59.00   50.09
     ------------------------------- ----------- ------- ------- -------
 
   heat_kernel_2d_sim(float *, float *, BoundaryCondition) (63, 63, 1)x(16, 16, 1), Device 0, CC 8.9, Invocations 100
     Section: GPU Speed Of Light Throughput
-    ----------------------- ----------- --------- --------- ---------
-    Metric Name             Metric Unit   Minimum   Maximum   Average
-    ----------------------- ----------- --------- --------- ---------
-    DRAM Frequency                  Ghz      8.96      8.99      8.98
-    SM Frequency                    Ghz      2.19      2.27      2.25
-    Elapsed Cycles                cycle 43,215.00 74,619.00 68,197.33
-    Memory Throughput                 %     70.13     92.39     89.24
-    DRAM Throughput                   %     70.13     92.39     89.24
-    Duration                         us     19.71     33.09     30.31
-    L1/TEX Cache Throughput           %     43.34     83.72     79.54
-    L2 Cache Throughput               %     32.57     52.95     35.46
-    SM Active Cycles              cycle 39,952.00 77,173.94 42,754.53
-    Compute (SM) Throughput           %     39.08     78.79     71.41
-    ----------------------- ----------- --------- --------- ---------
+    ----------------------- ----------- --------- ---------- ---------
+    Metric Name             Metric Unit   Minimum    Maximum   Average
+    ----------------------- ----------- --------- ---------- ---------
+    DRAM Frequency                  Ghz      8.97       8.99      8.98
+    SM Frequency                    Ghz      2.21       2.27      2.25
+    Elapsed Cycles                cycle 52,111.00 108,852.00 69,360.16
+    Memory Throughput                 %     67.18      92.48     89.59
+    DRAM Throughput                   %     67.18      92.48     89.59
+    Duration                         us     23.52      47.84     30.81
+    L1/TEX Cache Throughput           %     24.28      83.54     74.01
+    L2 Cache Throughput               %     22.55      44.03     34.82
+    SM Active Cycles              cycle 40,040.32 192,300.91 48,488.16
+    Compute (SM) Throughput           %     16.54      78.82     67.10
+    ----------------------- ----------- --------- ---------- ---------
 
     Section: GPU and Memory Workload Distribution
     -------------------------- ----------- ------------ ------------- ------------
     Metric Name                Metric Unit      Minimum       Maximum      Average
     -------------------------- ----------- ------------ ------------- ------------
-    Average DRAM Active Cycles       cycle   125,132.00    273,944.00   243,343.40
-    Total DRAM Elapsed Cycles        cycle   708,608.00  1,187,840.00 1,088,455.68
-    Average L1 Active Cycles         cycle    39,952.00     77,173.94    42,754.53
-    Total L1 Elapsed Cycles          cycle 1,443,444.00  2,910,000.00 1,640,852.46
-    Average L2 Active Cycles         cycle    33,195.56     61,063.06    35,724.57
-    Total L2 Elapsed Cycles          cycle   582,160.00    995,936.00   910,957.12
-    Average SM Active Cycles         cycle    39,952.00     77,173.94    42,754.53
-    Total SM Elapsed Cycles          cycle 1,443,444.00  2,910,000.00 1,640,852.46
-    Average SMSP Active Cycles       cycle    39,925.56     72,627.87    42,950.58
-    Total SMSP Elapsed Cycles        cycle 5,773,776.00 11,640,000.00 6,563,409.84
+    Average DRAM Active Cycles       cycle   186,408.00    288,756.00   247,614.80
+    Total DRAM Elapsed Cycles        cycle   844,800.00  1,719,296.00 1,106,462.72
+    Average L1 Active Cycles         cycle    40,040.32    192,300.91    48,488.16
+    Total L1 Elapsed Cycles          cycle 1,442,934.00  6,874,198.00 1,829,332.84
+    Average L2 Active Cycles         cycle    33,222.56     85,238.38    40,819.41
+    Total L2 Elapsed Cycles          cycle   699,440.00  1,446,704.00   926,174.88
+    Average SM Active Cycles         cycle    40,040.32    192,300.91    48,488.16
+    Total SM Elapsed Cycles          cycle 1,442,934.00  6,874,198.00 1,829,332.84
+    Average SMSP Active Cycles       cycle    39,996.27    159,290.93    49,460.74
+    Total SMSP Elapsed Cycles        cycle 5,771,736.00 27,496,792.00 7,317,331.36
     -------------------------- ----------- ------------ ------------- ------------
 
     Section: Launch Statistics
@@ -310,8 +310,8 @@ Debug Mode: Enabled
     Block Limit Warps                     block    6.00    6.00    6.00
     Theoretical Active Warps per SM        warp   48.00   48.00   48.00
     Theoretical Occupancy                     %  100.00  100.00  100.00
-    Achieved Occupancy                        %   76.43  156.65  138.49
-    Achieved Active Warps Per SM           warp   36.69   75.19   66.47
+    Achieved Occupancy                        %   34.58  204.15  130.22
+    Achieved Active Warps Per SM           warp   16.60   97.99   62.51
     ------------------------------- ----------- ------- ------- -------
 
   Note: The shown averages are calculated as the arithmetic mean of the metric values after the evaluation of the    

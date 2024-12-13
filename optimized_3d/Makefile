@@ -45,12 +45,12 @@ clean:
 
 # Generate PTX files
 %.ptx: %.cu
-	$(NVCC) $(NVCC_FLAGS) $(PTX_FLAGS) -ptx $< -o $@
-	$(NVCC) $(NVCC_FLAGS) $<
+	$(NVCC) $(NVCC_FLAGS) $(PTX_FLAGS) $(LIB) -ptx $< -o $@
+	$(NVCC) $(NVCC_FLAGS) $(LIB) $<
 
 # Generate CUBIN files
 %.cubin: %.cu
-	$(NVCC) $(NVCC_FLAGS) -cubin $< -o $@
+	$(NVCC) $(NVCC_FLAGS) $(LIB) -cubin $< -o $@ 
 	cuobjdump --dump-sass $@ > $(<:.cu=.sass)
 
 # Target to build PTX and CUBIN files

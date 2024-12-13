@@ -421,121 +421,110 @@ __global__ void add_heat_kernel_2d(float *u, int width, int height, int cx, int 
  * @param a          The diffusivity constant
  * @param boundary_condition The boundary condition
  */
-__global__ void heat_kernel_3d_sim(float* u0, float* u1, BoundaryCondition boundary_condition) {
-
+__global__ void heat_kernel_3d_sim(float* __restrict__ u0, float* __restrict__ u1, BoundaryCondition boundary_condition) {
     extern __shared__ float slice[];
     const int shared_bs_x = blockDim.x + 2;
 
+    // Compute global indices
     int x = blockIdx.x * blockDim.x + threadIdx.x;
     int y = blockIdx.y * blockDim.y + threadIdx.y;
 
+    // Compute shared memory indices
     int s_x = threadIdx.x + 1;
     int s_y = threadIdx.y + 1;
-
-    int stride = WIDTH * HEIGHT;
-    int i2d = IDX_2D(x, y, WIDTH);
-    int o2d = 0;
-    bool compute_if = x > 0 && x < (WIDTH - 1) && y > 0 && y < (HEIGHT - 1);
-
-    float u_behind;
-    float u_center = u0[i2d]; 
-    o2d = i2d; 
-    i2d += stride;
-    float u_infront = u0[i2d]; 
-    i2d += stride;
-
-    // before going into the loop make sure to update the boundaries
-    // it is the same as z == 0 || z == depth - 1
     
-    // i==0
-    // the full slice should be updated for u1 either to 0s or to the neumann boundary
-    switch (boundary_condition)
-    {
-    case DIRICHLET:
-        // all the values in the slice should be 0
-        u1[o2d] = 0.0f;
-        break;
-    case NEUMANN:
-        // we will be taking the infront value and adding the heat source
-        u1[o2d] = u_infront + HEAT_SOURCE * H2;
-    }
-    
+    // Set up pointers to navigate through u0 and u1
+    float* u0_ptr = u0 + x + y * WIDTH;
+    float* u1_ptr = u1 + x + y * WIDTH;
+
+    int stride = WIDTH * HEIGHT; // Distance between slices
+
+    // Initialize values for z = 0
+    float u_center = *u0_ptr;
+    u0_ptr += stride; // Move to z = 1
+    float u_infront = *u0_ptr;
+    u0_ptr += stride; // Prepare for next iteration
+
     if (x < WIDTH && y < HEIGHT) {
-    
-    for (int z = 1; z < DEPTH - 1; z++) {    
-        // These go in registers:
-        u_behind = u_center;
-        u_center = u_infront;
-        u_infront = u0[i2d];
-
-        i2d += stride;
-        o2d += stride;
-        // __syncthreads();
-
-        // Shared memory
-        slice[IDX_2D(s_x, s_y, shared_bs_x)] = u_center;
-
-        if (threadIdx.x == 0 && x > 0)
-            slice[IDX_2D(0, s_y, shared_bs_x)] = u0[IDX_3D(blockIdx.x*blockDim.x - 1, y, z, WIDTH, HEIGHT)];
-        // Right border
-        if (threadIdx.x == blockDim.x - 1 && x < WIDTH - 1)
-            slice[IDX_2D(blockDim.x + 1, s_y, shared_bs_x)] = u0[IDX_3D((blockIdx.x + 1)*blockDim.x, y, z, WIDTH, HEIGHT)];
-        // Top border
-        if (threadIdx.y == 0 && y > 0)
-            slice[IDX_2D(s_x, 0, shared_bs_x)] = u0[IDX_3D(x, blockIdx.y*blockDim.y - 1, z, WIDTH, HEIGHT)];
-        // Bottom border
-        if (threadIdx.y == blockDim.y - 1 && y < HEIGHT - 1)
-            slice[IDX_2D(s_x, blockDim.y + 1, shared_bs_x)] = u0[IDX_3D(x, (blockIdx.y + 1)*blockDim.y, z, WIDTH, HEIGHT)];
-
-        __syncthreads();
-    
-        float u_left = slice[IDX_2D(s_x - 1, s_y, shared_bs_x)];
-        float u_right = slice[IDX_2D(s_x + 1, s_y, shared_bs_x)];
-        float u_down = slice[IDX_2D(s_x, s_y - 1, shared_bs_x)];
-        float u_up = slice[IDX_2D(s_x, s_y + 1, shared_bs_x)];
-
-        if (compute_if) {
-            u1[o2d] = u_center * (1 - 6 * RATIO) +
-                RATIO * (u_left + u_right + u_down + u_up + u_behind + u_infront);
-        }
-        else {
-            switch (boundary_condition) {
+        // Handle boundary at z = 0
+        switch (boundary_condition) {
             case DIRICHLET:
-                u1[o2d] = 0.0f;
+                *u1_ptr = 0.0f;
                 break;
             case NEUMANN:
-                // Left boundary
-                if (x == 0)
-                    u1[o2d] = u_right + HEAT_SOURCE * H2; 
-                // Right boundary
-                else if (x == WIDTH - 1)
-                    u1[o2d] = u_left + HEAT_SOURCE * H2; 
-                // Top boundary
-                else if (y == 0)
-                    u1[o2d] = u_up + HEAT_SOURCE * H2; 
-                // Bottom boundary
-                else if (y == HEIGHT - 1)
-                    u1[o2d] = u_down + HEAT_SOURCE * H2; 
+                *u1_ptr = u_infront + HEAT_SOURCE * H2;
                 break;
+        }
+
+        u1_ptr += stride; // Move to z = 1 in u1
+
+        // Loop over z dimension
+        float u_behind;
+        for (int z = 1; z < DEPTH - 1; z++) {
+            u_behind = u_center;
+            u_center = u_infront;
+            u_infront = *u0_ptr; // Read next slice value
+
+            // Load u_center into shared memory
+            slice[s_y * shared_bs_x + s_x] = u_center;
+
+            // Load halo cells only if threads are at borders
+            if (threadIdx.x == 0 && x > 0)
+                slice[s_y * shared_bs_x + s_x - 1] = u0_ptr[-1 - stride];
+            if (threadIdx.x == blockDim.x - 1 && x < WIDTH - 1)
+                slice[s_y * shared_bs_x + s_x + 1] = u0_ptr[1 - stride];
+            if (threadIdx.y == 0 && y > 0)
+                slice[(s_y - 1) * shared_bs_x + s_x] = u0_ptr[-WIDTH - stride];
+            if (threadIdx.y == blockDim.y - 1 && y < HEIGHT - 1)
+                slice[(s_y + 1) * shared_bs_x + s_x] = u0_ptr[WIDTH - stride];
+
+            __syncthreads();
+
+            // Read neighboring values from shared memory
+            float u_left = slice[s_y * shared_bs_x + s_x - 1];
+            float u_right = slice[s_y * shared_bs_x + s_x + 1];
+            float u_down = slice[(s_y - 1) * shared_bs_x + s_x];
+            float u_up = slice[(s_y + 1) * shared_bs_x + s_x];
+
+            // Compute new temperature
+            if (x > 0 && x < (WIDTH - 1) && y > 0 && y < (HEIGHT - 1)) {
+                *u1_ptr = u_center * (1 - 6 * RATIO) +
+                        RATIO * (u_left + u_right + u_down + u_up + u_behind + u_infront);
+            } else {
+                // Handle boundaries within the computational domain
+                switch (boundary_condition) {
+                    case DIRICHLET:
+                        *u1_ptr = 0.0f;
+                        break;
+                    case NEUMANN:
+                        if (x == 0)
+                            *u1_ptr = u_right + HEAT_SOURCE * H2;
+                        else if (x == WIDTH - 1)
+                            *u1_ptr = u_left + HEAT_SOURCE * H2;
+                        else if (y == 0)
+                            *u1_ptr = u_up + HEAT_SOURCE * H2;
+                        else if (y == HEIGHT - 1)
+                            *u1_ptr = u_down + HEAT_SOURCE * H2;
+                        break;
+                }
             }
+
+            // Move pointers to next layer
+            u0_ptr += stride;
+            u1_ptr += stride;
+        }
+
+        // Handle boundary at z = DEPTH - 1
+        switch (boundary_condition) {
+            case DIRICHLET:
+                *u1_ptr = 0.0f;
+                break;
+            case NEUMANN:
+                *u1_ptr = u_behind + HEAT_SOURCE * H2;
+                break;
         }
     }
-    }
-
-    // i==depth-1
-    // the full slice should be updated for u1 either to 0s or to the neumann boundary
-    switch (boundary_condition)
-    {
-    case DIRICHLET:
-        // all the values in the slice should be 0
-        u1[o2d] = 0.0f;
-        break;
-    case NEUMANN:
-        // we will be taking the behind value and adding the heat source
-        u1[o2d] = u_behind + HEAT_SOURCE * H2;
-    }
 }
-
 
 /**
  * @brief Just coloring the output for 3D simulation
@@ -700,7 +689,7 @@ void update_sim_render()
 
     int MAX_SIM_STEPS = 10;
     if (simulation_mode == MODE_3D)
-        MAX_SIM_STEPS = 4;
+        MAX_SIM_STEPS = 2;
 
     for (int i=0; i<MAX_SIM_STEPS; i++){
         if (simulation_mode == MODE_1D)
@@ -842,7 +831,7 @@ void update_sim_render()
         // Set up the projection and view matrices
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        gluPerspective(90.0, (double) WIDTH / (double) HEIGHT, 0.01, 10000.0);
+        gluPerspective(60.0, (double) WIDTH / (double) HEIGHT, 0.01, 10000.0);
 
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
