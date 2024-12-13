@@ -548,6 +548,8 @@ __global__ void heat_kernel_3d_sim(float* u0, float* u1,
 
     extern __shared__ float slice[];
 
+    int shared_x = BLOCK_SIZE_X + 2;
+
     int ix = blockIdx.x * blockDim.x + threadIdx.x;
     int iy = blockIdx.y * blockDim.y + threadIdx.y;
 
@@ -595,23 +597,23 @@ __global__ void heat_kernel_3d_sim(float* u0, float* u1,
 
         // Shared memory
 
-        slice[IDX_2D(ty, tx, BLOCK_SIZE_X + 2)] = current;
+        slice[IDX_2D(ty, tx, shared_x)] = current;
 
         if (compute_if) {
             if (threadIdx.x == 0) { // Halo left
-                slice[IDX_2D(ty, tx - 1, BLOCK_SIZE_X + 2)] = u0[o2d - 1];
+                slice[IDX_2D(ty, tx - 1, shared_x)] = u0[o2d - 1];
             }
 
             if (threadIdx.x == BLOCK_SIZE_X - 1) { // Halo right
-                slice[IDX_2D(ty, tx + 1, BLOCK_SIZE_X + 2)] = u0[o2d + 1];
+                slice[IDX_2D(ty, tx + 1, shared_x)] = u0[o2d + 1];
             }
 
             if (threadIdx.y == 0) { // Halo bottom
-                slice[IDX_2D(ty - 1, tx, BLOCK_SIZE_X + 2)] = u0[o2d - width];
+                slice[IDX_2D(ty - 1, tx, shared_x)] = u0[o2d - width];
             }
 
             if (threadIdx.y == BLOCK_SIZE_Y - 1) { // Halo top
-                slice[IDX_2D(ty + 1, tx, BLOCK_SIZE_X + 2)] = u0[o2d + width];
+                slice[IDX_2D(ty + 1, tx, shared_x)] = u0[o2d + width];
             }
         }
 
@@ -619,12 +621,12 @@ __global__ void heat_kernel_3d_sim(float* u0, float* u1,
 
         if (compute_if) {
             u1[o2d] = current + (a * dt) * (
-                (slice[IDX_2D(ty, tx - 1, BLOCK_SIZE_X + 2)] - 
+                (slice[IDX_2D(ty, tx - 1, shared_x)] - 
                     2 * current + 
-                    slice[IDX_2D(ty, tx + 1, BLOCK_SIZE_X + 2)]) / dx2 +
-                (slice[IDX_2D(ty - 1, tx, BLOCK_SIZE_X + 2)] - 
+                    slice[IDX_2D(ty, tx + 1, shared_x)]) / dx2 +
+                (slice[IDX_2D(ty - 1, tx, shared_x)] - 
                     2 * current + 
-                    slice[IDX_2D(ty + 1, tx, BLOCK_SIZE_X + 2)]) / dy2 +
+                    slice[IDX_2D(ty + 1, tx, shared_x)]) / dy2 +
                 (behind - 2 * current + infront) / dz2);
         }
 
@@ -837,7 +839,7 @@ void update_sim_render()
 
     int MAX_SIM_STEPS = 10;
     if (simulation_mode == MODE_3D)
-        MAX_SIM_STEPS = 4;
+        MAX_SIM_STEPS = 2;
 
     for (int i=0; i<MAX_SIM_STEPS; i++){
         if (simulation_mode == MODE_1D)

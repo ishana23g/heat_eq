@@ -62,3 +62,5 @@ echo $P "${O3[@]}"
 echo 
 echo "For the NVIDIA Profiler CLI, run the following command:"
 echo ncu --open-in-ui -o profiler/ncu_report $P "${O3[@]}"
+echo "If that does not work" 
+echo "Just run `ncu` and open the directory manually, and specify the program and options."
