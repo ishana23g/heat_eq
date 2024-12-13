@@ -272,7 +272,7 @@ __global__ void add_heat_kernel_1d(float *u, int width, int x)
     {
         if (abs(tx) <= HEAT_RADIUS)
         {
-            u[idx] += HEAT_SOURCE;
+            u[idx] += HEAT_SOURCE * TIME_STEP;
         }
     }
 }
@@ -400,7 +400,7 @@ __global__ void add_heat_kernel_2d(float *u, int width, int height, int cx, int 
         if (tx * tx + ty * ty <= HEAT_RADIUS * HEAT_RADIUS)
         {
             int idx = y * width + x;
-            u[idx] += HEAT_SOURCE;
+            u[idx] += HEAT_SOURCE * TIME_STEP;
         }
     }
 }
@@ -566,7 +566,7 @@ __global__ void add_heat_kernel_3d(float *u, int width, int height, int depth, i
 
     if (x >= 0 && x < width && y >= 0 && y < height && z >= 0 && z < depth) {
         if (tx * tx + ty * ty + tz * tz <= HEAT_RADIUS * HEAT_RADIUS * 4) {
-            u[IDX_3D(x, y, z, width, height)] += HEAT_SOURCE;
+            u[IDX_3D(x, y, z, width, height)] += HEAT_SOURCE * TIME_STEP;
         }
     }
 }
