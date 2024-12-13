@@ -13,7 +13,7 @@ The heat equation is a partial differential equation (PDE) that describes the di
 All of these are in continuous form, and we are assuming non-homogenous heat sources.
 * In the 1D case, the heat equation is given by:
 
-  $$ \frac{\partial u}{\partial t} = \alpha \frac{\partial^2 u}{\partial x^2} + Q(x, t) $$
+  $$\frac{\partial u}{\partial t} = \alpha \frac{\partial^2 u}{\partial x^2} + Q(x, t) $$
 
   * $u(x, t)$: Temperature at position ( x ) and time ( t ).
   * $Q(x, t)$: Heat source term (e.g., from mouse interactions in the simulation).
@@ -22,7 +22,7 @@ All of these are in continuous form, and we are assuming non-homogenous heat sou
 
 * In the 2D case, the heat equation is given by:
 
-  $$ \frac{\partial u}{\partial t} = \alpha \left( \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} \right) + Q(x, y, t) $$
+  $$\frac{\partial u}{\partial t} = \alpha \left( \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} \right) + Q(x, y, t) $$
 
   * $u(x, y, t)$: Temperature at point ( (x, y) ) and time ( t ).
   * $Q(x, y, t)$: Heat source term (e.g., from mouse interactions in the simulation).
@@ -32,7 +32,7 @@ All of these are in continuous form, and we are assuming non-homogenous heat sou
 
 * In the 3D case, the heat equation is given by:
 
-  $$ \frac{\partial u}{\partial t} = \alpha \left( \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} + \frac{\partial^2 u}{\partial z^2} \right) + Q(x, y, z, t) $$
+  $$\frac{\partial u}{\partial t} = \alpha \left( \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} + \frac{\partial^2 u}{\partial z^2} \right) + Q(x, y, z, t) $$
 
   * $u(x, y, z, t)$: Temperature at point ( (x, y, z) ) and time ( t ).
   * $Q(x, y, z, t)$: Heat source term (e.g., from mouse interactions in the simulation).
@@ -48,28 +48,28 @@ Spatial Derivatives:
 Approximate second derivatives:
 
 * $\frac{\partial^2 u}{\partial x^2}$: Second derivative with respect to $x$.
-  $$ \frac{\partial^2 u}{\partial x^2} \approx \frac{u_{i+1,j} - 2u_{i,j} + u_{i-1,j}}{(\Delta x)^2} $$
+  $$\frac{\partial^2 u}{\partial x^2} \approx \frac{u_{i+1,j} - 2u_{i,j} + u_{i-1,j}}{(\Delta x)^2} $$
 
 * $\frac{\partial^2 u}{\partial y^2}$: Second derivative with respect to $y$.
-  $$ \frac{\partial^2 u}{\partial y^2} \approx \frac{u_{i,j+1} - 2u_{i,j} + u_{i,j-1}}{(\Delta y)^2} $$
+  $$\frac{\partial^2 u}{\partial y^2} \approx \frac{u_{i,j+1} - 2u_{i,j} + u_{i,j-1}}{(\Delta y)^2} $$
 
 * $\frac{\partial^2 u}{\partial z^2}$: Second derivative with respect to $z$.
-  $$ \frac{\partial^2 u}{\partial z^2} \approx \frac{u_{i,j,k+1} - 2u_{i,j,k} + u_{i,j,k-1}}{(\Delta z)^2} $$
+  $$\frac{\partial^2 u}{\partial z^2} \approx \frac{u_{i,j,k+1} - 2u_{i,j,k} + u_{i,j,k-1}}{(\Delta z)^2} $$
 
 * $\frac{\partial u}{\partial t}$: First derivative with respect to time.
 This is a forward difference in time that will propagate the heat equation forward in time.
-  $$ \frac{\partial u}{\partial t} \approx \frac{u^{n+1}{i,j} - u^{n}{i,j}}{\Delta t} $$
+  $$\frac{\partial u}{\partial t} \approx \frac{u^{n+1}{i,j} - u^{n}{i,j}}{\Delta t} $$
 
 
 * Discretized Heat Equation - In 3D:
 
-  $$ \frac{\partial u}{\partial t} = \alpha \left( \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} + \frac{\partial^2 u}{\partial z^2} \right) + Q(x, y, z, t) \implies $$
+  $$\frac{\partial u}{\partial t} = \alpha \left( \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} + \frac{\partial^2 u}{\partial z^2} \right) + Q(x, y, z, t) \implies $$
 
-  $$ \frac{u^{n+1}_{i,j,k} - u^{n}_{i,j,k}}{\Delta t} = \alpha \left( \frac{u_{i+1,j,k}^{n} - 2u_{i,j,k}^{n} + u_{i-1,j,k}^{n}}{(\Delta x)^2} + \frac{u_{i,j+1,k}^{n} - 2u_{i,j,k}^{n} + u_{i,j-1,k}^{n}}{(\Delta y)^2} + \frac{u_{i,j,k+1}^{n} - 2u_{i,j,k}^{n} + u_{i,j,k-1}^{n}}{(\Delta z)^2} \right) + Q_{i,j,k}^{n} $$
+  $$\frac{u^{n+1}_{i,j,k} - u^{n}_{i,j,k}}{\Delta t} = \alpha \left( \frac{u_{i+1,j,k}^{n} - 2u_{i,j,k}^{n} + u_{i-1,j,k}^{n}}{(\Delta x)^2} + \frac{u_{i,j+1,k}^{n} - 2u_{i,j,k}^{n} + u_{i,j-1,k}^{n}}{(\Delta y)^2} + \frac{u_{i,j,k+1}^{n} - 2u_{i,j,k}^{n} + u_{i,j,k-1}^{n}}{(\Delta z)^2} \right) + Q_{i,j,k}^{n} $$
 
 * Solving for $u^{n+1}_{i,j,k}$: The next temperature at point $(i, j, k)$.
 
-  $$ u^{n+1}_{i,j,k} = u^{n}_{i,j,k} + \Delta t \times \alpha \left( \frac{u_{i+1,j,k}^{n} - 2u_{i,j,k}^{n} + u_{i-1,j,k}^{n}}{(\Delta x)^2} + \frac{u_{i,j+1,k}^{n} - 2u_{i,j,k}^{n} + u_{i,j-1,k}^{n}}{(\Delta y)^2} + \frac{u_{i,j,k+1}^{n} - 2u_{i,j,k}^{n} + u_{i,j,k-1}^{n}}{(\Delta z)^2} \right) + \Delta t \times Q_{i,j,k}^{n} $$
+  $$u^{n+1}_{i,j,k} = u^{n}_{i,j,k} + \Delta t \times \alpha \left( \frac{u_{i+1,j,k}^{n} - 2u_{i,j,k}^{n} + u_{i-1,j,k}^{n}}{(\Delta x)^2} + \frac{u_{i,j+1,k}^{n} - 2u_{i,j,k}^{n} + u_{i,j-1,k}^{n}}{(\Delta y)^2} + \frac{u_{i,j,k+1}^{n} - 2u_{i,j,k}^{n} + u_{i,j,k-1}^{n}}{(\Delta z)^2} \right) + \Delta t \times Q_{i,j,k}^{n} $$
 
 ### Boundary Conditions
 
@@ -80,9 +80,9 @@ While each one can be different and separate, for the sake of simplicity we are 
 
   In the continuous form, this sets the temperature at the boundaries to a fixed value, which looks like:
 
-  $$ u(x, 0, 0, t) = u_{\text{boundary}}, \quad u(x, N_y, N_z, t) = u_{\text{boundary}}, $$
-  $$ \quad u(0, y, 0, t) = u_{\text{boundary}}, \quad u(N_x, y, N_z, t) = u_{\text{boundary}} $$
-  $$ \quad u(0, 0, z, t) = u_{\text{boundary}}, \quad u(N_x, N_y, z, t) = u_{\text{boundary}} $$
+  $$u(x, 0, 0, t) = u_{\text{boundary}}, \quad u(x, N_y, N_z, t) = u_{\text{boundary}}, $$
+  $$\quad u(0, y, 0, t) = u_{\text{boundary}}, \quad u(N_x, y, N_z, t) = u_{\text{boundary}} $$
+  $$\quad u(0, 0, z, t) = u_{\text{boundary}}, \quad u(N_x, N_y, z, t) = u_{\text{boundary}} $$
 
   And in the discretized form it will look the same, just we will index those specified, $0$ or $N$ values.
   Also, while the Dirichlet boundary condition is hardcoded to be $0.0f$, it can be changed to any value.
@@ -91,19 +91,19 @@ While each one can be different and separate, for the sake of simplicity we are 
 
   In the continuous form, this sets the derivative of the temperature at the boundaries to a fixed value, which looks like:
 
-  $$ \left( \frac{\partial u}{\partial x} \right)_{\text{boundary}} = \text{HEAT\_SOURCE}, $$
-  $$ \left( \frac{\partial u}{\partial y} \right)_{\text{boundary}} = \text{HEAT\_SOURCE}, $$
-  $$ \left( \frac{\partial u}{\partial z} \right)_{\text{boundary}} = \text{HEAT\_SOURCE}  $$
+  $$\left( \frac{\partial u}{\partial x} \right)_{\text{boundary}} = \text{HEAT\_SOURCE}, $$
+  $$\left( \frac{\partial u}{\partial y} \right)_{\text{boundary}} = \text{HEAT\_SOURCE}, $$
+  $$\left( \frac{\partial u}{\partial z} \right)_{\text{boundary}} = \text{HEAT\_SOURCE}  $$
 
   Set the derivative at the boundaries using finite differences:
 
-    $$ \frac{u_{0,j}^{n} - u_{1,j}^{n}}{2 \Delta x} = \left( \frac{\partial u}{\partial x} \right)_{\text{boundary}} $$
+    $$\frac{u_{0,j}^{n} - u_{1,j}^{n}}{2 \Delta x} = \left( \frac{\partial u}{\partial x} \right)_{\text{boundary}} $$
 
     Rearranged for implementation:
 
     For the left boundary ( \( i = 0 \) ):
 
-    $$ u_{0,j}^{n} = u_{1,j}^{n} - 2 \Delta x \left( \frac{\partial u}{\partial x} \right)_{\text{boundary}} $$
+    $$u_{0,j}^{n} = u_{1,j}^{n} - 2 \Delta x \left( \frac{\partial u}{\partial x} \right)_{\text{boundary}} $$
 
     For the rest&mdash;right, left, top, and bottom, and even the front and back in the 3D case&mdash;the same idea is applied.
 
@@ -120,7 +120,7 @@ where $\text{HEAT\_SOURCE}$ is a constant value.
 
   In 3D that would look something like:
 
-  $$ \Delta t \leq \frac{1}{2 \alpha} \left( \frac{1}{(\Delta x)^{-2} + (\Delta y)^{-2} + (\Delta z)^{-2}} \right) $$
+  $$\Delta t \leq \frac{1}{2 \alpha} \left( \frac{1}{(\Delta x)^{-2} + (\Delta y)^{-2} + (\Delta z)^{-2}} \right) $$
 
   In Code:
 
