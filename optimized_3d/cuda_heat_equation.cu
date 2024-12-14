@@ -28,7 +28,7 @@ inline void gpuAssert(cudaError_t code, const char *file, int line, bool abort=t
 // h = \Delta x = \Delta y = \Delta z
 #define H 1.0f
 #define H2 (H * H)
-#define H2_INV (1.0f / H2)
+// #define H2_INV (1.0f / H2)
 // #define DX (H)
 // #define DY (H)
 // #define DZ (H)
@@ -116,21 +116,13 @@ __global__ void heat_kernel_3d_sim(float *u0, float *u1, BoundaryCondition bound
 __global__ void heat_kernel_1d_color(float *u, uchar4 *output);
 __global__ void heat_kernel_2d_color(float *u, uchar4 *output);
 __global__ void heat_kernel_3d_color(float *u, uchar4 *output);
-__global__ void add_heat_kernel_1d(float *u, int width, int x);
-__global__ void add_heat_kernel_2d(float *u, int width, int height, int cx, int cy);
-__global__ void add_heat_kernel_3d(float *u, int width, int height, int depth, int cx, int cy, int cz);
+__global__ void add_heat_kernel_1d(float *u, int cx);
+__global__ void add_heat_kernel_2d(float *u, int cx, int cy);
+__global__ void add_heat_kernel_3d(float *u, int cx, int cy, int cz);
 
 // // Indexing macro
 #define IDX_2D(x, y, width) ((y) * (width) + (x))
 #define IDX_3D(x, y, z, width, height) ((z) * (width) * (height) + (y) * (width) + (x))
-
-// __device__ int IDX_2D(int x, int y, int width) {
-//     return (y * width) + x;
-// }
-
-// __device__ int IDX_3D(int x, int y, int z, int width, int height) {
-//     return z * width * height + y * width + x;
-// }
 
 // Color Functions
 __device__ void gradient_scaling(float heat_value, uchar4* out_color, SimulationMode mode);
@@ -235,9 +227,9 @@ __global__ void heat_kernel_1d_sim(float *u0, float *u1, BoundaryCondition bound
             case NEUMANN:
                 // Modified Neumann boundary
                 if (x == 0)
-                    u1[x] = s_u[s_x + 1] + HEAT_SOURCE * H2; // Left boundary
+                    u1[x] = s_u[s_x + 1] + HEAT_SOURCE * H; // Left boundary
                 else if (x == WIDTH - 1)
-                    u1[x] = s_u[s_x - 1] + HEAT_SOURCE * H2; // Right boundary
+                    u1[x] = s_u[s_x - 1] + HEAT_SOURCE * H; // Right boundary
                 break;
             }
         }
@@ -263,16 +255,16 @@ __global__ void heat_kernel_1d_color(float *u, uchar4 *output)
 
 
 // Add heat kernel for 1D simulation
-__global__ void add_heat_kernel_1d(float *u, int width, int x)
+__global__ void add_heat_kernel_1d(float *u, int cx)
 {
     int tx = blockIdx.x * blockDim.x + threadIdx.x - HEAT_RADIUS;
-    int idx = x + tx;
+    int x = cx + tx;
 
-    if (idx >= 0 && idx < width)
+    if (x >= 0 && x < WIDTH)
     {
         if (abs(tx) <= HEAT_RADIUS)
         {
-            u[idx] += HEAT_SOURCE * TIME_STEP;
+            u[x] += HEAT_SOURCE * TIME_STEP;
         }
     }
 }
@@ -345,16 +337,16 @@ __global__ void heat_kernel_2d_sim(float *u0, float *u1, BoundaryCondition bound
             case NEUMANN:
                 // Left boundary
                 if (x == 0)
-                    u1[idx] = u_right + HEAT_SOURCE * H2; 
+                    u1[idx] = u_right + HEAT_SOURCE * H; 
                 // Right boundary
                 else if (x == WIDTH - 1)
-                    u1[idx] = u_left + HEAT_SOURCE * H2; 
+                    u1[idx] = u_left + HEAT_SOURCE * H; 
                 // Top boundary
                 else if (y == 0)
-                    u1[idx] = u_up + HEAT_SOURCE * H2; 
+                    u1[idx] = u_up + HEAT_SOURCE * H; 
                 // Bottom boundary
                 else if (y == HEIGHT - 1)
-                    u1[idx] = u_down + HEAT_SOURCE * H2; 
+                    u1[idx] = u_down + HEAT_SOURCE * H; 
                 break;
             }
         }
@@ -382,12 +374,10 @@ __global__ void heat_kernel_2d_color(float *u, uchar4 *output)
  * @brief Add heat kernel for 2D simulation
  * 
  * @param u         The heat values at the current time step (t)
- * @param width     The width of the simulation area
- * @param height    The height of the simulation area
  * @param cx        The x-coordinate of the center of the heat source
  * @param cy        The y-coordinate of the center of the heat source
  */
-__global__ void add_heat_kernel_2d(float *u, int width, int height, int cx, int cy)
+__global__ void add_heat_kernel_2d(float *u, int cx, int cy)
 {
     int tx = blockIdx.x * blockDim.x + threadIdx.x - HEAT_RADIUS;
     int ty = blockIdx.y * blockDim.y + threadIdx.y - HEAT_RADIUS;
@@ -395,12 +385,11 @@ __global__ void add_heat_kernel_2d(float *u, int width, int height, int cx, int 
     int x = cx + tx;
     int y = cy + ty;
 
-    if (x >= 0 && x < width && y >= 0 && y < height)
+    if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
     {
         if (tx * tx + ty * ty <= HEAT_RADIUS * HEAT_RADIUS)
         {
-            int idx = y * width + x;
-            u[idx] += HEAT_SOURCE * TIME_STEP;
+            u[IDX_2D(x, y, WIDTH)] += HEAT_SOURCE * TIME_STEP;
         }
     }
 }
@@ -411,14 +400,6 @@ __global__ void add_heat_kernel_2d(float *u, int width, int height, int cx, int 
  *
  * @param u0         The heat values at the current time step (t)
  * @param u1         The heat values at the next time step (t + dt)
- * @param width      The width of the simulation area
- * @param height     The height of the simulation area
- * @param depth      The depth of the simulation area
- * @param dt         The time step
- * @param dx2        The square of the x-axis step size
- * @param dy2        The square of the y-axis step size
- * @param dz2        The square of the z-axis step size
- * @param a          The diffusivity constant
  * @param boundary_condition The boundary condition
  */
 __global__ void heat_kernel_3d_sim(float* __restrict__ u0, float* __restrict__ u1, BoundaryCondition boundary_condition) {
@@ -452,7 +433,7 @@ __global__ void heat_kernel_3d_sim(float* __restrict__ u0, float* __restrict__ u
                 *u1_ptr = 0.0f;
                 break;
             case NEUMANN:
-                *u1_ptr = u_infront + HEAT_SOURCE * H2;
+                *u1_ptr = u_infront + HEAT_SOURCE * H;
                 break;
         }
 
@@ -498,13 +479,13 @@ __global__ void heat_kernel_3d_sim(float* __restrict__ u0, float* __restrict__ u
                         break;
                     case NEUMANN:
                         if (x == 0)
-                            *u1_ptr = u_right + HEAT_SOURCE * H2;
+                            *u1_ptr = u_right + HEAT_SOURCE * H;
                         else if (x == WIDTH - 1)
-                            *u1_ptr = u_left + HEAT_SOURCE * H2;
+                            *u1_ptr = u_left + HEAT_SOURCE * H;
                         else if (y == 0)
-                            *u1_ptr = u_up + HEAT_SOURCE * H2;
+                            *u1_ptr = u_up + HEAT_SOURCE * H;
                         else if (y == HEIGHT - 1)
-                            *u1_ptr = u_down + HEAT_SOURCE * H2;
+                            *u1_ptr = u_down + HEAT_SOURCE * H;
                         break;
                 }
             }
@@ -520,7 +501,7 @@ __global__ void heat_kernel_3d_sim(float* __restrict__ u0, float* __restrict__ u
                 *u1_ptr = 0.0f;
                 break;
             case NEUMANN:
-                *u1_ptr = u_behind + HEAT_SOURCE * H2;
+                *u1_ptr = u_behind + HEAT_SOURCE * H;
                 break;
         }
     }
@@ -548,14 +529,11 @@ __global__ void heat_kernel_3d_color(float *u, uchar4 *output)
  * @brief Add heat kernel for 3D simulation
  * 
  * @param u         The heat values at the current time step (t)
- * @param width     The width of the simulation area
- * @param height    The height of the simulation area
- * @param depth     The depth of the simulation area
  * @param cx        The x-coordinate of the center of the heat source
  * @param cy        The y-coordinate of the center of the heat source
  * @param cz        The z-coordinate of the center of the heat source
  */
-__global__ void add_heat_kernel_3d(float *u, int width, int height, int depth, int cx, int cy, int cz) {
+__global__ void add_heat_kernel_3d(float *u, int cx, int cy, int cz) {
     int tx = blockIdx.x * blockDim.x + threadIdx.x - (HEAT_RADIUS * 2);
     int ty = blockIdx.y * blockDim.y + threadIdx.y - (HEAT_RADIUS * 2);
     int tz = blockIdx.z * blockDim.z + threadIdx.z - (HEAT_RADIUS * 2);
@@ -564,9 +542,9 @@ __global__ void add_heat_kernel_3d(float *u, int width, int height, int depth, i
     int y = cy + ty;
     int z = cz + tz;
 
-    if (x >= 0 && x < width && y >= 0 && y < height && z >= 0 && z < depth) {
+    if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT && z >= 0 && z < DEPTH) {
         if (tx * tx + ty * ty + tz * tz <= HEAT_RADIUS * HEAT_RADIUS * 4) {
-            u[IDX_3D(x, y, z, width, height)] += HEAT_SOURCE * TIME_STEP;
+            u[IDX_3D(x, y, z, WIDTH, HEIGHT)] += HEAT_SOURCE * TIME_STEP;
         }
     }
 }
@@ -953,7 +931,7 @@ void add_heat_launcher(double xpos, double ypos){
         dim3 blockSize(256);
         dim3 gridSize((2 * HEAT_RADIUS + blockSize.x - 1) / blockSize.x);
 
-        add_heat_kernel_1d<<<gridSize, blockSize>>>(d_u0, WIDTH, x);
+        add_heat_kernel_1d<<<gridSize, blockSize>>>(d_u0, x);
     }
     else if (simulation_mode == MODE_2D)
     {
@@ -961,7 +939,7 @@ void add_heat_launcher(double xpos, double ypos){
         dim3 gridSize((2 * HEAT_RADIUS + blockSize.x - 1) / blockSize.x,
                         (2 * HEAT_RADIUS + blockSize.y - 1) / blockSize.y);
 
-        add_heat_kernel_2d<<<gridSize, blockSize>>>(d_u0, WIDTH, HEIGHT, x, y);
+        add_heat_kernel_2d<<<gridSize, blockSize>>>(d_u0, x, y);
     }
     else if (simulation_mode == MODE_3D)
     {
@@ -974,10 +952,8 @@ void add_heat_launcher(double xpos, double ypos){
                         (2 * HEAT_RADIUS + blockSize.y - 1) / blockSize.y,
                         (2 * HEAT_RADIUS + blockSize.z - 1) / blockSize.z);
 
-        add_heat_kernel_3d<<<gridSize, blockSize>>>(d_u0, WIDTH, HEIGHT, DEPTH, x, y, z);
+        add_heat_kernel_3d<<<gridSize, blockSize>>>(d_u0, x, y, z);
     }
-
-    // cudaDeviceSynchronize();
 }
 
 // Cursor position callback

@@ -97,13 +97,13 @@ While each one can be different and separate, for the sake of simplicity we are 
 
   Set the derivative at the boundaries using finite differences:
 
-    $$\frac{u_{0,j}^{n} - u_{1,j}^{n}}{2 \Delta x} = \left( \frac{\partial u}{\partial x} \right)_{\text{boundary}} $$
+    $$\frac{u_{0,j}^{n} - u_{1,j}^{n}}{\Delta x} = \left( \frac{\partial u}{\partial x} \right)_{\text{boundary}} $$
 
     Rearranged for implementation:
 
     For the left boundary ( \( i = 0 \) ):
 
-    $$u_{0,j}^{n} = u_{1,j}^{n} - 2 \Delta x \left( \frac{\partial u}{\partial x} \right)_{\text{boundary}} $$
+    $$u_{0,j}^{n} = u_{1,j}^{n} - \Delta x \left( \frac{\partial u}{\partial x} \right)_{\text{boundary}} $$
 
     For the rest&mdash;right, left, top, and bottom, and even the front and back in the 3D case&mdash;the same idea is applied.
 

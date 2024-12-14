@@ -4,8 +4,9 @@
 make 
 
 P=./cuda_heat_equation
-O3=(-d 10 60 -b N)
-O2=(-d 10 60 -b N -m 2d)
+O3=(-d 10 60 -b N -m 3d)
+O2=(-d 25 60 -b N -m 2d)
+O1=(-d 25 60 -b N -m 1d)
 
 # Run diagnostics of memory and cache
 # check if diagnosis directory exists
@@ -33,23 +34,29 @@ fi
 rm -rf profiler/*
 
 ## NVIDIA VISUAL PROFILER
+
 # ncu $P "${O3[@]}" 2>&1 | tee profiler/ncu_all_3D.txt
 # ncu $P "${O2[@]}" 2>&1 | tee profiler/ncu_all_2D.txt
+
 # # measure how much FMAs and memory bandwidth is being used
+
 # ncu --metrics sm__sass_thread_inst_executed_op_fadd_pred_on.sum,\
 # sm__sass_thread_inst_executed_op_ffma_pred_on.sum,\
 # sm__sass_thread_inst_executed_op_fmul_pred_on.sum,\
 # dram__bytes_read.sum,\
 # dram__bytes_write.sum,\
 # $P "${O3[@]}" 2>&1 | tee profiler/ncu_fma_memory_3D.txt
+
 # ncu --metrics sm__sass_thread_inst_executed_op_fadd_pred_on.sum,\
 # sm__sass_thread_inst_executed_op_ffma_pred_on.sum,\
 # sm__sass_thread_inst_executed_op_fmul_pred_on.sum,\
 # dram__bytes_read.sum,\
 # dram__bytes_write.sum,\
 # $P "${O2[@]}" 2>&1 | tee profiler/ncu_fma_memory_2D.txt
+
 ncu --print-summary per-kernel $P "${O3[@]}" 2>&1 | tee profiler/ncu_summary_3D.txt
 ncu --print-summary per-kernel $P "${O2[@]}" 2>&1 | tee profiler/ncu_summary_2D.txt
+ncu --print-summary per-kernel $P "${O1[@]}" 2>&1 | tee profiler/ncu_summary_1D.txt
 
 
 ## NVIDIA PROFILER - GUI

@@ -1,0 +1,497 @@
+==PROF== Connected to process 85683 (/home/driffyn/Documents/CMDA_4634/heat_eq/optimized_3d/cuda_heat_equation)
+==PROF== Profiling "heat_kernel_1d_sim" - 0: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 1: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 2: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 3: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 4: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 5: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 6: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 7: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 8: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 9: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_color" - 10: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 11: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 12: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 13: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 14: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 15: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 16: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 17: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 18: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 19: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 20: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_color" - 21: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 22: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 23: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 24: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 25: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 26: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 27: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 28: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 29: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 30: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 31: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_color" - 32: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 33: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 34: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 35: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 36: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 37: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 38: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 39: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 40: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 41: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 42: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_color" - 43: 0%....50%....100% - 8 passes
+==PROF== Profiling "add_heat_kernel_1d" - 44: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 45: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 46: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 47: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 48: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 49: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 50: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 51: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 52: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 53: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 54: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_color" - 55: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 56: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 57: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 58: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 59: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 60: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 61: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 62: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 63: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 64: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 65: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_color" - 66: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 67: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 68: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 69: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 70: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 71: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 72: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 73: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 74: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 75: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 76: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_color" - 77: 0%....50%....100% - 8 passes
+==PROF== Profiling "add_heat_kernel_1d" - 78: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 79: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 80: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 81: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 82: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 83: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 84: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 85: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 86: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 87: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 88: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_color" - 89: 0%....50%....100% - 8 passes
+==PROF== Profiling "add_heat_kernel_1d" - 90: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 91: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 92: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 93: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 94: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 95: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 96: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 97: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 98: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 99: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 100: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_color" - 101: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 102: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 103: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 104: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 105: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 106: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 107: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 108: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 109: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 110: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 111: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_color" - 112: 0%....50%....100% - 8 passes
+==PROF== Profiling "add_heat_kernel_1d" - 113: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 114: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 115: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 116: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 117: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 118: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 119: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 120: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 121: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 122: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 123: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_color" - 124: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 125: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 126: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 127: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 128: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 129: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 130: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 131: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 132: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 133: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 134: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_color" - 135: 0%....50%....100% - 8 passes
+==PROF== Profiling "add_heat_kernel_1d" - 136: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 137: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 138: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 139: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 140: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 141: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 142: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 143: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 144: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 145: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 146: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_color" - 147: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 148: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 149: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 150: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 151: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 152: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 153: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 154: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 155: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 156: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 157: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_color" - 158: 0%....50%....100% - 8 passes
+==PROF== Profiling "add_heat_kernel_1d" - 159: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 160: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 161: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 162: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 163: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 164: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 165: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 166: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 167: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 168: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 169: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_color" - 170: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 171: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 172: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 173: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 174: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 175: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 176: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 177: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 178: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 179: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 180: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_color" - 181: 0%....50%....100% - 8 passes
+==PROF== Profiling "add_heat_kernel_1d" - 182: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 183: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 184: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 185: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 186: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 187: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 188: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 189: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 190: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 191: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 192: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_color" - 193: 0%....50%....100% - 8 passes
+==PROF== Profiling "add_heat_kernel_1d" - 194: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 195: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 196: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 197: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 198: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 199: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 200: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 201: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 202: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 203: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 204: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_color" - 205: 0%....50%....100% - 8 passes
+==PROF== Profiling "add_heat_kernel_1d" - 206: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 207: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 208: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 209: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 210: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 211: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 212: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 213: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 214: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 215: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 216: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_color" - 217: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 218: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 219: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 220: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 221: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 222: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 223: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 224: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 225: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 226: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 227: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_color" - 228: 0%....50%....100% - 8 passes
+==PROF== Profiling "add_heat_kernel_1d" - 229: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 230: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 231: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 232: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 233: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 234: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 235: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 236: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 237: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 238: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 239: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_color" - 240: 0%....50%....100% - 8 passes
+==PROF== Profiling "add_heat_kernel_1d" - 241: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 242: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 243: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 244: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 245: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 246: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 247: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 248: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 249: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 250: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 251: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_color" - 252: 0%....50%....100% - 8 passes
+==PROF== Profiling "add_heat_kernel_1d" - 253: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 254: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 255: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 256: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 257: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 258: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 259: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 260: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 261: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 262: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 263: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_color" - 264: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 265: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 266: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 267: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 268: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 269: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 270: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 271: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 272: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 273: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 274: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_color" - 275: 0%....50%....100% - 8 passes
+==PROF== Profiling "add_heat_kernel_1d" - 276: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 277: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 278: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 279: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 280: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 281: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 282: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 283: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 284: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 285: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_sim" - 286: 0%....50%....100% - 8 passes
+==PROF== Profiling "heat_kernel_1d_color" - 287: 0%....50%....100% - 8 passes
+==PROF== Profiling "add_heat_kernel_1d" - 288: 0%....50%....100% - 8 passes
+====================================
+Simulation Mode: 1D
+Boundary Condition: Neumann
+Debug Mode: Enabled
+  Max Time Steps: 25
+  Heat Chance: 60%
+====================================
+==PROF== Disconnected from process 85683
+[85683] cuda_heat_equation@127.0.0.1
+  add_heat_kernel_1d(float *, int) (1, 1, 1)x(256, 1, 1), Device 0, CC 8.9, Invocations 14
+    Section: GPU Speed Of Light Throughput
+    ----------------------- ----------- -------- -------- --------
+    Metric Name             Metric Unit  Minimum  Maximum  Average
+    ----------------------- ----------- -------- -------- --------
+    DRAM Frequency                  Ghz     8.59     8.89     8.73
+    SM Frequency                    Ghz     2.22     2.26     2.25
+    Elapsed Cycles                cycle 3,805.00 4,478.00 3,939.50
+    Memory Throughput                 %     0.57    10.65     2.08
+    DRAM Throughput                   %     0.57    10.65     2.07
+    Duration                         us     1.70     1.98     1.75
+    L1/TEX Cache Throughput           %    23.25    24.77    23.80
+    L2 Cache Throughput               %     0.40     1.66     0.56
+    SM Active Cycles              cycle    48.44    51.62    50.43
+    Compute (SM) Throughput           %     0.02     0.02     0.02
+    ----------------------- ----------- -------- -------- --------
+
+    Section: GPU and Memory Workload Distribution
+    -------------------------- ----------- ---------- ---------- ----------
+    Metric Name                Metric Unit    Minimum    Maximum    Average
+    -------------------------- ----------- ---------- ---------- ----------
+    Average DRAM Active Cycles       cycle      88.00   1,636.00     319.14
+    Total DRAM Elapsed Cycles        cycle  58,368.00  69,632.00  61,220.57
+    Average L1 Active Cycles         cycle      48.44      51.62      50.43
+    Total L1 Elapsed Cycles          cycle 127,974.00 133,998.00 131,424.14
+    Average L2 Active Cycles         cycle     218.81     353.69     246.68
+    Total L2 Elapsed Cycles          cycle  50,576.00  59,472.00  52,368.00
+    Average SM Active Cycles         cycle      48.44      51.62      50.43
+    Total SM Elapsed Cycles          cycle 127,974.00 133,998.00 131,424.14
+    Average SMSP Active Cycles       cycle      33.60      35.51      34.42
+    Total SMSP Elapsed Cycles        cycle 511,896.00 535,992.00 525,696.57
+    -------------------------- ----------- ---------- ---------- ----------
+
+    Section: Launch Statistics
+    -------------------------------- --------------- ------- ------- -------
+    Metric Name                          Metric Unit Minimum Maximum Average
+    -------------------------------- --------------- ------- ------- -------
+    Block Size                                        256.00  256.00  256.00
+    Grid Size                                           1.00    1.00    1.00
+    Registers Per Thread             register/thread   16.00   16.00   16.00
+    Shared Memory Configuration Size           Kbyte   16.38   16.38   16.38
+    Driver Shared Memory Per Block       Kbyte/block    1.02    1.02    1.02
+    Dynamic Shared Memory Per Block       byte/block    0.00    0.00    0.00
+    Static Shared Memory Per Block        byte/block    0.00    0.00    0.00
+    # SMs                                         SM   34.00   34.00   34.00
+    Threads                                   thread  256.00  256.00  256.00
+    Uses Green Context                                  0.00    0.00    0.00
+    Waves Per SM                                        0.00    0.00    0.00
+    -------------------------------- --------------- ------- ------- -------
+
+    Section: Occupancy
+    ------------------------------- ----------- ------- ------- -------
+    Metric Name                     Metric Unit Minimum Maximum Average
+    ------------------------------- ----------- ------- ------- -------
+    Block Limit SM                        block   24.00   24.00   24.00
+    Block Limit Registers                 block   16.00   16.00   16.00
+    Block Limit Shared Mem                block   16.00   16.00   16.00
+    Block Limit Warps                     block    6.00    6.00    6.00
+    Theoretical Active Warps per SM        warp   48.00   48.00   48.00
+    Theoretical Occupancy                     %  100.00  100.00  100.00
+    Achieved Occupancy                        %   10.25   11.61   10.80
+    Achieved Active Warps Per SM           warp    4.92    5.57    5.18
+    ------------------------------- ----------- ------- ------- -------
+
+  heat_kernel_1d_color(float *, uchar4 *) (2, 1, 1)x(512, 1, 1), Device 0, CC 8.9, Invocations 25
+    Section: GPU Speed Of Light Throughput
+    ----------------------- ----------- -------- -------- --------
+    Metric Name             Metric Unit  Minimum  Maximum  Average
+    ----------------------- ----------- -------- -------- --------
+    DRAM Frequency                  Ghz     8.55     8.91     8.73
+    SM Frequency                    Ghz     2.21     2.27     2.24
+    Elapsed Cycles                cycle 4,021.00 4,722.00 4,181.84
+    Memory Throughput                 %     1.46     9.49     2.74
+    DRAM Throughput                   %     1.46     9.49     2.69
+    Duration                         us     1.79     2.08     1.86
+    L1/TEX Cache Throughput           %     9.98    11.36    10.90
+    L2 Cache Throughput               %     0.59     3.31     0.90
+    SM Active Cycles              cycle   105.65   120.24   110.14
+    Compute (SM) Throughput           %     0.24     0.25     0.25
+    ----------------------- ----------- -------- -------- --------
+
+    Section: GPU and Memory Workload Distribution
+    -------------------------- ----------- ---------- ---------- ----------
+    Metric Name                Metric Unit    Minimum    Maximum    Average
+    -------------------------- ----------- ---------- ---------- ----------
+    Average DRAM Active Cycles       cycle     224.00   1,712.00     444.00
+    Total DRAM Elapsed Cycles        cycle  61,440.00  72,192.00  65,003.52
+    Average L1 Active Cycles         cycle     105.65     120.24     110.14
+    Total L1 Elapsed Cycles          cycle 134,108.00 141,546.00 136,669.84
+    Average L2 Active Cycles         cycle     407.25   1,363.12     558.98
+    Total L2 Elapsed Cycles          cycle  53,472.00  62,736.00  55,596.16
+    Average SM Active Cycles         cycle     105.65     120.24     110.14
+    Total SM Elapsed Cycles          cycle 134,108.00 141,546.00 136,669.84
+    Average SMSP Active Cycles       cycle     104.12     121.81     108.69
+    Total SMSP Elapsed Cycles        cycle 536,432.00 566,184.00 546,679.36
+    -------------------------- ----------- ---------- ---------- ----------
+
+    Section: Launch Statistics
+    -------------------------------- --------------- -------- -------- --------
+    Metric Name                          Metric Unit  Minimum  Maximum  Average
+    -------------------------------- --------------- -------- -------- --------
+    Block Size                                         512.00   512.00   512.00
+    Grid Size                                            2.00     2.00     2.00
+    Registers Per Thread             register/thread    16.00    16.00    16.00
+    Shared Memory Configuration Size           Kbyte     8.19     8.19     8.19
+    Driver Shared Memory Per Block       Kbyte/block     1.02     1.02     1.02
+    Dynamic Shared Memory Per Block       byte/block     0.00     0.00     0.00
+    Static Shared Memory Per Block        byte/block     0.00     0.00     0.00
+    # SMs                                         SM    34.00    34.00    34.00
+    Threads                                   thread 1,024.00 1,024.00 1,024.00
+    Uses Green Context                                   0.00     0.00     0.00
+    Waves Per SM                                         0.02     0.02     0.02
+    -------------------------------- --------------- -------- -------- --------
+
+    Section: Occupancy
+    ------------------------------- ----------- ------- ------- -------
+    Metric Name                     Metric Unit Minimum Maximum Average
+    ------------------------------- ----------- ------- ------- -------
+    Block Limit SM                        block   24.00   24.00   24.00
+    Block Limit Registers                 block    8.00    8.00    8.00
+    Block Limit Shared Mem                block    8.00    8.00    8.00
+    Block Limit Warps                     block    3.00    3.00    3.00
+    Theoretical Active Warps per SM        warp   48.00   48.00   48.00
+    Theoretical Occupancy                     %  100.00  100.00  100.00
+    Achieved Occupancy                        %   29.62   33.96   32.70
+    Achieved Active Warps Per SM           warp   14.22   16.30   15.70
+    ------------------------------- ----------- ------- ------- -------
+
+  heat_kernel_1d_sim(float *, float *, BoundaryCondition) (2, 1, 1)x(512, 1, 1), Device 0, CC 8.9, Invocations 250
+    Section: GPU Speed Of Light Throughput
+    ----------------------- ----------- -------- -------- --------
+    Metric Name             Metric Unit  Minimum  Maximum  Average
+    ----------------------- ----------- -------- -------- --------
+    DRAM Frequency                  Ghz     8.41     9.07     8.76
+    SM Frequency                    Ghz     2.21     2.29     2.25
+    Elapsed Cycles                cycle 4,133.00 6,211.00 4,327.23
+    Memory Throughput                 %     0.96    19.93     3.04
+    DRAM Throughput                   %     0.96    19.93     2.98
+    Duration                         us     1.82     2.72     1.92
+    L1/TEX Cache Throughput           %     3.80    18.19    17.49
+    L2 Cache Throughput               %     0.46     3.40     0.93
+    SM Active Cycles              cycle   115.15   551.74   121.18
+    Compute (SM) Throughput           %     0.29     0.51     0.50
+    ----------------------- ----------- -------- -------- --------
+
+    Section: GPU and Memory Workload Distribution
+    -------------------------- ----------- ---------- ---------- ----------
+    Metric Name                Metric Unit    Minimum    Maximum    Average
+    -------------------------- ----------- ---------- ---------- ----------
+    Average DRAM Active Cycles       cycle     232.00   3,368.00     503.36
+    Total DRAM Elapsed Cycles        cycle  63,488.00  96,256.00  67,336.19
+    Average L1 Active Cycles         cycle     115.15     551.74     121.18
+    Total L1 Elapsed Cycles          cycle 138,628.00 243,650.00 142,908.40
+    Average L2 Active Cycles         cycle     438.12   1,578.44     550.33
+    Total L2 Elapsed Cycles          cycle  54,944.00  82,576.00  57,515.20
+    Average SM Active Cycles         cycle     115.15     551.74     121.18
+    Total SM Elapsed Cycles          cycle 138,628.00 243,650.00 142,908.40
+    Average SMSP Active Cycles       cycle     110.69     131.74     114.97
+    Total SMSP Elapsed Cycles        cycle 554,512.00 974,600.00 571,633.60
+    -------------------------- ----------- ---------- ---------- ----------
+
+    Section: Launch Statistics
+    -------------------------------- --------------- -------- -------- --------
+    Metric Name                          Metric Unit  Minimum  Maximum  Average
+    -------------------------------- --------------- -------- -------- --------
+    Block Size                                         512.00   512.00   512.00
+    Grid Size                                            2.00     2.00     2.00
+    Registers Per Thread             register/thread    18.00    18.00    18.00
+    Shared Memory Configuration Size           Kbyte    32.77    32.77    32.77
+    Driver Shared Memory Per Block       Kbyte/block     1.02     1.02     1.02
+    Dynamic Shared Memory Per Block      Kbyte/block     2.06     2.06     2.06
+    Static Shared Memory Per Block        byte/block     0.00     0.00     0.00
+    # SMs                                         SM    34.00    34.00    34.00
+    Threads                                   thread 1,024.00 1,024.00 1,024.00
+    Uses Green Context                                   0.00     0.00     0.00
+    Waves Per SM                                         0.02     0.02     0.02
+    -------------------------------- --------------- -------- -------- --------
+
+    Section: Occupancy
+    ------------------------------- ----------- ------- ------- -------
+    Metric Name                     Metric Unit Minimum Maximum Average
+    ------------------------------- ----------- ------- ------- -------
+    Block Limit SM                        block   24.00   24.00   24.00
+    Block Limit Registers                 block    5.00    5.00    5.00
+    Block Limit Shared Mem                block   10.00   10.00   10.00
+    Block Limit Warps                     block    3.00    3.00    3.00
+    Theoretical Active Warps per SM        warp   48.00   48.00   48.00
+    Theoretical Occupancy                     %  100.00  100.00  100.00
+    Achieved Occupancy                        %    7.81   35.49   31.81
+    Achieved Active Warps Per SM           warp    3.75   17.04   15.27
+    ------------------------------- ----------- ------- ------- -------
+
+  Note: The shown averages are calculated as the arithmetic mean of the metric values after the evaluation of the    
+  metrics for each individual kernel launch.                                                                         
+  If aggregating across varying launch configurations (like shared memory, cache config settings), the arithmetic    
+  mean can be misleading and looking at the individual results is recommended instead.                               
+  This output mode is backwards compatible to the per-kernel summary output of nvprof                                
+

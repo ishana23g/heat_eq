@@ -4,7 +4,7 @@
 NVCC := nvcc
 # Compiled on a 4060TI 16 GB card. Using arch=sm_89
 # Compiled on a 3060TI Mobile 8GB card. Using arch=sm_86
-sm_v := 86
+sm_v := 89
 NVCC_FLAGS := --use_fast_math -O3 -gencode arch=compute_$(sm_v),code=sm_$(sm_v) -ccbin g++
 PTX_FLAGS := -Xptxas -v
 #,-abi=no
